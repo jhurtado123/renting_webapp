@@ -204,10 +204,7 @@ Chat: Send message between owner and person who is interested in rent your flat
             <td></td>
             <td></td>
         </tr>
-
-
-    </tbody>
-
+     </tbody>
 </table>
 
 
@@ -219,31 +216,74 @@ User model
     {
     	username: String
     	password: String
+    	name: String
+    	rol: Array
+    	dni: String
+    	profile_image: String
+    	description: String
+    	dni_image: String
     }
 
-Event model
+Ad     
 
-    { 
-    	owner: ObjectId<User>
-    	name: String
-    	description: String
-    	date: Date
-    	location: String
-    	+
+    {
+        address: String
+        city: String
+        postal_code: String
+        coords: { 
+                lat: Number
+                lng: Number
+                }
+        price: String
+        parameters: Array
+    }
+   
+Review 
+      
+     {
+        content: String
+        valoration: Number (1-10)
+        user: Relation
+        owner: Relation
+     }
+  
+Appointment
     
+    {
+        date: DateTime
+        lessor: Relation user
+        lesser: Relation user
+        ad: Relation ad
+        status: String
+    }
+
+Chat
+
+    {
+       lessor: Relation user
+       lesser: Relation user
+       ad: Relation ad 
+    }
+
+Message 
+    
+    {
+        content: String
+        sender: Relation user
+        chat: Relation chat
     }
 
 ## Links
 
 ### Trello
 
-Link to Trello
+<a href="https://trello.com/b/pY0JoV81/app">LINK</a>
 
 ### Git
 
 The url to your repository and to your deployed project
 
-[Repository Link](http://github.com/)
+<a href="https://github.com/jhurtado123/renting_webapp">[Repository Link]</a>(http://github.com/)
 
 [Deploy Link](http://heroku.com/)
 
