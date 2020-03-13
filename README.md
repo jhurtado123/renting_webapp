@@ -211,7 +211,7 @@ Chat: Send message between owner and person who is interested in rent your flat
 
 ## Models
 
-User model
+User
 
     {
     	username: String
@@ -222,6 +222,11 @@ User model
     	profile_image: String
     	description: String
     	dni_image: String
+        Review: {
+            content: String
+            valoration: Number (1-10)
+            userid: Relation
+        }
     }
 
 Ad     
@@ -236,9 +241,15 @@ Ad
                 }
         price: String
         parameters: Array
+        Appointment: {
+            date: DateTime
+            lessor: Relation user
+            lesser: Relation user
+            status: String
+        }
     }
    
-Review 
+<!-- Review 
       
      {
         content: String
@@ -246,23 +257,22 @@ Review
         user: Relation
         owner: Relation
      }
-  
-Appointment
+   -->
+<!-- Appointment
     
     {
-        date: DateTime
-        lessor: Relation user
-        lesser: Relation user
+
         ad: Relation ad
         status: String
-    }
+    } -->
 
 Chat
 
     {
        lessor: Relation user
        lesser: Relation user
-       ad: Relation ad 
+       ad: Relation ad
+       message: String
     }
 
 Message 
