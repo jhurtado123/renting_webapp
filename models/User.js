@@ -16,7 +16,7 @@ const userSchema = new Schema({
   profile_image: String,
   description: String,
   dni: String,
-  Review: [{
+  reviews: [{
     content: {
       type: String,
       required: true
