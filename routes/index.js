@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/login', (req, res, next) => {
   const { username, userPassword } = req.body;
-    if (username === '' || password === '') {
+    if (username === '' || userPassword === '') {
       req.flash('error', 'no pueden estar vacios');
       res.redirect('/login');
     } else {
@@ -21,7 +21,7 @@ router.post('/login', (req, res, next) => {
             res.redirect('/login');
           } else {
             console.log(bcrypt.compareSync(userPassword, user.password));
-            if (bcrypt.compareSync(userPassword, user.passsword)) {
+            if (bcrypt.compareSync(userPassword, user.password)) {
               req.session.currentUser = user;
               req.flash('info', 'Welcome to Rent App!');
               res.redirect('/home');
