@@ -1,15 +1,26 @@
-<div>
-  <img src="/public/images/logo.jpg">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<div id="root">
+    <div>
+        <img src="/public/images/logo.jpg">
+    </div>
+    <form id="form" action="/login" method="POST">
+        <label for="username">Username</label><br>
+        <input type="text" name="username" placeholder="Your username">
+
+        <label for="userPassword">Password</label><br>
+        <input type="password" name="userPassword" placeholder="********">
+
+        <button type="submit">login</button>
+        {{#if error}}
+            {{error}}
+        {{/if}}
+    </form>
 </div>
-<form id="form" action="/login" method="POST">
-  <label for="username">Username</label><br>
-  <input type="text" name="username" placeholder="Your username">
-
-  <label for="userPassword">Password</label><br>
-  <input type="password" name="userPassword" placeholder="********">
-
-  <button type="submit">login</button>
-  {{#if error}}
-  {{error}}
-  {{/if}}
-</form>
+</body>
+</html>

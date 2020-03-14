@@ -5,7 +5,7 @@ const User = require('../models/User');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Rent App' });
+  res.render('login', { title: 'Rent App', layout: false });
 });
 
 router.post('/login', (req, res, next) => {
@@ -40,7 +40,7 @@ router.post('/login', (req, res, next) => {
 
 /*Register page*/
 router.get('/register', (req, res, next) => {
-  res.render('register', {messages: req.flash()});
+  res.render('register', {messages: req.flash(), layout: false});
 });
 router.post('/register', (req, res, next) => {
   const { username, password } = req.body;
