@@ -6,6 +6,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const flash = require('connect-flash');
+
 
 
 const indexRouter = require('./routes/index');
@@ -21,6 +23,7 @@ mongoose
   .catch(err => {
     console.error('Error connecting to mongo', err)
   });
+  
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,6 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+
 app.use(require('node-sass-middleware')({
   src:  path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
@@ -38,6 +42,8 @@ app.use(require('node-sass-middleware')({
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
