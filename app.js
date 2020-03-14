@@ -50,6 +50,10 @@ app.use(flash());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+//register partials
+hbs.registerPartials(path.join(__dirname, '/views/partials'));
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
