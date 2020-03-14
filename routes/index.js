@@ -67,4 +67,8 @@ router.post('/register', (req, res, next) => {
     .catch(error => console.log(error));
 });
 
+router.get('/home', (req, res, next) => {
+  res.render('home', {messages: req.flash()});
+});
+
 module.exports = router;
