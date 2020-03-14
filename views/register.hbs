@@ -1,19 +1,26 @@
-<h1>Crear cuenta</h1>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad aliquam, aspernatur assumenda autem dicta dignissimos eum expedita fugiat impedit iste labore minus natus obcaecati quia rerum sit tempora vel?
-</p>
 
-<form id="registerForm" method="post" action="/register">
-    <div class="form-group">
-        <label>Username</label>
-        <input type="text" name="username">
-    </div>
-    <div class="form-group">
-        <label>Contraseña</label>
-        <input type="password" name="password">
-    </div>
-    <button type="submit">Registrate</button>
-    {{#if messages.error }}
-        <p>{{messages.error }}</p>
-    {{/if}}
-</form>
+{{#if messages.success}}
+    <h1>¡Te has registrado con éxito!</h1>
+    <p>Ahora ya puedes loguearte con tu nueva cuenta </p>
+    <a href="/">Acceder</a>
+{{else}}
+    <h1>Crear cuenta</h1>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad aliquam, aspernatur assumenda autem dicta dignissimos eum expedita fugiat impedit iste labore minus natus obcaecati quia rerum sit tempora vel?
+    </p>
+
+    <form id="registerForm" method="post" action="/register">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username">
+        </div>
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" name="password">
+        </div>
+        <button type="submit">Registrate</button>
+        {{#if messages.error }}
+            <p>{{messages.error }}</p>
+        {{/if}}
+    </form>
+{{/if}}
