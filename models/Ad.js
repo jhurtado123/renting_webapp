@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const adSchema = new Schema({
+  title: String,
   address: {
     require: true,
     type: String

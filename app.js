@@ -8,11 +8,14 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
-const hbs = require('hbs');
+var hbs = require('hbs');
+const extend = require('handlebars-extend-block');
 
+hbs = extend(hbs);
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const adsRouter = require('./routes/ad');
 
 const app = express();
 
@@ -50,6 +53,7 @@ app.use(flash());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/ad', adsRouter);
 
 //register partials
 hbs.registerPartials(path.join(__dirname, '/views/partials'));

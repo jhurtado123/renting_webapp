@@ -1,0 +1,16 @@
+form {
+  #images_preview {
+    width: 100%;
+    display: flex;
+    flex-flow:row wrap;
+    justify-content: flex-start;
+    .image-preview-wrapper {
+      width:30%;
+      margin-right: 3%;
+      img {
+        width:100%;
+        border-radius: 15px;
+      }
+    }
+  }
+}

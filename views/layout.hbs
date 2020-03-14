@@ -3,10 +3,13 @@
 <head>
     <title>{{title}}</title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    {{{block "stylesheets"}}}
 </head>
 <body>
 <div id="root">
     {{{body}}}
 </div>
+
+{{{block "scripts"}}}
 </body>
 </html>
