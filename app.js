@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
+const hbs = require('handlebars');
 
 
 const indexRouter = require('./routes/index');
