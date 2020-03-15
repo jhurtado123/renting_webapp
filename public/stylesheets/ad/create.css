@@ -10,4 +10,41 @@ form #images_preview {
       width: 100%;
       border-radius: 15px; }
 
+form #imageList {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start; }
+  form #imageList #addImage {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 25px;
+    cursor: pointer; }
+    form #imageList #addImage:hover {
+      background: grey; }
+    form #imageList #addImage #imageUploadInput {
+      position: absolute;
+      width: 75px;
+      height: 75px;
+      opacity: 0;
+      cursor: pointer; }
+  form #imageList .uploaded-image {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-right: 15px;
+    margin-bottom: 15px; }
+    form #imageList .uploaded-image img {
+      width: 100%;
+      height: 100%;
+      border-radius: 25px; }
+
 /*# sourceMappingURL=create.css.map */

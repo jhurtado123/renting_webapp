@@ -1,25 +1,26 @@
 //Images preview
-const imagesInput = document.querySelector('#images');
+const imagesInput = document.querySelector('#imageUploadInput');
+const imageList = document.querySelector('#imageList');
 
 imagesInput.addEventListener('change', event => {
   const files = event.target.files;
-  const output = document.getElementById("images_preview");
 
   Array.from(files).forEach(file => {
-    if(!file.type.match('image')) return;
+    if (!file.type.match('image')) return;
 
     const picReader = new FileReader();
 
-    picReader.addEventListener("load",function(event){
+    picReader.addEventListener("load", function (event) {
       const picFile = event.target;
-      const div = document.createElement("div");
-      div.classList.add('image-preview-wrapper');
-      div.innerHTML = `<img src="${picFile.result}">`;
-
-      document.querySelector('#images_preview').insertBefore(div,null);
+      const data = new FormData();
+      data.append('file', file);
+      axios.post('/ad/api/uploadImage', data, {
+        headers: {'content-type': `multipart/form-data`}
+      })
+        .then(response => {
+          imageList.insertAdjacentHTML('afterbegin', `<div class='uploaded-image'><img class="image-preview" src="${picFile.result}"><inpu type="hidden" value="${response.data.filename}" name="images"></div>`);
+        });
     });
-
-    //Read the image
     picReader.readAsDataURL(file);
   });
 });
