@@ -1,9 +1,69 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const User = require('../models/User');
+const router = express.Router();
+const path = require('path');
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, "./public/uploads/userProfileImages");
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
+const upload = multer({ storage: storage });
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+/* GET user page. */
+router.get('/:userid', (req, res, next) => {
+  const { currentUser } = req.session;
+  console.log(currentUser)
+  User.findById(currentUser._id)
+    .then(users => {
+      res.render('users/user', {
+        currentUser,
+      });
+    })
+    .catch(next);
+});
+
+/* Edit user page */
+router.get('/:userid/edit', (req, res, next) => {
+  const { currentUser } = req.session;
+  console.log(currentUser)
+  User.findById(currentUser._id)
+    .then(user => {
+      res.render('users/edit', {
+        currentUser,
+      });
+    })
+})
+
+router.post('/:userid/edit',  upload.any('photo'), (req, res, next) => {
+  const updateProfile = req.body
+  updateProfile.profile_image = req.files[0].filename;
+  const { currentUser } = req.session;
+  currentUser.profile_image = req.files[0].filename;
+  currentUser.description = updateProfile.description;
+  currentUser.name = updateProfile.name;
+  currentUser.dni = updateProfile.dni;
+  User.updateOne({ _id: currentUser._id }, updateProfile)
+    .then(() => {
+      res.render('users/user', {
+        currentUser,
+      });
+    })
+    .catch(next);
+});
+
+/* Delete user */
+router.post('/:userid/delete', (req, res, next) => {
+  const { currentUser } = req.session;
+  console.log(currentUser)
+  User.findByIdAndDelete(currentUser._id)
+    .then(() => {
+      res.redirect('/register');
+    })
+    .catch(next);
 });
 
 module.exports = router;

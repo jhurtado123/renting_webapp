@@ -1,15 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
 <div>
-  <img src="/public/images/logo.jpg">
+    <div>
+        <img src="/public/images/logo.jpg">
+    </div>
+    <form id="form" action="/login" method="POST">
+        <label for="username">Username</label><br>
+        <input type="text" name="username" placeholder="Your username">
+
+        <label for="userPassword">Password</label><br>
+        <input type="password" name="userPassword" placeholder="********">
+
+        <button type="submit">login</button>
+        {{#if error}}
+            <p>{{error}}</p>
+        {{/if}}
+    </form>
+    <div>
+        <p>¿Todavía no tienes cuenta?</p>
+        <a href="/register">registrate aquí</a>       
+    </div>
 </div>
-<form id="form" action="/login" method="POST">
-  <label for="username">Username</label><br>
-  <input type="text" name="username" placeholder="Your username">
-
-  <label for="userPassword">Password</label><br>
-  <input type="password" name="userPassword" placeholder="********">
-
-  <button type="submit">login</button>
-  {{#if error}}
-  {{error}}
-  {{/if}}
-</form>
+</body>
+</html>

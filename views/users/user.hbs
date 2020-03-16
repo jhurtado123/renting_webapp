@@ -1,0 +1,10 @@
+<h1>Your account</h1>
+<p>Welcome {{ currentUser.username }}</p>
+<img src="/uploads/userProfileImages/{{currentUser.profile_image}}">
+<p>Your description {{ currentUser.description }}</p>
+<p>Your id {{ currentUser._id }}</p>
+<p>Your dni {{ currentUser.dni }}</p>
+<a href="/users/{{currentUser._id}}/edit">Edit your profile</a>
+<form action="/users/{{currentUser._id}}/delete" method="post">
+  <button class="button">Delete your profile</button>
+</form>

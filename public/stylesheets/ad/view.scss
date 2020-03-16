@@ -1,0 +1,29 @@
+.ad-images-slider {
+  width: auto;
+  height: 300px;
+  display: flex;
+  flex-flow: row nowrap;
+  overflow: auto;
+  .slide {
+    width: 100%;
+    height: 100%;
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+}
+.ad-images-preview {
+  display: flex;
+  flex-flow: row wrap;
+  .image-preview {
+    width:10%;
+    height:40px;
+    border-right: 1px solid grey;
+    cursor:pointer;
+  }
+}
+#map {
+  width: 100%;
+  height: 400px;
+}
