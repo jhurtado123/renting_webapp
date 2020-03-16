@@ -2,6 +2,12 @@
 const imagesInput = document.querySelector('#imageUploadInput');
 const imageList = document.querySelector('#imageList');
 
+
+document.querySelectorAll('.uploaded-image').forEach(node => {
+  node.removeEventListener('click', removeImageAtServer);
+  node.addEventListener('click', removeImageAtServer);
+});
+
 imagesInput.addEventListener('change', event => {
   const files = event.target.files;
 
