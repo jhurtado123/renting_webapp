@@ -1,0 +1,69 @@
+{{#extend "stylesheets"}}
+    <link rel="stylesheet" href="/stylesheets/ad/view.css"/>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+{{/extend}}
+
+<div class="ad-images-slider">
+    {{#each ad.images }}
+        <div class="slide {{#ifEq @index 0}}active{{/ifEq}}" data-index="{{@index}}" style='background: url("/uploads/picturesAd/{{this}}");background-position: center;background-repeat: no-repeat;background-size:100% 100%;'></div>
+    {{/each}}
+</div>
+<div class="ad-images-preview">
+    {{#each ad.images }}
+        <div class="image-preview" data-index="{{@index}}" style='background: url("/uploads/picturesAd/{{this}}");background-position: center;background-repeat: no-repeat;background-size:100% 100%;'></div>
+    {{/each}}
+</div>
+<h1>{{ad.title}}</h1>
+<p class="price">{{ad.price}}€</p>
+<p>{{ad.description}}</p>
+<div id="map"></div>
+
+
+{{#extend "scripts"}}
+    <script src="/javascripts/ad/view.js"></script>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoiamh1cnRhZG8xMjMiLCJhIjoiY2s3dGlqZWtlMHFveTNvbjF1bjJxYTg2ayJ9.zbzGWyoeQ52ddJTrK2gjdA';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [{{ad.coords.lng}}, {{ad.coords.lat}}],
+            zoom: 14,
+            interactive: true
+        });
+        map.on('load', function() {
+            map.addSource("source_circle_500", {
+                "type": "geojson",
+                "data": {
+                    "type": "FeatureCollection",
+                    "features": [{
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [{{ad.coords.lng}}, {{ad.coords.lat}}]
+                        }
+                    }]
+                }
+            });
+
+            map.addLayer({
+                "id": "circle500",
+                "type": "circle",
+                "source": "source_circle_500",
+                "paint": {
+                    "circle-radius": {
+                        stops: [
+                            [1, 2],
+                            [15, 150]
+                        ],
+                        base: 2
+                    },
+                    "circle-color": "lightblue",
+                    "circle-opacity": 0.6
+                }
+            });
+        });
+
+    </script>
+
+{{/extend}}

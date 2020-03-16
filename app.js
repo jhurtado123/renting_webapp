@@ -5,14 +5,18 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const MongoStore = require("connect-mongo")(session);
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
-const hbs = require('hbs');
+var hbs = require('hbs');
+const extend = require('handlebars-extend-block');
 
+hbs = extend(hbs);
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const adsRouter = require('./routes/ad');
 
 const app = express();
 
@@ -37,6 +41,16 @@ app.use(cookieParser('secret'));
 app.use(session({cookie: { maxAge: 60000 }}));
 app.use(flash());
 
+app.use(session({
+  secret: "renting-app-secret",
+  cookie: { maxAge: 60 * 10000 }, // 60 seconds
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    resave: true,
+    saveUninitialized: false,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
 
 app.use(require('node-sass-middleware')({
   src:  path.join(__dirname, 'public'),
@@ -50,10 +64,13 @@ app.use(flash());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/ad', adsRouter);
 
 //register partials
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
-
+hbs.registerHelper('ifEq', function(arg1, arg2, options) {
+  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

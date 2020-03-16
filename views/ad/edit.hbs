@@ -1,0 +1,65 @@
+{{#extend "stylesheets"}}
+    <link rel="stylesheet" href="/stylesheets/ad/edit.css"/>
+{{/extend}}
+
+<form action="/ad/edit/{{ad._id}}" method="post">
+    <div class="form-group">
+        <label>Titulo</label>
+        <input type="text" name="title" value="{{ad.title}}">
+    </div>
+    <div class="form-group">
+        <label>Ciudad</label>
+        <input type="text" name="city" value="{{ad.city}}">
+    </div>
+    <div class="form-group">
+        <label>Código postal</label>
+        <input type="text" name="postal_code" value="{{ad.postal_code}}">
+    </div>
+    <div class="form-group">
+        <label>Dirección</label>
+        <input type="text" name="address" value="{{ad.address}}">
+        <div class="info">Por seguridad la dirección exacta del inmueble no se mostrará al usuario hasta que usted no confirme una cita con este.</div>
+    </div>
+    <div class="form-group">
+        <label>Metros cuadrados</label>
+        <input type="number" name="square_meters" value="{{ad.parameters.square_meters}}">
+    </div>
+    <div class="form-group">
+        <input type="checkbox" name="terrace" id="terrace" value="{{ad.parameters.terrace}}">
+        <label for="terrace">Terraza</label>
+    </div>
+    <div class="form-group">
+        <label>Estado del inmueble ( del 1 al 5, siendo 1 en mal estado y 5 en buen estado )</label>
+        <input type="range" name="flat_status" min="1" max="5" step="1" value="{{ad.parameters.flat_status}}">
+    </div>
+    <div class="form-group">
+        <label>Precio</label>
+        <input type="number" name="price" value="{{ad.price}}">
+    </div>
+    <div class="form-group">
+        <label>Descripción</label>
+        <textarea name="description">{{ad.description}}</textarea>
+    </div>
+    <div class="form-group">
+        <label>Imagenes</label>
+
+        <div id="imageList">
+            {{#each ad.images }}
+                <div class='uploaded-image'>
+                    <img class="image-preview" src="/uploads/picturesAd/{{this}}">
+                    <input type="hidden" value="{{this}}" name="images">
+                </div>
+            {{/each}}
+            <div id="addImage">
+                <input type="file" id="imageUploadInput">
+                +
+            </div>
+        </div>
+    </div>
+    <button type="submit">Publicar</button>
+</form>
+
+{{#extend "scripts"}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/javascripts/ad/edit.js"></script>
+{{/extend}}

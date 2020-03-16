@@ -1,0 +1,27 @@
+.ad-images-slider {
+  width: auto;
+  height: 300px;
+  display: flex;
+  flex-flow: row nowrap;
+  overflow: auto; }
+  .ad-images-slider .slide {
+    width: 100%;
+    height: 100%;
+    display: none; }
+    .ad-images-slider .slide.active {
+      display: block; }
+
+.ad-images-preview {
+  display: flex;
+  flex-flow: row wrap; }
+  .ad-images-preview .image-preview {
+    width: 10%;
+    height: 40px;
+    border-right: 1px solid grey;
+    cursor: pointer; }
+
+#map {
+  width: 100%;
+  height: 400px; }
+
+/*# sourceMappingURL=view.css.map */
