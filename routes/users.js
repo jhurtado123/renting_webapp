@@ -40,7 +40,8 @@ router.get('/:userid/edit', (req, res, next) => {
 
 router.post('/:userid/edit',  upload.any('photo'), (req, res, next) => {
   const updateProfile = req.body
-  const { currentUser } = req.session; 
+  updateProfile.profile_image = req.files[0].filename;
+  const { currentUser } = req.session;
   currentUser.profile_image = req.files[0].filename;
   currentUser.description = updateProfile.description;
   currentUser.name = updateProfile.name;
