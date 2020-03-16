@@ -87,6 +87,16 @@ router.post('/edit/:adId', (req, res, next) => {
     .catch(error => console.log(error));
 });
 
+router.post('/remove/:adId', (req, res, next) => {
+  Ad.findOne({_id: req.params.adId})
+    .then(ad => {
+      if (!ad) next();
+      return ad.remove()
+    })
+    .then(result => res.redirect('/home'))
+    .catch(error => console.log(error));
+});
+
 /* POST UPLOAD IMAGE */
 router.post('/api/uploadImage', upload.any('photo'), function(req, res, next) {
   return res.json({filename: req.files[0].filename})
