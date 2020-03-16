@@ -1,7 +1,9 @@
 {{#extend "stylesheets"}}
     <link rel="stylesheet" href="/stylesheets/ad/edit.css"/>
 {{/extend}}
-
+<form action="/ad/remove/{{ad._id}}" method="post">
+    <button type="submit">Borrar anuncio</button>
+</form>
 <form action="/ad/edit/{{ad._id}}" method="post">
     <div class="form-group">
         <label>Titulo</label>
