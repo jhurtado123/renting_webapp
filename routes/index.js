@@ -12,13 +12,13 @@ router.post('/login', (req, res, next) => {
   const { username, userPassword } = req.body;
     if (username === '' || userPassword === '') {
       req.flash('error', 'no pueden estar vacios');
-      res.redirect('/login');
+      res.redirect('/');
     } else {
       User.findOne({ username })
         .then(user => {
           if (!user) {
             req.flash('error', 'no estas registrado');
-            res.redirect('/login');
+            res.redirect('/');
           } else {
             console.log(bcrypt.compareSync(userPassword, user.password));
             if (bcrypt.compareSync(userPassword, user.password)) {
@@ -27,7 +27,7 @@ router.post('/login', (req, res, next) => {
               res.redirect('/home');
             } else {
               req.flash('error', 'usuario o contraseña incorrectos');
-              res.redirect('/login');
+              res.redirect('/');
             }
           }
         })
