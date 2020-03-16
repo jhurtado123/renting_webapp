@@ -5,20 +5,20 @@ const User = require('../models/User');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Rent App' });
+  res.render('login', { title: 'Rent App', layout: false });
 });
 
 router.post('/login', (req, res, next) => {
   const { username, userPassword } = req.body;
     if (username === '' || userPassword === '') {
       req.flash('error', 'no pueden estar vacios');
-      res.redirect('/login');
+      res.redirect('/');
     } else {
       User.findOne({ username })
         .then(user => {
           if (!user) {
             req.flash('error', 'no estas registrado');
-            res.redirect('/login');
+            res.redirect('/');
           } else {
             console.log(bcrypt.compareSync(userPassword, user.password));
             if (bcrypt.compareSync(userPassword, user.password)) {
@@ -27,7 +27,7 @@ router.post('/login', (req, res, next) => {
               res.redirect('/home');
             } else {
               req.flash('error', 'usuario o contraseña incorrectos');
-              res.redirect('/login');
+              res.redirect('/');
             }
           }
         })
@@ -40,7 +40,7 @@ router.post('/login', (req, res, next) => {
 
 /*Register page*/
 router.get('/register', (req, res, next) => {
-  res.render('register', {messages: req.flash()});
+  res.render('register', {messages: req.flash(), layout: false});
 });
 router.post('/register', (req, res, next) => {
   const { username, password } = req.body;
