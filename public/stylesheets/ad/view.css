@@ -72,4 +72,8 @@
   to {
     opacity: 1; } }
 
+.summary-info {
+  display: flex;
+  justify-content: space-evenly; }
+
 /*# sourceMappingURL=view.css.map */
