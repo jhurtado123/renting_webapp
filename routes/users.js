@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
+const Ad = require('../models/Ad');
 const router = express.Router();
 const path = require('path');
 const multer = require("multer");
@@ -64,6 +65,19 @@ router.post('/:userid/delete', (req, res, next) => {
       res.redirect('/register');
     })
     .catch(next);
+});
+
+/*List user ads*/
+router.get('/:userId/ads', (req, res, next) => {
+  const currentUserId = req.session.currentUser._id;
+  const paramsId = req.params.userId;
+
+  if (currentUserId !== paramsId) next();
+  Ad.find({'owner': paramsId})
+    .then(ads => {
+      res.render('users/ads', {ads});
+    })
+    .catch(error => console.log(error));
 });
 
 module.exports = router;

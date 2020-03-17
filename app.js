@@ -38,12 +38,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser('secret'));
-app.use(session({cookie: { maxAge: 60000 }}));
+app.use(session({cookie: { maxAge: new Date(Date.now() + (60 * 1000 * 30)) }}));
 app.use(flash());
 
 app.use(session({
   secret: "renting-app-secret",
-  cookie: { maxAge: 60 * 10000 }, // 60 seconds
+  cookie: { maxAge: new Date(Date.now() + (60 * 1000 * 30)) }, // 60 seconds
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     resave: true,
