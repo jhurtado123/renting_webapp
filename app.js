@@ -11,6 +11,7 @@ const mongoose = require('mongoose');
 const flash = require('connect-flash');
 var hbs = require('hbs');
 const extend = require('handlebars-extend-block');
+const authMiddleware = require('./helpers/auth');
 
 
 hbs = extend(hbs);
@@ -71,8 +72,10 @@ app.dynamicHelpers({
     return req.session.currentUser;
   }
 });
-app.use('/users', usersRouter);
-app.use('/ad', adsRouter);
+//authmiddleware
+app.use(authMiddleware.checkIfUserLoggedIn);
+app.use('/users',  usersRouter);
+app.use('/ad',  adsRouter);
 
 //register partials
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
@@ -90,7 +93,6 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
   res.render('error');
