@@ -1,0 +1,28 @@
+{{#extend "stylesheets"}}
+    <link rel="stylesheet" href="/stylesheets/users/userAds.css"/>
+{{/extend}}
+<h1>Mis anuncios</h1>
+
+{{#ifEq ads.length 0}}
+    <p>Aún no tienes anuncios</p>
+{{else}}
+    <div id="ads">
+        {{#each ads}}
+            <div id="ad">
+                <a href="/ad/{{this._id}}">
+                    <div class="ad-image"
+                         style="background: url('/uploads/picturesAd/{{this.images.[0]}}'); background-size: cover;background-repeat: no-repeat"></div>
+                    <div class="info">
+                        <h2>{{this.title}}</h2>
+                        <p>{{this.price}}€</p>
+                    </div>
+                </a>
+                <div class="edit">
+                    <a href="/ad/edit/{{this._id}}">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{/ifEq}}

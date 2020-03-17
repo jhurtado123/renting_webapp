@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
+const Ad = require('../models/Ad');
 const router = express.Router();
 const path = require('path');
 const multer = require("multer");
@@ -39,7 +40,7 @@ router.get('/:userid/edit', (req, res, next) => {
 })
 
 router.post('/:userid/edit',  upload.any('photo'), (req, res, next) => {
-  const updateProfile = req.body
+  const updateProfile = req.body;
   updateProfile.profile_image = req.files[0].filename;
   const { currentUser } = req.session;
   currentUser.profile_image = req.files[0].filename;
@@ -58,12 +59,25 @@ router.post('/:userid/edit',  upload.any('photo'), (req, res, next) => {
 /* Delete user */
 router.post('/:userid/delete', (req, res, next) => {
   const { currentUser } = req.session;
-  console.log(currentUser)
+  console.log(currentUser);
   User.findByIdAndDelete(currentUser._id)
     .then(() => {
       res.redirect('/register');
     })
     .catch(next);
+});
+
+/*List user ads*/
+router.get('/:userId/ads', (req, res, next) => {
+  const currentUserId = req.session.currentUser._id;
+  const paramsId = req.params.userId;
+
+  if (currentUserId !== paramsId) next();
+  Ad.find({'owner': paramsId})
+    .then(ads => {
+      res.render('users/ads', {ads});
+    })
+    .catch(error => console.log(error));
 });
 
 module.exports = router;
