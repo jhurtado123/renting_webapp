@@ -10,7 +10,8 @@ body {
 #wrapper {
   position: relative;
   width: 100vw;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  padding-bottom: 100px; }
   #wrapper #content {
     min-height: 100vh;
     padding: 20px;
@@ -46,10 +47,20 @@ a {
     align-items: center;
     border-bottom: 1px solid grey;
     padding-bottom: 15px; }
+    #lateralMenu .profile-block .image {
+      border-radius: 50%;
+      border: 1px solid grey;
+      width: 50px;
+      height: 50px; }
     #lateralMenu .profile-block .wrap {
       display: flex;
-      flex-flow: column; }
+      flex-flow: column;
+      justify-content: center;
+      margin-left: -20px; }
+      #lateralMenu .profile-block .wrap p {
+        margin-top: 0; }
     #lateralMenu .profile-block i {
+      margin-right: 10px;
       font-size: 30px;
       cursor: pointer; }
   #lateralMenu .links-block {
@@ -70,6 +81,7 @@ a {
     height: 24px; }
 
 #footerMenu {
+  background: white;
   z-index: 10;
   position: fixed;
   width: 100vw;

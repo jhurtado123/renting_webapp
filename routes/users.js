@@ -17,7 +17,6 @@ const upload = multer({ storage: storage });
 /* GET user page. */
 router.get('/:userid', (req, res, next) => {
   const { currentUser } = req.session;
-  console.log(currentUser)
   User.findById(currentUser._id)
     .then(users => {
       res.render('users/user', {
@@ -30,7 +29,6 @@ router.get('/:userid', (req, res, next) => {
 /* Edit user page */
 router.get('/:userid/edit', (req, res, next) => {
   const { currentUser } = req.session;
-  console.log(currentUser)
   User.findById(currentUser._id)
     .then(user => {
       res.render('users/edit', {
@@ -59,7 +57,6 @@ router.post('/:userid/edit',  upload.any('photo'), (req, res, next) => {
 /* Delete user */
 router.post('/:userid/delete', (req, res, next) => {
   const { currentUser } = req.session;
-  console.log(currentUser);
   User.findByIdAndDelete(currentUser._id)
     .then(() => {
       res.redirect('/register');
