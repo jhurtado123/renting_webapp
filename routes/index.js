@@ -38,6 +38,16 @@ router.post('/login', (req, res, next) => {
     }
 });
 
+/*Logout*/
+router.get('/logout', (req, res, next) => {
+  req.session.destroy(err => {
+    if (err) {
+      next(err);
+    }
+    res.redirect('/login');
+  });
+});
+
 
 /*Register page*/
 router.get('/register', (req, res, next) => {
