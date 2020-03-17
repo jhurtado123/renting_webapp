@@ -73,6 +73,14 @@ a {
     }
   }
 }
+#headerMenu{
+  display: flex;
+  justify-content: flex-end;
+  .profile-image {
+    width: 24px;
+    height: 24px;
+  }
+}
 #footerMenu {
   z-index: 10;
   position: fixed;
