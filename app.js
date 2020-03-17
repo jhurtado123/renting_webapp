@@ -12,6 +12,7 @@ const flash = require('connect-flash');
 var hbs = require('hbs');
 const extend = require('handlebars-extend-block');
 
+
 hbs = extend(hbs);
 
 const indexRouter = require('./routes/index');
@@ -19,6 +20,7 @@ const usersRouter = require('./routes/users');
 const adsRouter = require('./routes/ad');
 
 const app = express();
+require('express-dynamic-helpers-patch')(app);
 
 mongoose
   .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
@@ -63,6 +65,12 @@ app.use(flash());
 
 
 app.use('/', indexRouter);
+
+app.dynamicHelpers({
+  currentUser: function (req, res) {
+    return req.session.currentUser;
+  }
+});
 app.use('/users', usersRouter);
 app.use('/ad', adsRouter);
 
