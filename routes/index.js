@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const Ad = require('../models/Ad');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -68,7 +69,15 @@ router.post('/register', (req, res, next) => {
 });
 
 router.get('/home', (req, res, next) => {
-  res.render('home', {messages: req.flash()});
+  Ad.find()
+    .then(ads => {
+      console.log(ads)
+      res.render('home', {
+        ads,
+        messages: req.flash() 
+      });
+    })
+    .catch(err => console.log('Error while getting ads ', err))
 });
 
 module.exports = router;
