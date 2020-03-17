@@ -28,13 +28,13 @@
             <div class="wrap">
                 <p>Hola USERNAME</p>
                 <div class="actions">
-                    <a href="/">Editar perfil</a> · <a href="/logout">Logout</a>
+                    <a href="/users/{{currentUser._id}}/edit">Editar perfil</a> · <a href="/logout">Logout</a>
                 </div>
             </div>
             <i class="fa fa-times close-menu"></i>
         </div>
         <div class="links-block">
-            <a href="">Mis anuncios</a>
+            <a href="/users/{{currentUser._id}}/ads">Mis anuncios</a>
             <a href="">Mis chats</a>
             <a href="">Mis citas</a>
         </div>
