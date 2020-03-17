@@ -62,6 +62,13 @@ a {
     position: absolute;
     bottom: 20px; }
 
+#headerMenu {
+  display: flex;
+  justify-content: flex-end; }
+  #headerMenu .profile-image {
+    width: 24px;
+    height: 24px; }
+
 #footerMenu {
   z-index: 10;
   position: fixed;

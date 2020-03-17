@@ -12,7 +12,12 @@
 <body>
 <div id="wrapper">
     <div id="headerMenu">
-
+        <a href="/users/{{currentUser._id}}">
+            <img class ="profile-image" src="/uploads/userProfileImages/{{currentUser.profile_image}}">
+        </a>
+        <a href="/logout">
+            <img src="/images/icons/switch.png">
+        </a>
     </div>
     <div id="content">
         {{{body}}}
