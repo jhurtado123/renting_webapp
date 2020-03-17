@@ -1,0 +1,44 @@
+{{#extend "stylesheets"}}
+  <link rel="stylesheet" href="/stylesheets/ad/view.css" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+{{/extend}}
+<div>
+  <div class="slideshow-container">
+    {{#each this.images }}
+    <div class="mySlides fade">
+      <img src="/uploads/picturesAd/{{this}}" class="slide">
+    </div>
+    {{/each}}
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+  <h3>{{this.title}}</h3>
+  <h4>{{this.price}}€</h4>
+  <p>{{this.city}}</p>
+  <p>{{this.parameters.square_meters}} m²</p>
+  <p>{{this.parameters.flat_status}}º piso</p>
+  <p>{{this.description}}</p>
+  <a href="/ad/{{this._id}}" class="button">See more</a>
+</div>
+<script>
+  var slideIndex = 0;
+
+    showSlides();
+
+    function showSlides() {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1 }
+      slides[slideIndex - 1].style.display = "block";
+      //setTimeout(showSlides, 5000);
+    }
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+</script>
