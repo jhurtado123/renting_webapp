@@ -1,10 +1,100 @@
 body, html {
   height: 100%;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  width: 100%; }
+
+body {
+  overflow-x: hidden; }
+
+#wrapper {
+  position: relative;
+  width: 100vw;
+  overflow-x: hidden; }
+  #wrapper #content {
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden; }
 
 * {
   outline: none;
   box-sizing: border-box; }
+
+a {
+  color: black;
+  text-decoration: none; }
+
+#lateralMenu {
+  z-index: 100;
+  width: 85%;
+  border-right: 1px solid black;
+  font-size: 14px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  transition: transform 1s;
+  padding: 20px;
+  background: white; }
+  #lateralMenu.open {
+    transform: translateX(0px); }
+  #lateralMenu .profile-block {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid grey;
+    padding-bottom: 15px; }
+    #lateralMenu .profile-block .wrap {
+      display: flex;
+      flex-flow: column; }
+    #lateralMenu .profile-block i {
+      font-size: 30px;
+      cursor: pointer; }
+  #lateralMenu .links-block {
+    margin-top: 40px; }
+    #lateralMenu .links-block a {
+      font-size: 16px;
+      display: block;
+      margin: 15px 0; }
+  #lateralMenu .more-block {
+    position: absolute;
+    bottom: 20px; }
+
+#footerMenu {
+  z-index: 10;
+  position: fixed;
+  width: 100vw;
+  left: 0;
+  top: calc(100vh - 80px);
+  border: 1px solid black;
+  max-height: 80px;
+  height: 80px;
+  overflow: hidden;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around; }
+  #footerMenu .block {
+    flex: 1 1 0px;
+    text-align: center;
+    font-size: 14px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    cursor: pointer; }
+    #footerMenu .block i {
+      margin-top: 10px;
+      font-size: 28px; }
+
+#backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(140, 140, 140, 0.9);
+  display: none;
+  overflow: hidden; }
 
 /*# sourceMappingURL=style.css.map */

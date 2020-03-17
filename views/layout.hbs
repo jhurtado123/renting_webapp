@@ -3,13 +3,69 @@
 <head>
     <title>{{title}}</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!--Font awseomse-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     {{{block "stylesheets"}}}
 </head>
 <body>
+<div id="wrapper">
+    <div id="headerMenu">
 
-{{{body}}}
+    </div>
+    <div id="content">
+        {{{body}}}
+    </div>
+    <div id="lateralMenu">
+        <div class="profile-block">
+            <img src="">
+            <div class="wrap">
+                <p>Hola USERNAME</p>
+                <div class="actions">
+                    <a href="/">Editar perfil</a> · <a href="/logout">Logout</a>
+                </div>
+            </div>
+            <i class="fa fa-times close-menu"></i>
+        </div>
+        <div class="links-block">
+            <a href="">Mis anuncios</a>
+            <a href="">Mis chats</a>
+            <a href="">Mis citas</a>
+        </div>
+        <div class="more-block">
+            <a href="">Help?</a> ·
+            <a href="">Aviso legal</a> ·
+            <a href="">Principios</a> ·
+            <a href="">Contribuir</a>
+        </div>
+    </div>
 
+    <div id="footerMenu">
+        <a class="block" href="/home">
+            <i class="fa fa-search"></i>
+            <p>Buscar</p>
+        </a>
+        <a class="block" href="/users/{{currentUser._id}}/ads">
+            <i class="fa fa-home"></i>
+            <p>Anuncios</p>
+        </a>
+        <a class="block">
+            <i class="fa fa-calendar"></i>
+            <p>Citas</p>
+        </a>
+        <a class="block">
+            <i class="fa fa-comments"></i>
+            <p>Chats</p>
+        </a>
+        <div class="block" id="moreMenu">
+            <i class="fa fa-ellipsis-v"></i>
+            <p>Más</p>
+        </div>
+    </div>
+    <div id="backdrop"></div>
+</div>
+<script src="/javascripts/main.js"></script>
 {{{block "scripts"}}}
 </body>
 </html>
