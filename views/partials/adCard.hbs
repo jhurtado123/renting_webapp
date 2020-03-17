@@ -16,10 +16,14 @@
   <h3>{{this.title}}</h3>
   <h4>{{this.price}}€</h4>
   <p>{{this.city}}</p>
-  <p>{{this.parameters.square_meters}} m²</p>
-  <p>{{this.parameters.flat_status}}º piso</p>
+  <div class ="summary-info">
+    <p>{{this.parameters.square_meters}} m² <img src="/images/icons/area.png"></p>
+    <p>{{this.parameters.flat_status}}º piso<img src="/images/icons/ruler.png"></p>
+    <p>2 hab.<img src="/images/icons/bed.png"></p>
+    <p>1 bañ.<img src="/images/icons/shower.png"></p>
+  </div>
   <p>{{this.description}}</p>
-  <a href="/ad/{{this._id}}" class="button">See more</a>
+  <a href="/ad/{{this._id}}" class="button">Ver piso</a>
 </div>
 <script>
   var slideIndex = 0;
