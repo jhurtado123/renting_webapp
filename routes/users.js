@@ -40,7 +40,7 @@ router.get('/:userid/edit', (req, res, next) => {
 })
 
 router.post('/:userid/edit',  upload.any('photo'), (req, res, next) => {
-  const updateProfile = req.body
+  const updateProfile = req.body;
   updateProfile.profile_image = req.files[0].filename;
   const { currentUser } = req.session;
   currentUser.profile_image = req.files[0].filename;
@@ -59,7 +59,7 @@ router.post('/:userid/edit',  upload.any('photo'), (req, res, next) => {
 /* Delete user */
 router.post('/:userid/delete', (req, res, next) => {
   const { currentUser } = req.session;
-  console.log(currentUser)
+  console.log(currentUser);
   User.findByIdAndDelete(currentUser._id)
     .then(() => {
       res.redirect('/register');

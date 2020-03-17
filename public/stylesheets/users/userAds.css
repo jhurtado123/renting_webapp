@@ -1,0 +1,26 @@
+#ads {
+  margin-top: 50px; }
+  #ads #ad {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin-bottom: 20px; }
+    #ads #ad a {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      width: 80%; }
+    #ads #ad .ad-image {
+      width: 100%;
+      min-height: 100px; }
+    #ads #ad .info {
+      margin-left: 15px; }
+      #ads #ad .info h2 {
+        font-size: 16px; }
+    #ads #ad .edit {
+      margin-left: 15px;
+      display: flex;
+      align-items: center;
+      font-size: 30px; }
+
+/*# sourceMappingURL=userAds.css.map */
