@@ -1,0 +1,7 @@
+<a href="/appointment/delete/{{appointment.id}}">Eliminar cita</a>
+<div id="appointment">
+    <h2>Cita con {{#ifEq currentUser._id appointment.lesser._id }}{{appointment.lessor.username}}{{else}}{{appointment.lesser.username}}{{/ifEq}}  </h2>
+    <p>Direccion: {{appointment.ad.address}}, {{appointment.ad.city}}</p>
+    <p>Fecha: {{appointment.date}}</p>
+    <p>Estado: {{appointment.status}}</p>
+</div>

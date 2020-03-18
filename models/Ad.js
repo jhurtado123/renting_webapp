@@ -22,14 +22,10 @@ const adSchema = new Schema({
     'flat_status': Number,
   },
   images: Array,
-  Appointments: [{
-    date: Date,
-    lessor: { type: Schema.Types.ObjectId, ref: 'User' },
-    lesser: { type: Schema.Types.ObjectId, ref: 'User' },
-    status: String
-  }]
-
-});
+},
+  {
+    timestamps: true
+  });
 
 
 const Ad = mongoose.model('Ad', adSchema);

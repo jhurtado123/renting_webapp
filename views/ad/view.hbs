@@ -9,6 +9,12 @@
         <div class="slide {{#ifEq @index 0}}active{{/ifEq}}" data-index="{{@index}}" style='background: url("/uploads/picturesAd/{{this}}");background-position: center;background-repeat: no-repeat;background-size:100% 100%;'></div>
     {{/each}}
 </div>
+<form action="/appointment/create" method="post">
+    <input type="hidden" name="lesser" value="{{currentUser._id}}">
+    <input type="hidden" name="lessor" value="{{ad.owner}}">
+    <input type="hidden" name="ad" value="{{ad._id}}">
+    <button type="submit">Pedir cita</button>
+</form>
 <div class="ad-images-preview">
     {{#each ad.images }}
         <div class="image-preview" data-index="{{@index}}" style='background: url("/uploads/picturesAd/{{this}}");background-position: center;background-repeat: no-repeat;background-size:100% 100%;'></div>
