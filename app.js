@@ -73,9 +73,8 @@ app.dynamicHelpers({
   }
 });
 //authmiddleware
-app.use(authMiddleware.checkIfUserLoggedIn);
-app.use('/users',  usersRouter);
-app.use('/ad',  adsRouter);
+app.use('/users',authMiddleware.checkIfUserLoggedIn,  usersRouter);
+app.use('/ad',authMiddleware.checkIfUserLoggedIn,  adsRouter);
 
 //register partials
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
