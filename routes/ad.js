@@ -43,7 +43,7 @@ router.post('/create',function(req, res, next) {
     .then(result => {
 
     })
-    .catch(error => console.log(error));
+    .catch(error => next(error));
 });
 
 /* GET VIEW AD */
@@ -53,7 +53,7 @@ router.get('/:adId', (req, res, next) => {
       if (!ad) next();
       res.render('ad/view', {ad});
     })
-    .catch(error => console.log(error) );
+    .catch(error => next(error));
 });
 
 /*GET EDIT AD*/
@@ -64,7 +64,7 @@ router.get('/edit/:adId', (req, res, next) => {
 
       res.render('ad/edit', {ad});
     })
-    .catch(error => console.log(error));
+    .catch(error => next(error));
 });
 router.post('/edit/:adId', (req, res, next) => {
   Ad.findOne({_id: req.params.adId})
@@ -84,7 +84,7 @@ router.post('/edit/:adId', (req, res, next) => {
       return ad.save();
     })
     .then(result => res.redirect(`/ad/${req.params.adId}`))
-    .catch(error => console.log(error));
+    .catch(error => next(error));
 });
 
 router.post('/remove/:adId', (req, res, next) => {
@@ -94,7 +94,7 @@ router.post('/remove/:adId', (req, res, next) => {
       return ad.remove()
     })
     .then(result => res.redirect('/home'))
-    .catch(error => console.log(error));
+    .catch(error => next(error));
 });
 
 /* POST UPLOAD IMAGE */
