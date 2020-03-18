@@ -35,7 +35,8 @@ router.get('/:userid/edit', (req, res, next) => {
         currentUser,
       });
     })
-})
+    .catch(error => next(error));
+});
 
 router.post('/:userid/edit',  upload.any('photo'), (req, res, next) => {
   const updateProfile = req.body;
@@ -74,7 +75,7 @@ router.get('/:userId/ads', (req, res, next) => {
     .then(ads => {
       res.render('users/ads', {ads});
     })
-    .catch(error => console.log(error));
+    .catch(error => next(error));
 });
 
 module.exports = router;
