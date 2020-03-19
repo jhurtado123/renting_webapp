@@ -24,19 +24,19 @@
     </div>
     <div id="lateralMenu">
         <div class="profile-block">
-            <img src="">
+            <img class="image" src="/uploads/userProfileImages/{{currentUser.profile_image}}">
             <div class="wrap">
                 <p>Hola USERNAME</p>
                 <div class="actions">
-                    <a href="/">Editar perfil</a> · <a href="/logout">Logout</a>
+                    <a href="/users/edit">Editar perfil</a> · <a href="/logout">Logout</a>
                 </div>
             </div>
             <i class="fa fa-times close-menu"></i>
         </div>
         <div class="links-block">
-            <a href="">Mis anuncios</a>
+            <a href="/users/ads">Mis anuncios</a>
             <a href="">Mis chats</a>
-            <a href="">Mis citas</a>
+            <a href="/users/appointments">Mis citas</a>
         </div>
         <div class="more-block">
             <a href="">Help?</a> ·
@@ -51,11 +51,11 @@
             <i class="fa fa-search"></i>
             <p>Buscar</p>
         </a>
-        <a class="block" href="/users/{{currentUser._id}}/ads">
+        <a class="block" href="/users/ads">
             <i class="fa fa-home"></i>
             <p>Anuncios</p>
         </a>
-        <a class="block">
+        <a class="block" href="/users/appointments">
             <i class="fa fa-calendar"></i>
             <p>Citas</p>
         </a>

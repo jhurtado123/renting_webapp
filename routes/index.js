@@ -25,6 +25,10 @@ router.post('/login', (req, res, next) => {
             if (bcrypt.compareSync(userPassword, user.password)) {
               req.session.currentUser = user;
               req.flash('info', 'Welcome to Rent App!');
+              const requestedUrl = req.flash('requestedUrl');
+              if (requestedUrl.length) {
+                res.redirect(requestedUrl[0]);
+              }
               res.redirect('/home');
             } else {
               req.flash('error', 'usuario o contraseña incorrectos');
@@ -40,11 +44,12 @@ router.post('/login', (req, res, next) => {
 
 /*Logout*/
 router.get('/logout', (req, res, next) => {
+  req.flash('requestedUrl');
   req.session.destroy(err => {
     if (err) {
       next(err);
     }
-    res.redirect('/login');
+    res.redirect('/');
   });
 });
 
@@ -69,7 +74,7 @@ router.post('/register', (req, res, next) => {
       }
       const salt  = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(password, salt);
-      return new User({username, password: hash}).save();
+      return new User({username, password: hash, profile_image: 'default-profileImage.png'}).save();
     })
     .then(user => {
       req.flash('success', true);

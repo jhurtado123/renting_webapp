@@ -1,0 +1,19 @@
+{{#extend "stylesheets"}}
+    <link rel="stylesheet" href="/stylesheets/appointments/list.css"/>
+{{/extend}}
+<h1>Mis citas</h1>
+{{#ifEq appointments.length 0}}
+    <p>En estos momentos no tienes citas activas</p>
+{{else}}
+    <div id="appointments">
+        {{#each appointments}}
+            <a id="appointment" href="/appointment/view/{{this.id}}">
+                <h2>Cita con {{#ifEq ../currentUser._id this.lesser._id }}{{this.lessor.username}}{{else}}{{this.lesser.username}}{{/ifEq}}  </h2>
+                <p>Direccion: {{this.ad.address}}, {{this.ad.city}}</p>
+                <p>Fecha: {{this.date}}</p>
+                <p>Estado: {{this.status}}</p>
+                <p><a href="/ad/{{this.ad._id}}">Ver anuncio</a></p>
+            </a>
+        {{/each}}
+    </div>
+{{/ifEq}}
