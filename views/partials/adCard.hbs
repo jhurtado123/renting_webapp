@@ -1,8 +1,3 @@
-{{#extend "stylesheets"}}
-  <link rel="stylesheet" href="/stylesheets/ad/view.css" />
-  <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
-  <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
-{{/extend}}
 <div>
   <div class="slideshow-container">
     {{#each this.images }}
@@ -25,25 +20,3 @@
   <p>{{this.description}}</p>
   <a href="/ad/{{this._id}}" class="button">Ver piso</a>
 </div>
-<script>
-  var slideIndex = 0;
-  showSlides();
-  function showSlides() {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    if (slideIndex >= slides.length) {
-      slideIndex = 0;
-    }
-    if (slideIndex < 0) {
-      slideIndex = slides.length - 1;
-    }
-    slides[slideIndex].style.display = "block";
-  }
-  function plusSlides(n) {
-    slideIndex += n;
-    showSlides();
-  }
-</script>

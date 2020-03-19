@@ -1,3 +1,9 @@
+{{#extend "stylesheets"}}
+    <link rel="stylesheet" href="/stylesheets/components/slider.css" />
+    <link rel="stylesheet" href="/stylesheets/ad/view.css" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+{{/extend}}
 <div id="homeMenu">
   <form action="/home" method="get">
     <input type="text" name="search" placeholder="Barrio, Código postal">
@@ -14,4 +20,7 @@
   {{>adCard}}
   {{/each}}
 </div>
+{{#extend "scripts"}}
+    <script src="/javascripts/components/slider.js"></script>
+{{/extend}}
 
