@@ -1,0 +1,36 @@
+#modalDrawMap {
+  width: 90vw;
+  height: 80vh;
+  margin: 0 auto;
+  position: fixed;
+  background: white;
+  border: 1px solid black;
+  top: 50%;
+  transition: transform 1s;
+  left: 50%;
+  padding: 20px;
+  z-index: 100;
+  transform: translate(-50%, -200%); }
+  #modalDrawMap.open {
+    transform: translate(-50%, -56%); }
+  #modalDrawMap .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer; }
+  #modalDrawMap #showFlats {
+    margin: 20px auto 0;
+    background: black;
+    color: white;
+    font-weight: bold;
+    width: 90%;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 0; }
+
+#mapDraw {
+  margin-top: 20px;
+  width: 100%;
+  height: 70%; }
+
+/*# sourceMappingURL=home.css.map */

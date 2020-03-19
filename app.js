@@ -20,6 +20,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const adsRouter = require('./routes/ad');
 const appointmentsRouter = require('./routes/appointment');
+const apiRouter = require('./routes/api');
 
 const app = express();
 require('express-dynamic-helpers-patch')(app);
@@ -76,6 +77,7 @@ app.dynamicHelpers({
 app.use('/users',authMiddleware.checkIfUserLoggedIn, usersRouter);
 app.use('/ad',authMiddleware.checkIfUserLoggedIn, adsRouter);
 app.use('/appointment', authMiddleware.checkIfUserLoggedIn, appointmentsRouter);
+app.use('/api', apiRouter); //TODO authMiddleware.checkIfUserLoggedIn ?
 
 //register partials
 hbs.registerPartials(path.join(__dirname, '/views/partials'));

@@ -1,18 +1,22 @@
 {{#extend "stylesheets"}}
     <link rel="stylesheet" href="/stylesheets/components/slider.css" />
     <link rel="stylesheet" href="/stylesheets/ad/view.css" />
+    <link rel="stylesheet" href="/stylesheets/home.css" />
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css" type="text/css"/>
 {{/extend}}
 <div id="homeMenu">
   <form action="/home" method="get">
     <input type="text" name="search" placeholder="Barrio, Código postal">
   </form>
   <a href="#"><img src="/images/icons/filter.png"></a>
-  <a href="#"><img src="/images/icons/pin.png"></a>
+  <span id="openDrawMap"><img src="/images/icons/pin.png"></span>
   <a href="#"><img src="/images/icons/sort.png"></a>
 </div>
-<div>
+<div id="adList">
   {{#if messages.error}}
     <p>{{messages.error}}</p>
   {{/if}}
@@ -20,7 +24,18 @@
   {{>adCard}}
   {{/each}}
 </div>
+<div id="modalDrawMap">
+    <div class="close">X</div>
+    <h2>Dibuja en el mapa tu busqueda</h2>
+    <div id="mapDraw"></div>
+    <div class="calculation-box">
+        <div id="calculated-area"></div>
+    </div>
+    <div id="showFlats">Mostrar pisos</div>
+</div>
 {{#extend "scripts"}}
     <script src="/javascripts/components/slider.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/javascripts/home.js"></script>
 {{/extend}}
 

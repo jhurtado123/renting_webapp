@@ -24,7 +24,6 @@ function goToIndex(index) {
   slideIndex = index;
   showSlides();
 }
-
 document.querySelectorAll('.image-preview').forEach(element => {
   element.addEventListener('click', function () {
     const index = this.getAttribute('data-index');
