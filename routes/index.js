@@ -84,15 +84,51 @@ router.post('/register', (req, res, next) => {
 });
 
 router.get('/home', (req, res, next) => {
-  Ad.find()
-    .then(ads => {
-      console.log(ads)
-      res.render('home', {
-        ads,
-        messages: req.flash() 
-      });
-    })
-    .catch(err => console.log('Error while getting ads ', err))
+  if(req.query.search) {
+    if(isNaN(req.query.search)){
+      Ad.find()
+        .then(ads => {
+          console.log(ads)
+          if(ads.length > 0){
+            res.render('home', {
+              ads,
+              messages: req.flash()
+            });  
+          } else {
+            console.log("hola")
+            req.flash('error', 'No hay anuncios en este código postal');
+            res.redirect('/home');
+          }
+        })
+        .catch(err => console.log('Error while getting ads ', err))
+    } else{
+      Ad.find({ postal_code: req.query.search })
+        .then(ads => {
+          console.log(ads)
+          if(ads.length > 0){
+            res.render('home', {
+              ads,
+              messages: req.flash()
+            });  
+          } else {
+            console.log("hola")
+            req.flash('error', 'No hay anuncios en este código postal');
+            res.redirect('/home');
+          }
+        })
+        .catch(err => console.log('Error while getting ads ', err))
+    }
+  } else {
+    Ad.find()
+      .then(ads => {
+          res.render('home', {
+            ads,
+            messages: req.flash() 
+          });
+      })
+      .catch(err => console.log('Error while getting ads ', err))
+  }
 });
+
 
 module.exports = router;
