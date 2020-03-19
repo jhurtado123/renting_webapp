@@ -1,5 +1,16 @@
-  <div>
-    {{#each ads}}
-    {{>adCard}}
-    {{/each}}
-  </div>
+<div id="homeMenu">
+  <form action="/home" method="get">
+    <input type="text" name="search" placeholder="Barrio, Código postal">
+  </form>
+  <a href="#"><img src="/images/icons/filter.png"></a>
+  <a href="#"><img src="/images/icons/pin.png"></a>
+  <a href="#"><img src="/images/icons/sort.png"></a>
+</div>
+<div>
+  {{#if messages.error}}
+    <p>{{messages.error}}</p>
+  {{/if}}
+  {{#each ads}}
+  {{>adCard}}
+  {{/each}}
+</div>

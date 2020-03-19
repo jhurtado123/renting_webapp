@@ -27,6 +27,10 @@
   width: 100%;
   height: 400px;
 }
+#homeMenu{
+  display: flex;
+  justify-content: space-around;
+}
 *{box-sizing:border-box}
 .slideshow-container {
     max-width: 1000px;
