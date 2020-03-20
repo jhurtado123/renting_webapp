@@ -12,7 +12,7 @@ const userSchema = new Schema({
     required: true,
   },
   name: String,
-  rol:[],
+  role:[],
   phone: Number,
   profile_image: String,
   description: String,

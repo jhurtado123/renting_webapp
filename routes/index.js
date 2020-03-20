@@ -74,7 +74,7 @@ router.post('/register', (req, res, next) => {
       }
       const salt  = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(password, salt);
-      return new User({name, username, password: hash, profile_image: 'default-profileImage.png'}).save();
+      return new User({name, username, password: hash, profile_image: 'default-profileImage.png', role: ['ROLE_USER']}).save();
     })
     .then(user => {
       req.flash('success', true);
