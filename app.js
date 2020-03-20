@@ -74,6 +74,7 @@ app.dynamicHelpers({
     return req.session.currentUser;
   },
 });
+
 app.use('/users',authMiddleware.checkIfUserLoggedIn, usersRouter);
 app.use('/ad',authMiddleware.checkIfUserLoggedIn, adsRouter);
 app.use('/appointment', authMiddleware.checkIfUserLoggedIn, appointmentsRouter);

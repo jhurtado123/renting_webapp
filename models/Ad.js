@@ -10,8 +10,9 @@ const adSchema = new Schema({
     require: true,
     type: String
   },
+  number: String,
   city: String,
-  postal_code: Number,
+  postal_code: String,
   coords: {
     lat: Number,
     lng: Number
@@ -20,7 +21,16 @@ const adSchema = new Schema({
   parameters: {
     'square_meters': Number,
     'flat_status': Number,
+    'height': Number,
+    'hasElevator': Boolean,
+    'rooms': Number,
+    'bathrooms': Number,
+    'terrace': Boolean,
+    'terrace_square_meters': Number,
+    'parking': Boolean,
+    'storage_room': Boolean
   },
+  neighborhood: String,
   images: Array,
 },
   {
