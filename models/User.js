@@ -13,6 +13,7 @@ const userSchema = new Schema({
   },
   name: String,
   rol:[],
+  phone: Number,
   profile_image: String,
   description: String,
   dni: String,

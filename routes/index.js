@@ -59,7 +59,7 @@ router.get('/register', (req, res, next) => {
   res.render('register', {messages: req.flash(), layout: false});
 });
 router.post('/register', (req, res, next) => {
-  const { username, password } = req.body;
+  const { name, username, password } = req.body;
 
   if (!username || !password) {
     req.flash('error', 'Rellena todos los campos');
@@ -74,7 +74,7 @@ router.post('/register', (req, res, next) => {
       }
       const salt  = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(password, salt);
-      return new User({username, password: hash, profile_image: 'default-profileImage.png'}).save();
+      return new User({name, username, password: hash, profile_image: 'default-profileImage.png'}).save();
     })
     .then(user => {
       req.flash('success', true);
