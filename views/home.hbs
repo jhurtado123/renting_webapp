@@ -14,7 +14,7 @@
   </form>
   <a href="#"><img src="/images/icons/filter.png"></a>
   <span id="openDrawMap"><img src="/images/icons/pin.png"></span>
-  <a href="#"><img src="/images/icons/sort.png"></a>
+  <a id="openSortAds"><img src="/images/icons/sort.png"></a>
 </div>
 <div id="adList">
   {{#if messages.error}}
@@ -32,6 +32,20 @@
         <div id="calculated-area"></div>
     </div>
     <div id="showFlats">Mostrar pisos</div>
+</div>
+<div id="sortAds">
+  <div class="close">X</div>
+  <div class="orderSection">
+    <label for="order">Ordenar por:</label>
+    <select id="orderBy" name="order">
+      <option value="data">Fecha más reciente</option>
+      <option value="morePrice">Precio: Más caro primero</option>
+      <option value="lessPrice">Precio: Más barato primero</option>
+      <option value="moreMeters">Metros: Más metros primero</option>
+      <option value="lessMeters">Metros: Menos metros primero</option>
+    </select>
+    <button id="buttonOrder" type="submit">Ordenar</button>
+  </div>
 </div>
 {{#extend "scripts"}}
     <script src="/javascripts/components/slider.js"></script>

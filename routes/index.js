@@ -88,7 +88,6 @@ router.get('/home', (req, res, next) => {
     if(isNaN(req.query.search)){
       Ad.find()
         .then(ads => {
-          console.log(ads)
           if(ads.length > 0){
             res.render('home', {
               ads,
@@ -104,14 +103,12 @@ router.get('/home', (req, res, next) => {
     } else{
       Ad.find({ postal_code: req.query.search })
         .then(ads => {
-          console.log(ads)
           if(ads.length > 0){
             res.render('home', {
               ads,
               messages: req.flash()
             });  
           } else {
-            console.log("hola")
             req.flash('error', 'No hay anuncios en este código postal');
             res.redirect('/home');
           }
