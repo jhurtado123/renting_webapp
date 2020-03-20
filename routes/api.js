@@ -22,5 +22,41 @@ router.post('/get/ads', (req, res, next) => {
     .catch(error => console.log(error));
 });
 
+/*POST, ORDER ADS */
+router.post('/sort/ads', (req, res, next) => {
+  const {order} = req.body;
+  console.log(order)  
+  if (order === 'data'){
+    Ad.find().sort({createdAt: -1})
+      .then(ads => {
+        res.send({ 'ads': ads   })
+      })
+  } else if(order === 'morePrice'){
+    Ad.find().sort({ price: -1 })
+      .then(ads => {
+        res.send({ 'ads': ads })
+      })
+      .catch(error => next(error));
+  } else if (order === 'lessPrice'){
+    Ad.find().sort({ price: 1 })
+      .then(ads => {
+        res.send({ 'ads': ads })
+      })
+      .catch(error => next(error));
+  } else if(order === 'moreMeters'){
+    Ad.find().sort({ 'parameters.square_meters': -1})
+      .then(ads => {
+        res.send({ 'ads': ads })
+      })
+      .catch(error => next(error));
+  } else if (order === 'lessMeters') {
+    Ad.find().sort({ 'parameters.square_meters': 1 })
+      .then(ads => {
+        res.send({ 'ads': ads })
+      })
+      .catch(error => next(error));
+  }  
+})
+
 
 module.exports = router;

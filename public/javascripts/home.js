@@ -1,6 +1,8 @@
 const drawMapModal = document.querySelector('#modalDrawMap');
 const showFlatsButton = document.querySelector('#showFlats');
 const adList = document.querySelector('#adList');
+const sortAdsModal = document.querySelector('#sortAds');
+const buttonOrder = document.querySelector('#buttonOrder');
 
 document.querySelector('#openDrawMap').addEventListener('click', () => {
   if (drawMapModal.classList.contains('open')) {
@@ -10,6 +12,16 @@ document.querySelector('#openDrawMap').addEventListener('click', () => {
   }
 });
 document.querySelector('#modalDrawMap .close').addEventListener('click', disableDrawMapModal);
+
+document.querySelector('#openSortAds').addEventListener('click', () => {
+  if (sortAdsModal.classList.contains('open')) {
+    disableSortAdsModal();
+  } else {
+    enableSortAdsModal();
+  }
+});
+document.querySelector('#sortAds .close').addEventListener('click', disableSortAdsModal);
+
 
 function disableDrawMapModal() {
   backdrop.style.display = 'none';
@@ -22,6 +34,12 @@ function enableDrawMapModal() {
   drawMapModal.classList.add('open');
 }
 
+function disableSortAdsModal(){
+  sortAdsModal.classList.remove('open');
+}
+function enableSortAdsModal(){
+  sortAdsModal.classList.add('open');
+}
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoiamh1cnRhZG8xMjMiLCJhIjoiY2s3dGlqZWtlMHFveTNvbjF1bjJxYTg2ayJ9.zbzGWyoeQ52ddJTrK2gjdA';
 var map = new mapboxgl.Map({
@@ -84,6 +102,18 @@ showFlatsButton.addEventListener('click', () => {
     })
     .catch(error => console.log(error));
 });
+
+let order;
+buttonOrder.addEventListener('click', () => {
+  axios.post('/api/sort/ads', {'order': document.querySelector('#orderBy').value})
+    .then(result => {
+      console.log("hola")
+      createAdsOnView(result.data.ads);
+      disableSortAdsModal();
+    })
+    .catch(error => console.log(error));
+});
+
 
 function createAdsOnView(ads) {
   adList.innerHTML = '';

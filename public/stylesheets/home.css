@@ -33,4 +33,27 @@
   width: 100%;
   height: 70%; }
 
+#sortAds {
+  width: 90vw;
+  height: 30vh;
+  margin: 0 auto;
+  position: fixed;
+  background: white;
+  border: 1px solid black;
+  top: 50%;
+  transition: transform 1s;
+  left: 50%;
+  padding: 20px;
+  z-index: 100;
+  transform: translate(-50%, -400%); }
+  #sortAds.open {
+    transform: translate(-50%, -130%); }
+  #sortAds .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer; }
+  #sortAds .orderSection {
+    margin-top: 30px; }
+
 /*# sourceMappingURL=home.css.map */
