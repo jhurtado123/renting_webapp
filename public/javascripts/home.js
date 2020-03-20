@@ -75,10 +75,12 @@ function updateArea(e) {
       .then(result => {
         const {ads} = result.data;
         ads.forEach(ad => {
+          console.log(ad);
           markers.push(new mapboxgl.Marker({color:'yellow'})
-            .setLngLat([ad.coords.lng, ad.coords.lat])
+            .setLngLat([ad.location.coordinates[0], ad.location.coordinates[1]])
             .addTo(map));
         });
+        showFlatsButton.querySelector('span').innerHTML = `(${ads.length})`;
       })
       .catch(error => console.log(error));
   } else {

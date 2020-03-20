@@ -26,6 +26,7 @@
     <button type="submit">Pedir cita</button>
 </form>
 <h1>{{ad.title}}</h1>
+<p>{{ad.neighborhood}}, {{ad.city}}</p>
 <p class="price">{{ad.price}}€</p>
 <p>{{ad.description}}</p>
 <div id="map"></div>
@@ -39,7 +40,7 @@
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [{{ad.coords.lng}}, {{ad.coords.lat}}],
+            center: [{{ad.location.coordinates.[1]}}, {{ad.location.coordinates.[0]}}],
             zoom: 14,
             interactive: true
         });
@@ -52,7 +53,7 @@
                         "type": "Feature",
                         "geometry": {
                             "type": "Point",
-                            "coordinates": [{{ad.coords.lng}}, {{ad.coords.lat}}]
+                            "coordinates": [{{ad.location.coordinates.[1]}}, {{ad.location.coordinates.[0]}}]
                         }
                     }]
                 }

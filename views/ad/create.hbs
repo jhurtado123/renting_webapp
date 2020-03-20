@@ -21,8 +21,20 @@
         <div class="info">Por seguridad la dirección exacta del inmueble no se mostrará al usuario hasta que usted no confirme una cita con este.</div>
     </div>
     <div class="form-group">
+        <label>Número</label>
+        <input type="text" name="number">
+    </div>
+    <div class="form-group">
         <label>Metros cuadrados</label>
         <input type="number" name="square_meters">
+    </div>
+    <div class="form-group">
+        <label>Número de habitaciones</label>
+        <input type="number" name="rooms">
+    </div>
+    <div class="form-group">
+        <label>Número de lavabos</label>
+        <input type="number" name="bathrooms">
     </div>
     <div class="form-group">
         <input type="checkbox" name="terrace" id="terrace">
@@ -31,6 +43,22 @@
     <div class="form-group">
         <label>Estado del inmueble ( del 1 al 5, siendo 1 en mal estado y 5 en buen estado )</label>
         <input type="range" name="flat_status" min="1" max="5" step="1">
+    </div>
+    <div class="form-group">
+        <label>Altura del inmueble</label>
+        <input type="number" name="height">
+    </div>
+    <div class="form-group">
+        <input id="hasElevator" type="checkbox" name="hasElevator">
+        <label for="hasElevator">Tiene ascensor</label>
+    </div>
+    <div class="form-group">
+        <input id="parking" type="checkbox" name="parking">
+        <label for="parking">Incluye plaza de parking</label>
+    </div>
+    <div class="form-group">
+        <input id="storage_room" type="checkbox" name="storage_room">
+        <label for="storage_room">Incluye trastero</label>
     </div>
     <div class="form-group">
         <label>Precio</label>

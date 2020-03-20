@@ -53,6 +53,7 @@ router.post('/edit',  upload.any('photo'), (req, res, next) => {
   currentUser.description = updateProfile.description;
   currentUser.name = updateProfile.name;
   currentUser.dni = updateProfile.dni;
+  currentUser.phone = updateProfile.phone;
   User.updateOne({ _id: currentUser._id }, updateProfile)
     .then(() => {
       res.redirect('/users/user');
