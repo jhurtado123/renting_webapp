@@ -32,7 +32,7 @@ router.post('/create', function (req, res, next) {
     height, storage_room, parking, number
   } = req.body;
 
-  getCoordsByAddress(address + ' ' + number, city)
+  getCoordsByAddress(address + ' ' + number + ', ' + postal_code, city)
     .then(async coords => {
       const neighborhood = await getNeighborhoodByPostalCode(postal_code);
       return new Ad({
@@ -92,7 +92,7 @@ router.post('/edit/:adId', (req, res, next) => {
       ad.title = title;
       ad.city = city;
       ad.postal_code = postal_code;
-      ad.coords = ad.address !== address ? await getCoordsByAddress(address + ' ' + number, city) : ad.coords;
+      ad.coords = ad.address !== address ? await getCoordsByAddress(address + ' ' + number + ', ' + postal_code, city) : ad.coords;
       ad.address = address;
       ad.parameters = {
         square_meters, flat_status,
