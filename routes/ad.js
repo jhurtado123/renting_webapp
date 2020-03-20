@@ -3,7 +3,7 @@ const path = require('path');
 const router = express.Router();
 const multer = require('multer');
 const axios = require('axios');
-const { curly } = require('node-libcurl');
+const {curly} = require('node-libcurl');
 
 
 const storage = multer.diskStorage({
@@ -38,8 +38,12 @@ router.post('/create', function (req, res, next) {
       return new Ad({
         title,
         owner: req.session.currentUser._id,
-        neighborhood : neighborhood === '' ? city : neighborhood,
-        address, number, city, postal_code, price, coords, description,
+        neighborhood: neighborhood === '' ? city : neighborhood,
+        address, number, city, postal_code, price, description,
+        location: {
+          type: 'Point',
+          coordinates: coords
+        },
         parameters: {
           square_meters, flat_status,
           terrace: terrace === 'on',
@@ -92,7 +96,12 @@ router.post('/edit/:adId', (req, res, next) => {
       ad.title = title;
       ad.city = city;
       ad.postal_code = postal_code;
-      ad.coords = ad.address !== address ? await getCoordsByAddress(address + ' ' + number + ', ' + postal_code, city) : ad.coords;
+      if (address !== ad.address) {
+        ad.location = {
+          type: 'Point',
+          coordinates: await getCoordsByAddress(address + ' ' + number + ', ' + postal_code, city)
+        }
+      }
       ad.address = address;
       ad.parameters = {
         square_meters, flat_status,
@@ -141,16 +150,16 @@ async function getCoordsByAddress(address, city) {
 
   return await axios.get(url)
     .then(response => {
-      return {
-        lat: response.data.features[0].center[1],
-        lng: response.data.features[0].center[0]
-      };
+      return [
+        response.data.features[0].center[0],
+        response.data.features[0].center[1]
+      ];
     });
 }
 
 async function getNeighborhoodByPostalCode(postal_code) {
   const url = `https://seguro.elpais.com/estaticos/2019/01/renta_codigos_postal/suggest.pl?q=${postal_code}&code=9`;
-  const { data } = await curly.get(url);
+  const {data} = await curly.get(url);
   const response = getJsonFromResponse(data);
 
   return response !== '' ? response.zona : '';
@@ -160,7 +169,7 @@ function getJsonFromResponse(response) {
   response = response.split('[')[1];
   response = response.split(']')[0];
 
-  return response === '' ?  '' : JSON.parse(response);
+  return response === '' ? '' : JSON.parse(response);
 }
 
 module.exports = router;

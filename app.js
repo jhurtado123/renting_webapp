@@ -66,7 +66,6 @@ app.use(require('node-sass-middleware')({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
-
 app.use('/', indexRouter);
 
 app.dynamicHelpers({
