@@ -28,16 +28,18 @@ function disableDrawMapModal() {
   content.style.overflowY = 'visible';
   drawMapModal.classList.remove('open');
 }
+
 function enableDrawMapModal() {
   content.style.overflowY = 'hidden';
   backdrop.style.display = 'block';
   drawMapModal.classList.add('open');
 }
 
-function disableSortAdsModal(){
+function disableSortAdsModal() {
   sortAdsModal.classList.remove('open');
 }
-function enableSortAdsModal(){
+
+function enableSortAdsModal() {
   sortAdsModal.classList.add('open');
 }
 
@@ -65,6 +67,7 @@ map.on('draw.update', updateArea);
 
 const markers = [];
 let polygon;
+
 function updateArea(e) {
   var data = draw.getAll();
   var answer = document.getElementById('calculated-area');
@@ -76,7 +79,7 @@ function updateArea(e) {
         const {ads} = result.data;
         ads.forEach(ad => {
           console.log(ad);
-          markers.push(new mapboxgl.Marker({color:'yellow'})
+          markers.push(new mapboxgl.Marker({color: 'yellow'})
             .setLngLat([ad.location.coordinates[0], ad.location.coordinates[1]])
             .addTo(map));
         });
@@ -107,7 +110,6 @@ let order;
 buttonOrder.addEventListener('click', () => {
   axios.post('/api/sort/ads', {'order': document.querySelector('#orderBy').value})
     .then(result => {
-      console.log("hola")
       createAdsOnView(result.data.ads);
       disableSortAdsModal();
     })
@@ -117,13 +119,17 @@ buttonOrder.addEventListener('click', () => {
 
 function createAdsOnView(ads) {
   adList.innerHTML = '';
+  if (!ads.length) {
+    adList.innerHTML = '<div class="not-found">No hay anuncios disponibles es esta búsqueda</div>';
+    return;
+  }
   ads.forEach(ad => {
     const imagesHtmlString = getHtmlImagesString(ad.images);
     let string = `<div>
-            <div class="slideshow-container">
+            <div class="slideshow-container" data-id="${ad._id}">
                 ${imagesHtmlString}
-              <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-              <a class="next" onclick="plusSlides(1)">&#10095;</a>
+              <a class="prev" onclick="plusSlides('${ad._id}')">&#10094;</a>
+              <a class="next" onclick="plusSlides('${ad._id}')">&#10095;</a>
             </div>
             <h3>${ad.title}</h3>
             <h4>${ad.price}€</h4>
@@ -139,17 +145,15 @@ function createAdsOnView(ads) {
           </div>`;
     adList.innerHTML += string;
   });
-  if (!ads.length) {
-    adList.innerHTML = '<div class="not-found">No hay anuncios disponibles es esta busqueda</div>'
-  } else {
-    showSlides();
-  }
+  disableDrawMapModal();
+  activateSliders();
+
 }
 
 function getHtmlImagesString(images) {
   let string = '';
-  images.forEach(image => {
-    string += `<div class="mySlides fade"><img src="/uploads/picturesAd/${image}" class="slide"></div>`;
+  images.forEach((image, index) => {
+    string += `<div class="mySlides fade" data-index="${index}"><img src="/uploads/picturesAd/${image}" class="slide"></div>`;
   });
   return string;
 }
