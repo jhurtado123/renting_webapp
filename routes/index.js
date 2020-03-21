@@ -84,22 +84,22 @@ router.post('/register', (req, res, next) => {
 });
 
 router.get('/home', (req, res, next) => {
+  
   if(req.query.search) {
     if(isNaN(req.query.search)){
-      Ad.find()
-        .then(ads => {
-          if(ads.length > 0){
-            res.render('home', {
-              ads,
-              messages: req.flash()
-            });  
-          } else {
-            console.log("hola")
-            req.flash('error', 'No hay anuncios en este código postal');
-            res.redirect('/home');
-          }
-        })
-        .catch(err => console.log('Error while getting ads ', err))
+    Ad.find({ neighborhood: { $regex: ".*" + req.query.search + ".*" } })
+      .then(ads => {
+        if (ads.length > 0) {
+          res.render("home", {
+            ads,
+            messages: req.flash()
+          });
+        } else {
+          req.flash("error", "No hay anuncios en este barrio");
+          res.redirect("/home");
+        }
+      })
+      .catch(err => console.log("Error while getting ads ", err));
     } else{
       Ad.find({ postal_code: req.query.search })
         .then(ads => {
