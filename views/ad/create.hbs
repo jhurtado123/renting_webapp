@@ -2,14 +2,14 @@
     <link rel="stylesheet" href="/stylesheets/ad/create.css"/>
 {{/extend}}
 
-<form action="/ad/create" method="post">
+<form action="/ad/create" method="post" class="validate">
     <div class="form-group">
         <label>Titulo</label>
         <input type="text" name="title" data-validate="notEmpty">
     </div>
     <div class="form-group">
         <label>Ciudad</label>
-        <input type="text" name="city">
+        <input type="text" name="city" data-validate="notEmpty">
     </div>
     <div class="form-group">
         <label>Código postal</label>
@@ -17,24 +17,24 @@
     </div>
     <div class="form-group">
         <label>Dirección</label>
-        <input type="text" name="address">
+        <input type="text" name="address" data-validate="notNumbers">
         <div class="info">Por seguridad la dirección exacta del inmueble no se mostrará al usuario hasta que usted no confirme una cita con este.</div>
     </div>
     <div class="form-group">
         <label>Número</label>
-        <input type="text" name="number">
+        <input type="text" name="number" data-validate="notEmpty">
     </div>
     <div class="form-group">
         <label>Metros cuadrados</label>
-        <input type="number" name="square_meters">
+        <input type="number" name="square_meters" data-validate="notEmpty">
     </div>
     <div class="form-group">
         <label>Número de habitaciones</label>
-        <input type="number" name="rooms">
+        <input type="number" name="rooms" data-validate="notEmpty">
     </div>
     <div class="form-group">
         <label>Número de lavabos</label>
-        <input type="number" name="bathrooms">
+        <input type="number" name="bathrooms" data-validate="notEmpty">
     </div>
     <div class="form-group">
         <input type="checkbox" name="terrace" id="terrace">
@@ -46,7 +46,7 @@
     </div>
     <div class="form-group">
         <label>Altura del inmueble</label>
-        <input type="number" name="height">
+        <input type="number" name="height" data-validate="notEmpty">
     </div>
     <div class="form-group">
         <input id="hasElevator" type="checkbox" name="hasElevator">
@@ -62,11 +62,11 @@
     </div>
     <div class="form-group">
         <label>Precio</label>
-        <input type="number" name="price">
+        <input type="number" name="price" data-validate="notEmpty">
     </div>
     <div class="form-group">
         <label>Descripción</label>
-        <textarea name="description"></textarea>
+        <textarea name="description" data-validate="notEmpty"></textarea>
     </div>
     <div class="form-group">
         <label>Imagenes</label>

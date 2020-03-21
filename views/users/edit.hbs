@@ -4,17 +4,26 @@
 <h2>Edit your profile</h2>
 {{currentUser._id}}
 
-<form action="/users/profile" method="POST" enctype="multipart/form-data">
-    <input type="text" name="name" placeholder="Modify your Name" value="{{ currentUser.name }}">
-    <input type="text" name="phone" placeholder="Introduce tu número de telefono" value="{{ currentUser.phone }}">
+<form action="/users/profile" method="POST" enctype="multipart/form-data" class="validate">
+    <div class="form-group">
+        <input type="text" name="name" placeholder="Modify your Name" value="{{ currentUser.name }}" data-validate="notEmpty">
+    </div>
+    <div class="form-group">
+        <input type="text" name="phone" placeholder="Introduce tu número de telefono" value="{{ currentUser.phone }}" data-validate="phone">
+    </div>
     <label for="profile_image">Imagen de perfil</label>
     <div class='uploaded-image'>
         <img class="image-preview" src="/uploads/userProfileImages/{{currentUser.profile_image}}">
         <input type="hidden" name="profile_image" value="{{currentUser.profile_image}}">
     </div>
     <input type="file" name="" id="imageUploadInput">
-    <input type="text" name="description" placeholder="Modify your description" value="{{ currentUser.description }}">
-    <input type="text" name="dni" placeholder="Introduce your dni" value="{{ currentUser.dni }}">
+    <div class="form-group">
+        <input type="text" name="description" placeholder="Modify your description"
+               value="{{ currentUser.description }}" data-validate="notEmpty">
+    </div>
+    <div class="form-group">
+        <input type="text" name="dni" placeholder="Introduce your dni" value="{{ currentUser.dni }}" data-validate="dni">
+    </div>
     <button>Update your Profile</button>
 </form>
 <div>
@@ -24,5 +33,6 @@
 
 {{#extend "scripts"}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/javascripts/validator.js"></script>
     <script src="/javascripts/users/edit.js"></script>
 {{/extend}}

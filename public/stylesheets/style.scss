@@ -133,3 +133,15 @@ a {
   display: none;
   overflow: hidden;
 }
+
+.has-error {
+  input,textarea {
+    border:1px solid red;
+  }
+  .error-message {
+    color:red;
+  }
+}
+.form-error-message {
+  color:red;
+}
