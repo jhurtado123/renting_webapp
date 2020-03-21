@@ -27,12 +27,12 @@ router.post('/login', (req, res, next) => {
               req.flash('info', 'Welcome to Rent App!');
               const requestedUrl = req.flash('requestedUrl');
               if (requestedUrl.length) {
-                res.redirect(requestedUrl[0]);
+                return res.redirect(requestedUrl[0]);
               }
-              res.redirect('/home');
+              return res.redirect("/home");
             } else {
               req.flash('error', 'usuario o contraseña incorrectos');
-              res.redirect('/');
+              return res.redirect("/");
             }
           }
         })

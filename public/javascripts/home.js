@@ -3,6 +3,8 @@ const showFlatsButton = document.querySelector('#showFlats');
 const adList = document.querySelector('#adList');
 const sortAdsModal = document.querySelector('#sortAds');
 const buttonOrder = document.querySelector('#buttonOrder');
+const filterAdsModal = document.querySelector('#filterAds');
+const filterAdsButton = document.querySelector('#buttonFilter');
 
 document.querySelector('#openDrawMap').addEventListener('click', () => {
   if (drawMapModal.classList.contains('open')) {
@@ -23,6 +25,18 @@ document.querySelector('#openSortAds').addEventListener('click', () => {
 document.querySelector('#sortAds .close').addEventListener('click', disableSortAdsModal);
 
 
+document.querySelector("#openFilterAds").addEventListener("click", () => {
+  if (filterAdsModal.classList.contains("open")) {
+    disableFilterAdsModal();
+  } else {
+    enableFilterAdsModal();
+  }
+});
+document
+  .querySelector("#filterAds .close")
+  .addEventListener("click", disableFilterAdsModal);
+
+
 function disableDrawMapModal() {
   backdrop.style.display = 'none';
   content.style.overflowY = 'visible';
@@ -39,6 +53,13 @@ function disableSortAdsModal(){
 }
 function enableSortAdsModal(){
   sortAdsModal.classList.add('open');
+}
+
+function disableFilterAdsModal(){
+  filterAdsModal.classList.remove('open');
+}
+function enableFilterAdsModal(){
+  filterAdsModal.classList.add('open');
 }
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoiamh1cnRhZG8xMjMiLCJhIjoiY2s3dGlqZWtlMHFveTNvbjF1bjJxYTg2ayJ9.zbzGWyoeQ52ddJTrK2gjdA';
@@ -114,6 +135,32 @@ buttonOrder.addEventListener('click', () => {
     .catch(error => console.log(error));
 });
 
+filterAdsButton.addEventListener("click", () => {
+  let filter = {
+    price: document.querySelector("#priceMin").value,
+    meters: document.querySelector("#metersMin").value,
+    rooms: document.querySelector("#rooomsMin").value,
+    wc: document.querySelector('#wcMin').value
+  };
+  axios.post('/api/filter/ads', { 'filter': filter })
+    .then(result => {
+      console.log("hola");
+      createAdsOnView(result.data.ads);
+      disableSortAdsModal();
+    })
+    .catch(error => console.log(error));
+});
+
+
+// filterAdsButton.addEventListener('click', () => {
+//   axios.post("/api/filter/ads", { 'filter': filter })
+//     .then(result => {
+//       console.log("hola")
+//       createAdsOnView(result.data.ads);
+//       disableSortAdsModal();
+//     })
+//     .catch(error => console.log(error));
+// });
 
 function createAdsOnView(ads) {
   adList.innerHTML = '';

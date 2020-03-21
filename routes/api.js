@@ -58,5 +58,20 @@ router.post('/sort/ads', (req, res, next) => {
   }  
 })
 
+/* POST, FILTER ADS*/
+router.post('/filter/ads', (req, res) => {
+  const filter = req.body;
+  console.log("Entra en los filtros", filter)
+  Ad.find({
+    price: { $gt: filter.filter.price },
+    // 'parameters.square_meters': {$gt: filter.filter.meters},
+    'parameters.rooms': {$gt: filter.filter.rooms}
+    })
+    .then(ads => {
+      console.log(ads)
+      res.send({ ads: ads });
+    })
+    .catch(error => console.log(error));
+})
 
 module.exports = router;
