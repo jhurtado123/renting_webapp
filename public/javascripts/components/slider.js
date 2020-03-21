@@ -1,29 +1,44 @@
 var slideIndex = 0;
-showSlides();
-function showSlides() {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  if (slideIndex >= slides.length) {
-    slideIndex = 0;
-  }
-  if (slideIndex < 0) {
-    slideIndex = slides.length - 1;
-  }
-  slides[slideIndex].style.display = "block";
+activateSliders();
+
+function activateSliders() {
+  const sliders = document.querySelectorAll(".slideshow-container");
+  sliders.forEach(slider => {
+    slider.querySelector('.mySlides').classList.add('active');
+  })
 }
-function plusSlides(n) {
-  slideIndex += n;
-  console.log(slideIndex);
-  showSlides();
+function plusSlides(slideId) {
+  const slider = document.querySelector(`.slideshow-container[data-id="${slideId}"]`);
+  const slidesCount = (slider.querySelectorAll('.mySlides').length) - 1;
+  const currentSlide = slider.querySelector('.mySlides.active');
+  currentSlide.classList.remove('active');
+  const currentIndex = parseInt(currentSlide.getAttribute('data-index'));
+  let nextIndex = currentIndex + 1;
+  if (currentIndex === slidesCount) {
+    nextIndex = 0;
+  }
+  slider.querySelector(`.mySlides[data-index="${nextIndex}"]`).classList.add('active');
+}
+function minusSlides(slideId) {
+  const slider = document.querySelector(`.slideshow-container[data-id="${slideId}"]`);
+  const slidesCount = (slider.querySelectorAll('.mySlides').length) - 1;
+  const currentSlide = slider.querySelector('.mySlides.active');
+  currentSlide.classList.remove('active');
+  const currentIndex = parseInt(currentSlide.getAttribute('data-index'));
+  let nextIndex = currentIndex - 1;
+  if (currentIndex === 0) {
+    nextIndex = slidesCount;
+  }
+  slider.querySelector(`.mySlides[data-index="${nextIndex}"]`).classList.add('active');
 }
 
 function goToIndex(index) {
-  slideIndex = index;
-  showSlides();
+  const slider = document.querySelector('.slideshow-container');
+  const currentSlide = slider.querySelector('.mySlides.active');
+  currentSlide.classList.remove('active');
+  slider.querySelector(`.mySlides[data-index="${index}"]`).classList.add('active');
 }
+
 document.querySelectorAll('.image-preview').forEach(element => {
   element.addEventListener('click', function () {
     const index = this.getAttribute('data-index');

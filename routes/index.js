@@ -21,7 +21,6 @@ router.post('/login', (req, res, next) => {
             req.flash('error', 'no estas registrado');
             res.redirect('/');
           } else {
-            console.log(bcrypt.compareSync(userPassword, user.password));
             if (bcrypt.compareSync(userPassword, user.password)) {
               req.session.currentUser = user;
               req.flash('info', 'Welcome to Rent App!');

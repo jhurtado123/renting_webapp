@@ -5,14 +5,14 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
 {{/extend}}
 
-<div class="slideshow-container">
+<div class="slideshow-container" data-id="{{ad._id}}">
     {{#each ad.images }}
-        <div class="mySlides fade">
+        <div class="mySlides fade" data-index="{{@index}}">
             <img src="/uploads/picturesAd/{{this}}" class="slide">
         </div>
     {{/each}}
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <a class="prev" onclick="minusSlides('{{ad._id}}')">&#10094;</a>
+    <a class="next" onclick="plusSlides('{{ad._id}}')">&#10095;</a>
 </div>
 <div class="ad-images-preview">
     {{#each ad.images }}
