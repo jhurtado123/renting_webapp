@@ -1,22 +1,22 @@
 <div>
-  <div class="slideshow-container">
-    {{#each this.images }}
-    <div class="mySlides fade">
-      <img src="/uploads/picturesAd/{{this}}" class="slide">
+    <div class="slideshow-container" data-id="{{this._id}}">
+        {{#each this.images }}
+            <div class="mySlides fade" data-index="{{@index}}">
+                <img src="/uploads/picturesAd/{{this}}" class="slide">
+            </div>
+        {{/each}}
+        <a class="prev" onclick="minusSlides('{{this._id}}')">&#10094;</a>
+        <a class="next" onclick="plusSlides('{{this._id}}')">&#10095;</a>
     </div>
-    {{/each}}
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-  </div>
-  <h3>{{this.title}}</h3>
-  <h4>{{this.price}}€</h4>
-  <p>{{this.city}}</p>
-  <div class ="summary-info">
-    <p>{{this.parameters.square_meters}} m² <img src="/images/icons/area.png"></p>
-    <p>{{this.parameters.flat_status}}º piso<img src="/images/icons/ruler.png"></p>
-    <p>2 hab.<img src="/images/icons/bed.png"></p>
-    <p>1 bañ.<img src="/images/icons/shower.png"></p>
-  </div>
-  <p>{{this.description}}</p>
-  <a href="/ad/{{this._id}}" class="button">Ver piso</a>
+    <h3>{{this.title}}</h3>
+    <h4>{{this.price}}€</h4>
+    <p>{{this.city}}</p>
+    <div class="summary-info">
+        <p>{{this.parameters.square_meters}} m² <img src="/images/icons/area.png"></p>
+        <p>{{this.parameters.flat_status}}º piso<img src="/images/icons/ruler.png"></p>
+        <p>2 hab.<img src="/images/icons/bed.png"></p>
+        <p>1 bañ.<img src="/images/icons/shower.png"></p>
+    </div>
+    <p>{{this.description}}</p>
+    <a href="/ad/{{this._id}}" class="button">Ver piso</a>
 </div>

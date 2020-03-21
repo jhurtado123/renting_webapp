@@ -86,7 +86,6 @@ hbs.registerHelper('ifEq', function(arg1, arg2, options) {
 });
 // Deprecated since version 0.8.0
 hbs.registerHelper("formatDate", function(datetime) {
-    console.log(datetime);
     return `${datetime.getUTCDate()}/${datetime.getUTCMonth()+1}/${datetime.getFullYear()}`;
 });
 
