@@ -29,7 +29,7 @@ router.post('/create', function (req, res, next) {
     title, city, postal_code, address,
     square_meters, flat_status, price, images,
     description, terrace, rooms, bathrooms,
-    height, storage_room, parking, number
+    height, storage_room, parking, number, hasElevator
   } = req.body;
 
   getCoordsByAddress(address + ' ' + number + ', ' + postal_code, city)
@@ -49,7 +49,8 @@ router.post('/create', function (req, res, next) {
           terrace: terrace === 'on',
           rooms, bathrooms, height,
           storage_room: storage_room === 'on',
-          parking: parking === 'ok'
+          parking: parking === 'on',
+          hasElevator: hasElevator === 'on',
         },
         images
       }).save();
@@ -86,7 +87,7 @@ router.post('/edit/:adId', (req, res, next) => {
       if (!ad) next();
       const {
         title, city, postal_code, address, square_meters, flat_status, price, images, description, terrace, rooms, bathrooms,
-        height, storage_room, parking, number
+        height, storage_room, parking, number, hasElevator
       } = req.body;
 
       if (postal_code !== ad.postal_code) {
@@ -108,7 +109,8 @@ router.post('/edit/:adId', (req, res, next) => {
         terrace: terrace === 'on',
         rooms, bathrooms, height,
         storage_room: storage_room === 'on',
-        parking: parking === 'ok'
+        parking: parking === 'on',
+        hasElevator: hasElevator === 'on'
       };
       ad.description = description;
       ad.images = images;

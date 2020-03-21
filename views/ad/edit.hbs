@@ -31,7 +31,7 @@
         <input type="number" name="square_meters" value="{{ad.parameters.square_meters}}">
     </div>
     <div class="form-group">
-        <input type="checkbox" name="terrace" id="terrace" value="{{ad.parameters.terrace}}">
+        <input type="checkbox" name="terrace" id="terrace" {{#if ad.parameters.terrace}}checked{{/if}}>
         <label for="terrace">Terraza</label>
     </div>
     <div class="form-group">
@@ -40,18 +40,26 @@
     </div>
     <div class="form-group">
         <label>Altura del inmueble</label>
-        <input type="number" name="height" value="{{ad.height}}">
+        <input type="number" name="height" value="{{ad.parameters.height}}">
     </div>
     <div class="form-group">
-        <input id="hasElevator" type="checkbox" name="hasElevator" checked="{{ad.hasElevator}}">
+        <label>Habitaciones</label>
+        <input type="number" name="rooms" value="{{ad.parameters.rooms}}">
+    </div>
+    <div class="form-group">
+        <label>Lavabos</label>
+        <input type="number" name="bathrooms" value="{{ad.parameters.bathrooms}}">
+    </div>
+    <div class="form-group">
+        <input id="hasElevator" type="checkbox" name="hasElevator" {{#if ad.parameters.hasElevator}}checked{{/if}}>
         <label for="hasElevator">Tiene ascensor</label>
     </div>
     <div class="form-group">
-        <input id="parking" type="checkbox" name="parking" checked="{{ad.parking}}">
+        <input id="parking" type="checkbox" name="parking" {{#if ad.parameters.parking}}checked{{/if}}>
         <label for="parking">Incluye plaza de parking</label>
     </div>
     <div class="form-group">
-        <input id="storage_room" type="checkbox" name="storage_room" checked="{{ad.storage_room}}">
+        <input id="storage_room" type="checkbox" name="storage_room" {{#if ad.parameters.storage_room}}checked{{/if}}>
         <label for="storage_room">Incluye trastero</label>
     </div>
     <div class="form-group">
