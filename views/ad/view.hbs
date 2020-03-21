@@ -25,10 +25,23 @@
     <input type="hidden" name="ad" value="{{ad._id}}">
     <button type="submit">Pedir cita</button>
 </form>
+
 <h1>{{ad.title}}</h1>
 <p>{{ad.neighborhood}}, {{ad.city}}</p>
 <p class="price">{{ad.price}}€</p>
 <p>{{ad.description}}</p>
+<a id="owner" href="/users/{{ad.owner._id}}">
+    <div class="owner-image" style='background: url("/uploads/userProfileImages{{ad.owner.profile_image}}");background-repeat: no-repeat;background-size: cover;background-position: center'></div>
+    <div class="info">
+        <div class="name">
+            {{ad.owner.name}}
+        </div>
+        <div class="date">
+            Publicado desde: {{formatDate ad.createdAt}}
+        </div>
+    </div>
+</a>
+
 <div id="map"></div>
 
 
@@ -40,7 +53,7 @@
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [{{ad.location.coordinates.[1]}}, {{ad.location.coordinates.[0]}}],
+            center: [{{ad.location.coordinates.[0]}}, {{ad.location.coordinates.[1]}}],
             zoom: 14,
             interactive: true
         });
@@ -53,7 +66,7 @@
                         "type": "Feature",
                         "geometry": {
                             "type": "Point",
-                            "coordinates": [{{ad.location.coordinates.[1]}}, {{ad.location.coordinates.[0]}}]
+                            "coordinates": [{{ad.location.coordinates.[0]}}, {{ad.location.coordinates.[1]}}]
                         }
                     }]
                 }

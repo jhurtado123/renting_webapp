@@ -13,7 +13,7 @@
 <div id="wrapper">
     <div id="headerMenu">
         <a href="/users/{{currentUser._id}}">
-            <img class ="profile-image" src="/uploads/userProfileImages/{{currentUser.profile_image}}">
+            <img class="profile-image" src="/uploads/userProfileImages/{{currentUser.profile_image}}">
         </a>
         <a href="/logout">
             <img src="/images/icons/switch.png">
@@ -24,16 +24,19 @@
     </div>
     <div id="lateralMenu">
         <div class="profile-block">
-            <img class="image" src="/uploads/userProfileImages/{{currentUser.profile_image}}">
+            <a href="/users/{{currentUser._id}}">
+                <img class="image" src="/uploads/userProfileImages/{{currentUser.profile_image}}">
+            </a>
             <div class="wrap">
-                <p>Hola USERNAME</p>
+                <p>Hola {{currentUser.name}}</p>
                 <div class="actions">
-                    <a href="/users/edit">Editar perfil</a> · <a href="/logout">Logout</a>
+                    <a href="/users/{{currentUser._id}}">Ver perfil</a> · <a href="/logout">Logout</a>
                 </div>
             </div>
             <i class="fa fa-times close-menu"></i>
         </div>
         <div class="links-block">
+            <a href="/users/profile">Editar mi perfil</a>
             <a href="/users/ads">Mis anuncios</a>
             <a href="">Mis chats</a>
             <a href="/users/appointments">Mis citas</a>

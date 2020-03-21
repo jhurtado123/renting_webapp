@@ -62,7 +62,7 @@ router.post('/create', function (req, res, next) {
 
 /* GET VIEW AD */
 router.get('/:adId', (req, res, next) => {
-  Ad.findOne({_id: req.params.adId})
+  Ad.findOne({_id: req.params.adId}).populate('owner')
     .then(ad => {
       if (!ad) next();
       res.render('ad/view', {ad});
