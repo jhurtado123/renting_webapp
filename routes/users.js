@@ -14,6 +14,7 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({ storage: storage });
+const fs = require('fs');
 
 
 /*List user ads*/
@@ -47,16 +48,15 @@ router.get('/profile', (req, res, next) => {
 
 router.post('/profile',  upload.any('photo'), (req, res, next) => {
   const updateProfile = req.body;
-  updateProfile.profile_image = req.files[0].filename ;
   const { currentUser } = req.session;
-  currentUser.profile_image = req.files[0].filename;
   currentUser.description = updateProfile.description;
   currentUser.name = updateProfile.name;
   currentUser.dni = updateProfile.dni;
   currentUser.phone = updateProfile.phone;
+  console.log(currentUser._id);
   User.updateOne({ _id: currentUser._id }, updateProfile)
     .then(() => {
-      res.redirect('/users/user');
+      res.redirect(`/users/${currentUser._id}`);
     })
     .catch(next);
 });
@@ -82,10 +82,24 @@ router.post('/:userid/delete', (req, res, next) => {
   const { currentUser } = req.session;
   User.findByIdAndDelete(currentUser._id)
     .then(() => {
-      res.redirect('/');
+      return res.redirect('/');
     })
     .catch(next);
 });
 
+/* POST UPLOAD IMAGE */
+router.post('/api/uploadImage', upload.any('photo'), function (req, res, next) {
+  req.session.currentUser.profile_image = req.files[0].filename;
+  return res.json({filename: req.files[0].filename})
+});
+/* POST REMOVE IMAGE */
+router.post('/api/removeImage', function (req, res, next) {
+  const {image} = req.body;
+  fs.unlinkSync(`./public/uploads/userProfileImages/${image}`)
+    .then(res => {
+      return res.json({'ok': true})
+    })
+    .catch(error => console.log(error));
+  });
 
 module.exports = router;
