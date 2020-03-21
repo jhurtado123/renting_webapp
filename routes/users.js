@@ -36,7 +36,7 @@ router.get('/appointments', (req, res, next) => {
 });
 
 /* Edit user page */
-router.get('/edit', (req, res, next) => {
+router.get('/profile', (req, res, next) => {
   const { currentUser } = req.session;
   User.findById(currentUser._id)
     .then(user => {
@@ -45,7 +45,7 @@ router.get('/edit', (req, res, next) => {
     .catch(error => next(error));
 });
 
-router.post('/edit',  upload.any('photo'), (req, res, next) => {
+router.post('/profile',  upload.any('photo'), (req, res, next) => {
   const updateProfile = req.body;
   updateProfile.profile_image = req.files[0].filename ;
   const { currentUser } = req.session;
@@ -63,14 +63,15 @@ router.post('/edit',  upload.any('photo'), (req, res, next) => {
 
 
 /* GET user page. */
-router.get('/:userid', (req, res, next) => {
-  const { currentUser } = req.session;
-  User.findById(currentUser._id)
-    .then(users => {
-      res.render('users/user', {
-        currentUser,
-      });
+router.get('/:userId', (req, res, next) => {
+  const { userId } = req.params;
+  let matchUser;
+  User.findById(userId)
+    .then(user => {
+      matchUser = user;
+     return Ad.find({'owner': userId});
     })
+    .then(ads =>  res.render('users/user', {'user': matchUser, ads}))
     .catch(next);
 });
 
@@ -81,7 +82,7 @@ router.post('/:userid/delete', (req, res, next) => {
   const { currentUser } = req.session;
   User.findByIdAndDelete(currentUser._id)
     .then(() => {
-      res.redirect('/register');
+      res.redirect('/');
     })
     .catch(next);
 });
