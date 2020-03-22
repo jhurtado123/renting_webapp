@@ -116,4 +116,13 @@ a {
   display: none;
   overflow: hidden; }
 
+.has-error input, .has-error textarea {
+  border: 1px solid red; }
+
+.has-error .error-message {
+  color: red; }
+
+.form-error-message {
+  color: red; }
+
 /*# sourceMappingURL=style.css.map */

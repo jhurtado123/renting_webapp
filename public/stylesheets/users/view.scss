@@ -1,0 +1,56 @@
+.banner {
+  width: 100%;
+  height:150px;
+  background: grey;
+  border:3px solid lightgray;
+  position: relative;
+  margin-bottom: 60px;
+  a {
+    position: absolute;
+    top:10px;
+    right: 10px;
+    padding:5px 6px;
+    background: white;
+  }
+  .profile-image {
+    border-radius: 100%;
+    border:3px solid lightgray;
+    width: 110px;
+    height: 110px;
+    position: absolute;
+    bottom:-30%;
+    left:50%;
+    transform: translateX(-50%);
+  }
+}
+h1 {
+  text-align: center;
+}
+h2 {
+  margin-top: 50px;
+}
+.user-ads {
+  display: flex;
+  flex-flow: row wrap;
+  .ad {
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 30px;
+    h3 {
+      margin-bottom: 5px;
+    }
+    .ad-image {
+      width: 100%;
+      height: 300px;
+    }
+    .neighboorhood {
+      margin-top: 2px;
+      float: left;
+      font-size: 12px;
+    }
+    .price {
+      margin-top: 2px;
+      float: right;
+    }
+  }
+}

@@ -5,6 +5,9 @@
   margin:auto;
   .mySlides {
     display:none;
+    &.active {
+      display: block;
+    }
     .slide {
       width: 100%;
       height: 400px;

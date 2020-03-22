@@ -84,6 +84,10 @@ hbs.registerPartials(path.join(__dirname, '/views/partials'));
 hbs.registerHelper('ifEq', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
+// Deprecated since version 0.8.0
+hbs.registerHelper("formatDate", function(datetime) {
+    return `${datetime.getUTCDate()}/${datetime.getUTCMonth()+1}/${datetime.getFullYear()}`;
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

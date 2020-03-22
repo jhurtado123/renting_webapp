@@ -29,14 +29,17 @@ imagesInput.addEventListener('change', event => {
             node.removeEventListener('click', removeImageAtServer);
             node.addEventListener('click', removeImageAtServer);
           })
-        });
+        })
+        .catch(error => {
+          console.log(error);
+        })
     });
     picReader.readAsDataURL(file);
   });
 });
 
 function removeImageAtServer(event) {
-  const image = event.target.nextSibling;
+  const image = event.target.nextElementSibling;
   axios.post('/ad/api/removeImage', {'image': image.value});
 
   image.parentElement.remove();
