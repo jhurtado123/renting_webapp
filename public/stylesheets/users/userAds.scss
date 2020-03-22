@@ -29,3 +29,16 @@
     }
   }
 }
+#addNewAd {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  background: black;
+  color:white;
+}
