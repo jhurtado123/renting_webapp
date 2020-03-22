@@ -137,30 +137,32 @@ buttonOrder.addEventListener('click', () => {
 
 filterAdsButton.addEventListener("click", () => {
   let filter = {
-    price: document.querySelector("#priceMin").value,
-    meters: document.querySelector("#metersMin").value,
-    rooms: document.querySelector("#rooomsMin").value,
-    wc: document.querySelector('#wcMin').value
+    price: document.querySelector("#priceMin").value
+      ? document.querySelector("#priceMin").value
+      : 1,
+    meters: document.querySelector("#metersMin").value
+      ? document.querySelector("#metersMin").value
+      : 1,
+    rooms: document.querySelector("#rooomsMin").value
+      ? document.querySelector("#rooomsMin").value
+      : 1,
+    wc: document.querySelector("#wcMin").value
+      ? document.querySelector("#wcMin").value
+      : 1,
+    parking: document.querySelector("#parking").checked,
+    terrace: document.querySelector("#terrace").checked,
+    elevator: document.querySelector("#elevator").checked,
+    storage: document.querySelector("#storage").checked
+
   };
   axios.post('/api/filter/ads', { 'filter': filter })
     .then(result => {
-      console.log("hola");
       createAdsOnView(result.data.ads);
       disableSortAdsModal();
     })
     .catch(error => console.log(error));
 });
 
-
-// filterAdsButton.addEventListener('click', () => {
-//   axios.post("/api/filter/ads", { 'filter': filter })
-//     .then(result => {
-//       console.log("hola")
-//       createAdsOnView(result.data.ads);
-//       disableSortAdsModal();
-//     })
-//     .catch(error => console.log(error));
-// });
 
 function createAdsOnView(ads) {
   adList.innerHTML = '';
@@ -178,8 +180,8 @@ function createAdsOnView(ads) {
             <div class ="summary-info">
               <p>${ad.parameters.square_meters} m² <img src="/images/icons/area.png"></p>
               <p>${ad.parameters.flat_status}º piso<img src="/images/icons/ruler.png"></p>
-              <p>2 hab.<img src="/images/icons/bed.png"></p>
-              <p>1 bañ.<img src="/images/icons/shower.png"></p>
+              <p>${ad.parameters.rooms} hab.<img src="/images/icons/bed.png"></p>
+              <p>${ad.parameters.bathrooms} bañ.<img src="/images/icons/shower.png"></p>
             </div>
             <p>${ad.description}</p>
             <a href="/ad/${ad._id}" class="button">Ver piso</a>
