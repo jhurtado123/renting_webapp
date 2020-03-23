@@ -16,6 +16,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const fs = require('fs');
 
+/*Management page*/
+router.get('/management', (req, res, next) => {
+    res.render('users/management');
+});
 
 /*List user ads*/
 router.get('/ads', (req, res, next) => {
@@ -49,11 +53,15 @@ router.get('/profile', (req, res, next) => {
 router.post('/profile',  upload.any('photo'), (req, res, next) => {
   const updateProfile = req.body;
   const { currentUser } = req.session;
+  if (updateProfile.lesseeMode && updateProfile.lesseeMode === 'on') {
+    updateProfile.lesseeMode = currentUser.lesseeMode = true;
+    currentUser.dni = updateProfile.dni;
+  } else {
+    updateProfile.dni = '';
+  }
   currentUser.description = updateProfile.description;
   currentUser.name = updateProfile.name;
-  currentUser.dni = updateProfile.dni;
   currentUser.phone = updateProfile.phone;
-  console.log(currentUser._id);
   User.updateOne({ _id: currentUser._id }, updateProfile)
     .then(() => {
       res.redirect(`/users/${currentUser._id}`);

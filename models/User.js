@@ -27,7 +27,8 @@ const userSchema = new Schema({
       type: String,
       required: true
     },
-  }]
+  }],
+  lesseeMode: Boolean,
 },
   {
     timestamps: true

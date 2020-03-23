@@ -6,10 +6,12 @@
 
 <form action="/users/profile" method="POST" enctype="multipart/form-data" class="validate">
     <div class="form-group">
-        <input type="text" name="name" placeholder="Modify your Name" value="{{ currentUser.name }}" data-validate="notEmpty">
+        <input type="text" name="name" placeholder="Modify your Name" value="{{ currentUser.name }}"
+               data-validate="notEmpty">
     </div>
     <div class="form-group">
-        <input type="text" name="phone" placeholder="Introduce tu número de telefono" value="{{ currentUser.phone }}" data-validate="phone">
+        <input type="text" name="phone" placeholder="Introduce tu número de telefono" value="{{ currentUser.phone }}"
+               data-validate="phone">
     </div>
     <label for="profile_image">Imagen de perfil</label>
     <div class='uploaded-image'>
@@ -21,11 +23,47 @@
         <input type="text" name="description" placeholder="Modify your description"
                value="{{ currentUser.description }}" data-validate="notEmpty">
     </div>
-    <div class="form-group">
-        <input type="text" name="dni" placeholder="Introduce your dni" value="{{ currentUser.dni }}" data-validate="dni">
-    </div>
+    {{#if currentUser.lesseeMode }}
+        <div class="lesseModeActivated">
+            Tu perfil tiene el modo propietario activado
+        </div>
+    {{else}}
+        <div class="form-group">
+            <input id="lesseeMode" name="lesseeMode" type="checkbox">
+            <label for="lesseeMode">Activar modo 'Propietario'</label>
+        </div>
+    {{/if}}
+
     <button>Update your Profile</button>
+    {{#unless currentUser.lesseeMode }}
+        <div id="modalLesseeMode">
+            <div class="close">X</div>
+            <h2>Modo propietario</h2>
+            <div id="acceptDecline">
+                <p>El modo propietario te permite acceder a nuevas funcionalidades de la App como subir anuncios,
+                    gestionar
+                    tus
+                    anuncios y crear citas</p>
+                <p>Para activarlo pulsa en activar, recuerda que una vez activado ya no podrás volver atrás.</p>
+                <div class="buttons">
+                    <div class="lesseeModeCancel">Cancelar</div>
+                    <div id="lesseeModeActivate">Activar</div>
+                </div>
+            </div>
+            <div id="lesseeDni">
+                <p>Para activar el modo propietario es obligatorio introducir tu DNI.</p>
+                <p>Esto se requiere para evitar fraudes en la web y tu documento nunca se mostrará publicamente</p>
+                <input name="dni" type="text" id="inputDNI">
+                <div class="buttons">
+                    <div class="lesseeModeCancel">Cancelar</div>
+                    <div id="lesseeModeFinish">Finalizar</div>
+                </div>
+            </div>
+        </div>
+    {{/unless}}
 </form>
+
+
 <div>
     <a href="/users/{{currentUser._id}}" class="button">Return to your profile back</a>
     <a href="/home" class="button">Return to the home</a>

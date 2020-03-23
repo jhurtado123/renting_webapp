@@ -1,0 +1,13 @@
+{{#extend "stylesheets"}}
+    <link rel="stylesheet" href="/stylesheets/users/management.css"/>
+{{/extend}}
+<h1>Gestión</h1>
+
+<a href="/users/favorites" class="management-block">
+    <h2>Mis favoritos</h2>
+</a>
+{{#if currentUser.lesseeMode }}
+    <a href="/users/ads" class="management-block">
+        <h2>Mis anuncios</h2>
+    </a>
+{{/if}}

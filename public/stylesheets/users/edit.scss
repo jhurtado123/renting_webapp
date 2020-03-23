@@ -19,4 +19,60 @@ form {
     }
 
   }
+  .lesseModeActivated {
+    background: green;
+    color:white;
+    padding:20px 15px;
+    margin:10px 0;
+  }
+}
+#modalLesseeMode {
+  width:90vw;
+  height: 80vh;
+  margin:0 auto;
+  position: fixed;
+  background: white;
+  border:1px solid black;
+  top: 50%;
+  transition: transform 1s;
+  left: 50%;
+  padding:20px;
+  z-index: 100;
+  transform: translate(-50%, -200%);
+  &.open {
+    transform: translate(-50%, -56%);
+  }
+  .close {
+    position: absolute;
+    top: 20px;
+    right:20px;
+    cursor:pointer;
+  }
+  div {
+    transition: opacity 0.5s;
+  }
+  #lesseeDni {
+    transition: opacity 0.5s;
+    display: none;
+    opacity: 0;
+  }
+  .buttons {
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
+    .lesseeModeCancel {
+      border: 1px solid black;
+      padding: 20px 15px;
+      display: inline;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    #lesseeModeFinish, #lesseeModeActivate {
+      background: black;
+      padding: 20px 15px;
+      color: white;
+      display: inline;
+      cursor: pointer;
+    }
+  }
 }
