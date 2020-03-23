@@ -17,11 +17,8 @@
         <input type="password" name="userPassword" placeholder="********">
 
         <button type="submit">login</button>
-        {{#if messages.error }}
-            <p>{{messages.error }}</p>
-        {{/if}}
-        {{#if messages.error}}
-            <p>{{messages.error}}</p>
+        {{#if messages}}
+            <p>{{messages}}</p>
         {{/if}}
     </form>
     <div>

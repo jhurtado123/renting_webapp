@@ -6,7 +6,7 @@ const Ad = require('../models/Ad');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Rent App',messages: req.flash(), layout: false });
+  res.render('login', { title: 'Rent App',messages: req.flash('error'), layout: false });
 });
 
 router.post('/login', (req, res, next) => {
