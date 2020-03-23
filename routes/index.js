@@ -6,19 +6,19 @@ const Ad = require('../models/Ad');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Rent App', layout: false });
+  res.render('login', { title: 'Rent App',messages: req.flash(), layout: false });
 });
 
 router.post('/login', (req, res, next) => {
   const { username, userPassword } = req.body;
     if (username === '' || userPassword === '') {
-      req.flash('error', 'no pueden estar vacios');
+      req.flash('error', 'Los campos no pueden estar vacíos');
       res.redirect('/');
     } else {
       User.findOne({ username })
         .then(user => {
           if (!user) {
-            req.flash('error', 'no estas registrado');
+            req.flash('error', 'No estás registrado');
             res.redirect('/');
           } else {
             if (bcrypt.compareSync(userPassword, user.password)) {
@@ -30,8 +30,8 @@ router.post('/login', (req, res, next) => {
               }
               return res.redirect('/home');
             } else {
-              req.flash('error', 'usuario o contraseña incorrectos');
-              return res.redirect('/');
+              req.flash('error', 'Usuario o Contraseña, incorrectos');
+              return res.redirect("/");
             }
           }
         })
