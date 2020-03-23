@@ -56,7 +56,28 @@ router.post('/sort/ads', (req, res, next) => {
       })
       .catch(error => next(error));
   }  
-})
+});
 
+/* POST, FILTER ADS*/
+router.post('/filter/ads', (req, res) => {
+  const filter = req.body;
+  let query = {
+    price: {$gte: filter.filter.price},
+    "parameters.square_meters": {$gte: filter.filter.meters},
+    "parameters.rooms": {$gte: filter.filter.rooms},
+    "parameters.bathrooms": {$gte: filter.filter.wc}
+  };
+  if (filter.filter.parking) query["parameters.parking"] = true;
+  if (filter.filter.terrace) query["parameters.terrace"] = true;
+  if (filter.filter.elevator) query["parameters.hasElevator"] = true;
+  if (filter.filter.storage) query["parameters.storage_room"] = true;
+  console.log(query);
+
+  Ad.find(query)
+    .then(ads => {
+      res.send({ ads: ads });
+    })
+    .catch(error => console.log(error));
+});
 
 module.exports = router;

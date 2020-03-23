@@ -12,7 +12,7 @@
   <form action="/home" method="get">
     <input type="text" name="search" placeholder="Barrio, Código postal">
   </form>
-  <a href="#"><img src="/images/icons/filter.png"></a>
+  <a  id="openFilterAds"><img src="/images/icons/filter.png"></a>
   <span id="openDrawMap"><img src="/images/icons/pin.png"></span>
   <a id="openSortAds"><img src="/images/icons/sort.png"></a>
 </div>
@@ -23,6 +23,25 @@
   {{#each ads}}
   {{>adCard}}
   {{/each}}
+</div>
+<div id="filterAds">
+  <div class="close">X</div>
+  <div>
+    <p>Filtrar anuncios</p>
+    <input id="priceMin" type="number" placeholder="Precio mínimo">
+    <input id="metersMin" type="number" placeholder="Mínimo metros">
+    <input id="rooomsMin" type="number" placeholder="Mínimo Habitaciones">
+    <input id="wcMin" type="number" placeholder="Mínimo Baños">
+    <label for="parking">Parking</label>
+    <input id="parking" type="checkbox">
+    <label for="terrace">Terraza</label>
+    <input id="terrace" type="checkbox">
+    <label for="elevator">Ascensor</label>
+    <input id="elevator" type="checkbox">
+    <label for="storage">Trastero</label>
+    <input id="storage" type="checkbox">
+    <button id="buttonFilter" type="submit">Filtrar</button>
+  </div>
 </div>
 <div id="modalDrawMap">
     <div class="close">X</div>
