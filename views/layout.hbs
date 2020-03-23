@@ -37,9 +37,12 @@
         </div>
         <div class="links-block">
             <a href="/users/profile">Editar mi perfil</a>
-            <a href="/users/ads">Mis anuncios</a>
-            <a href="">Mis chats</a>
+            {{#if currentUser.lesseeMode}}
+                <a href="/users/ads">Mis anuncios</a>
+            {{/if}}
+            <a href="" onclick="alert('Proximamente');">Mis chats</a>
             <a href="/users/appointments">Mis citas</a>
+            <a href="" onclick="alert('Proximamente');">Mis favoritos</a>
         </div>
         <div class="more-block">
             <a href="">Help?</a> ·
@@ -62,7 +65,7 @@
             <i class="fa fa-calendar"></i>
             <p>Citas</p>
         </a>
-        <a class="block">
+        <a class="block" onclick="alert('Proximámente');">
             <i class="fa fa-comments"></i>
             <p>Chats</p>
         </a>
