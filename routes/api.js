@@ -56,22 +56,28 @@ router.post('/sort/ads', (req, res, next) => {
       })
       .catch(error => next(error));
   }  
-})
+});
 
 /* POST, FILTER ADS*/
 router.post('/filter/ads', (req, res) => {
   const filter = req.body;
-  console.log("Entra en los filtros", filter)
-  Ad.find({
-    price: { $gt: filter.filter.price },
-    // 'parameters.square_meters': {$gt: filter.filter.meters},
-    'parameters.rooms': {$gt: filter.filter.rooms}
-    })
+  let query = {
+    price: {$gte: filter.filter.price},
+    "parameters.square_meters": {$gte: filter.filter.meters},
+    "parameters.rooms": {$gte: filter.filter.rooms},
+    "parameters.bathrooms": {$gte: filter.filter.wc}
+  };
+  if (filter.filter.parking) query["parameters.parking"] = true;
+  if (filter.filter.terrace) query["parameters.terrace"] = true;
+  if (filter.filter.elevator) query["parameters.hasElevator"] = true;
+  if (filter.filter.storage) query["parameters.storage_room"] = true;
+  console.log(query);
+
+  Ad.find(query)
     .then(ads => {
-      console.log(ads)
       res.send({ ads: ads });
     })
     .catch(error => console.log(error));
-})
+});
 
 module.exports = router;

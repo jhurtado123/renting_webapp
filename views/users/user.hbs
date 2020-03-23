@@ -1,10 +1,42 @@
-<h1>Your account</h1>
-<p>Welcome {{ currentUser.username }}</p>
-<img src="/uploads/userProfileImages/{{currentUser.profile_image}}">
-<p>Your description {{ currentUser.description }}</p>
-<p>Your id {{ currentUser._id }}</p>
-<p>Your dni {{ currentUser.dni }}</p>
-<a href="/users/{{currentUser._id}}/edit">Edit your profile</a>
-<form action="/users/{{currentUser._id}}/delete" method="post">
-  <button class="button">Delete your profile</button>
-</form>
+{{#extend "stylesheets"}}
+    <link rel="stylesheet" href="/stylesheets/users/view.css"/>
+{{/extend}}
+<div class="banner">
+    {{#ifEq currentUser._id user._id}}
+        <a href="/users/profile">Editar perfil</a>
+    {{/ifEq}}
+    <div class="profile-image"
+         style='background: url("/uploads/userProfileImages/{{user.profile_image}}");background-repeat: no-repeat;background-size: cover;background-position: center'></div>
+</div>
+<h1>{{ user.name }}</h1>
+<p>{{ user.description }}</p>
+
+<h2>Anuncios del usuario</h2>
+<div class="user-ads">
+    {{#if ads.length }}
+        {{#each ads}}
+            <a class="ad" href="/ad/{{this.id}}">
+                <div class="ad-image" style='background: url("/uploads/picturesAd/{{this.images.[0]}}"), url("/uploads/picturesAd/seeds-images{{this.images.[0]}}");background-repeat: no-repeat;background-size: cover;background-position: center'></div>
+                <h3>{{this.title}}</h3>
+                {{#ifEq this.neighborhood this.city }}
+                    <p class="neighboorhood">{{this.city}}</p>
+                {{else }}
+                    <p class="neighboorhood">{{this.neighborhood}}, {{this.city}}</p>
+                {{/ifEq}}
+                <p class="price">{{this.price}}€</p>
+            </a>
+        {{/each}}
+    {{else}}
+        <p>El usuario no tiene anuncios disponibles</p>
+    {{/if}}
+</div>
+
+<h2>Reviews del usuario</h2>
+<div class="users-reviews">
+    {{#if reviews.length }}
+    {{else}}
+        <p>El usuario no tiene reviews</p>
+    {{/if}}
+</div>
+
+

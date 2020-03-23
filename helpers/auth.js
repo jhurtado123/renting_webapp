@@ -3,7 +3,7 @@ function checkIfUserLoggedIn(req, res, next) {
     next();
   } else {
     req.flash('requestedUrl', req.originalUrl);
-    res.redirect('/');
+    return res.redirect('/');
   }
 }
 

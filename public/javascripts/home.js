@@ -42,16 +42,18 @@ function disableDrawMapModal() {
   content.style.overflowY = 'visible';
   drawMapModal.classList.remove('open');
 }
+
 function enableDrawMapModal() {
   content.style.overflowY = 'hidden';
   backdrop.style.display = 'block';
   drawMapModal.classList.add('open');
 }
 
-function disableSortAdsModal(){
+function disableSortAdsModal() {
   sortAdsModal.classList.remove('open');
 }
-function enableSortAdsModal(){
+
+function enableSortAdsModal() {
   sortAdsModal.classList.add('open');
 }
 
@@ -86,6 +88,7 @@ map.on('draw.update', updateArea);
 
 const markers = [];
 let polygon;
+
 function updateArea(e) {
   var data = draw.getAll();
   var answer = document.getElementById('calculated-area');
@@ -97,7 +100,7 @@ function updateArea(e) {
         const {ads} = result.data;
         ads.forEach(ad => {
           console.log(ad);
-          markers.push(new mapboxgl.Marker({color:'yellow'})
+          markers.push(new mapboxgl.Marker({color: 'yellow'})
             .setLngLat([ad.location.coordinates[0], ad.location.coordinates[1]])
             .addTo(map));
         });
@@ -128,7 +131,6 @@ let order;
 buttonOrder.addEventListener('click', () => {
   axios.post('/api/sort/ads', {'order': document.querySelector('#orderBy').value})
     .then(result => {
-      console.log("hola")
       createAdsOnView(result.data.ads);
       disableSortAdsModal();
     })
@@ -137,14 +139,26 @@ buttonOrder.addEventListener('click', () => {
 
 filterAdsButton.addEventListener("click", () => {
   let filter = {
-    price: document.querySelector("#priceMin").value,
-    meters: document.querySelector("#metersMin").value,
-    rooms: document.querySelector("#rooomsMin").value,
-    wc: document.querySelector('#wcMin').value
+    price: document.querySelector("#priceMin").value
+      ? document.querySelector("#priceMin").value
+      : 1,
+    meters: document.querySelector("#metersMin").value
+      ? document.querySelector("#metersMin").value
+      : 1,
+    rooms: document.querySelector("#rooomsMin").value
+      ? document.querySelector("#rooomsMin").value
+      : 1,
+    wc: document.querySelector("#wcMin").value
+      ? document.querySelector("#wcMin").value
+      : 1,
+    parking: document.querySelector("#parking").checked,
+    terrace: document.querySelector("#terrace").checked,
+    elevator: document.querySelector("#elevator").checked,
+    storage: document.querySelector("#storage").checked
+
   };
   axios.post('/api/filter/ads', { 'filter': filter })
     .then(result => {
-      console.log("hola");
       createAdsOnView(result.data.ads);
       disableSortAdsModal();
     })
@@ -152,25 +166,19 @@ filterAdsButton.addEventListener("click", () => {
 });
 
 
-// filterAdsButton.addEventListener('click', () => {
-//   axios.post("/api/filter/ads", { 'filter': filter })
-//     .then(result => {
-//       console.log("hola")
-//       createAdsOnView(result.data.ads);
-//       disableSortAdsModal();
-//     })
-//     .catch(error => console.log(error));
-// });
-
 function createAdsOnView(ads) {
   adList.innerHTML = '';
+  if (!ads.length) {
+    adList.innerHTML = '<div class="not-found">No hay anuncios disponibles es esta búsqueda</div>';
+    return;
+  }
   ads.forEach(ad => {
     const imagesHtmlString = getHtmlImagesString(ad.images);
     let string = `<div>
-            <div class="slideshow-container">
+            <div class="slideshow-container" data-id="${ad._id}">
                 ${imagesHtmlString}
-              <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-              <a class="next" onclick="plusSlides(1)">&#10095;</a>
+              <a class="prev" onclick="plusSlides('${ad._id}')">&#10094;</a>
+              <a class="next" onclick="plusSlides('${ad._id}')">&#10095;</a>
             </div>
             <h3>${ad.title}</h3>
             <h4>${ad.price}€</h4>
@@ -178,25 +186,23 @@ function createAdsOnView(ads) {
             <div class ="summary-info">
               <p>${ad.parameters.square_meters} m² <img src="/images/icons/area.png"></p>
               <p>${ad.parameters.flat_status}º piso<img src="/images/icons/ruler.png"></p>
-              <p>2 hab.<img src="/images/icons/bed.png"></p>
-              <p>1 bañ.<img src="/images/icons/shower.png"></p>
+              <p>${ad.parameters.rooms} hab.<img src="/images/icons/bed.png"></p>
+              <p>${ad.parameters.bathrooms} bañ.<img src="/images/icons/shower.png"></p>
             </div>
             <p>${ad.description}</p>
             <a href="/ad/${ad._id}" class="button">Ver piso</a>
           </div>`;
     adList.innerHTML += string;
   });
-  if (!ads.length) {
-    adList.innerHTML = '<div class="not-found">No hay anuncios disponibles es esta busqueda</div>'
-  } else {
-    showSlides();
-  }
+  disableDrawMapModal();
+  activateSliders();
+
 }
 
 function getHtmlImagesString(images) {
   let string = '';
-  images.forEach(image => {
-    string += `<div class="mySlides fade"><img src="/uploads/picturesAd/${image}" class="slide"></div>`;
+  images.forEach((image, index) => {
+    string += `<div class="mySlides fade" data-index="${index}"><img src="/uploads/picturesAd/${image}" class="slide"></div>`;
   });
   return string;
 }

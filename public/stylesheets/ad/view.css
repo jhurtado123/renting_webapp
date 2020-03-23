@@ -20,6 +20,22 @@
     border-right: 1px solid grey;
     cursor: pointer; }
 
+#owner {
+  margin: 30px 0;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center; }
+  #owner .owner-image {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 1px solid lightgray;
+    margin-right: 20px; }
+  #owner .info {
+    font-size: 16px; }
+  #owner .date {
+    font-size: 14px; }
+
 #map {
   width: 100%;
   height: 400px; }
