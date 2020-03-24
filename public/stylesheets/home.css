@@ -1,3 +1,10 @@
+#homeMenu {
+  background-color: #FF8A84; }
+  #homeMenu .searchbar {
+    border: 0px;
+    border-radius: 5px;
+    padding: 5px 10px; }
+
 #modalDrawMap {
   width: 90vw;
   height: 80vh;

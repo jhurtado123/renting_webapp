@@ -3,6 +3,7 @@ body, html {
   margin:0;
   padding:0;
   width: 100%;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -15,7 +16,6 @@ body {
   padding-bottom: 100px;
   #content {
     min-height: 100vh;
-    padding:20px;
     overflow-x: hidden;
   }
 }
@@ -89,13 +89,24 @@ a {
 #headerMenu{
   display: flex;
   justify-content: flex-end;
+  align-content: center;
+  background-color: #FF8A84;
+  padding: 15px 5px;
+  margin-bottom: -1px;
+  a {
+  margin-right: 15px;
+  }
+  .logo-link{
+    margin-right: 22%;
+  }
   .profile-image {
     width: 24px;
     height: 24px;
+    border-radius: 50%;
   }
 }
 #footerMenu {
-  background: white;
+  background-color: #FF8A84;
   z-index: 10;
   position: fixed;
   width:100vw;
@@ -116,10 +127,14 @@ a {
     display: flex;
     flex-flow: column;
     justify-content: space-between;
+    align-items: center;
     cursor: pointer;
     i {
       margin-top:10px;
       font-size: 28px;
+    }
+    img {
+      margin-top:10px;
     }
   }
 }
