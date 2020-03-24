@@ -1,10 +1,12 @@
-
+@import "variables";
 #homeMenu {
-  background-color: #FF8A84;
+  background: $background-gradient;
+  padding:10px 0;
   .searchbar{
-    border: 0px;
     border-radius: 5px;
     padding: 5px 10px;
+    border:1px solid $primary-color;
+    color:$secondary-color;
   }
 }
 #modalDrawMap {

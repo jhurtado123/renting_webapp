@@ -28,7 +28,7 @@ a {
 #lateralMenu {
   z-index: 100;
   width: 85%;
-  border-right: 1px solid black;
+  border-right: 1px solid #3a424a;
   font-size: 14px;
   height: 100vh;
   position: fixed;
@@ -36,17 +36,19 @@ a {
   left: 0;
   transform: translateX(-100%);
   transition: transform 1s;
-  padding: 20px;
   background: white; }
   #lateralMenu.open {
     transform: translateX(0px); }
   #lateralMenu .profile-block {
+    padding: 20px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid grey;
-    padding-bottom: 15px; }
+    padding-bottom: 15px;
+    background: linear-gradient(90deg, #84d8e3 36%, #a7e7cc 100%);
+    color: #324252; }
     #lateralMenu .profile-block .image {
       border-radius: 50%;
       border: 1px solid grey;
@@ -64,12 +66,13 @@ a {
       font-size: 30px;
       cursor: pointer; }
   #lateralMenu .links-block {
-    margin-top: 40px; }
+    padding: 20px; }
     #lateralMenu .links-block a {
       font-size: 16px;
       display: block;
       margin: 15px 0; }
   #lateralMenu .more-block {
+    padding: 20px;
     position: absolute;
     bottom: 20px; }
 
@@ -77,11 +80,12 @@ a {
   display: flex;
   justify-content: flex-end;
   align-content: center;
-  background-color: #FF8A84;
+  background: linear-gradient(90deg, #84d8e3 36%, #a7e7cc 100%);
   padding: 15px 5px;
   margin-bottom: -1px; }
   #headerMenu a {
-    margin-right: 15px; }
+    margin-right: 15px;
+    color: #324252; }
   #headerMenu .logo-link {
     margin-right: 22%; }
   #headerMenu .profile-image {
@@ -90,7 +94,7 @@ a {
     border-radius: 50%; }
 
 #footerMenu {
-  background-color: #FF8A84;
+  background: linear-gradient(90deg, #84d8e3 36%, #a7e7cc 100%);
   z-index: 10;
   position: fixed;
   width: 100vw;
@@ -111,7 +115,9 @@ a {
     flex-flow: column;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer; }
+    cursor: pointer;
+    color: #3a424a;
+    font-weight: bold; }
     #footerMenu .block i {
       margin-top: 10px;
       font-size: 28px; }

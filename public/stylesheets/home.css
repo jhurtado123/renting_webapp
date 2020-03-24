@@ -1,9 +1,11 @@
 #homeMenu {
-  background-color: #FF8A84; }
+  background: linear-gradient(90deg, #84d8e3 36%, #a7e7cc 100%);
+  padding: 10px 0; }
   #homeMenu .searchbar {
-    border: 0px;
     border-radius: 5px;
-    padding: 5px 10px; }
+    padding: 5px 10px;
+    border: 1px solid #324252;
+    color: #3a424a; }
 
 #modalDrawMap {
   width: 90vw;
