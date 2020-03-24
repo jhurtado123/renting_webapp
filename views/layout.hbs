@@ -12,6 +12,9 @@
 <body>
 <div id="wrapper">
     <div id="headerMenu">
+        <a class="logo-link" href="/home">
+            <span>LOGO</span>
+        </a>
         <a href="/users/{{currentUser._id}}">
             <img class="profile-image" src="/uploads/userProfileImages/{{currentUser.profile_image}}">
         </a>
@@ -54,23 +57,23 @@
 
     <div id="footerMenu">
         <a class="block" href="/home">
-            <i class="fa fa-search"></i>
+            <img src="/images/icons/search.png">
             <p>Buscar</p>
         </a>
         <a class="block" href="/users/management">
-            <i class="fa fa-home"></i>
+            <img src="/images/icons/house.png">
             <p>Gestión</p>
         </a>
         <a class="block" href="/users/appointments">
-            <i class="fa fa-calendar"></i>
+            <img src="/images/icons/calendar.png">
             <p>Citas</p>
         </a>
         <a class="block" onclick="alert('Proximámente');">
-            <i class="fa fa-comments"></i>
+            <img src="/images/icons/chat.png">
             <p>Chats</p>
         </a>
         <div class="block" id="moreMenu">
-            <i class="fa fa-ellipsis-v"></i>
+            <img src="/images/icons/menu.png">
             <p>Más</p>
         </div>
     </div>

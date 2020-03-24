@@ -1,8 +1,12 @@
+@import "variables";
+
+
 body, html {
   height:100%;
   margin:0;
   padding:0;
   width: 100%;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -15,7 +19,6 @@ body {
   padding-bottom: 100px;
   #content {
     min-height: 100vh;
-    padding:20px;
     overflow-x: hidden;
   }
 }
@@ -30,7 +33,7 @@ a {
 #lateralMenu {
   z-index: 100;
   width: 85%;
-  border-right: 1px solid black;
+  border-right: 1px solid $secondary-color;
   font-size: 14px;
   height: 100vh;
   position: fixed;
@@ -38,18 +41,20 @@ a {
   left:0;
   transform: translateX(-100%);
   transition: transform 1s;
-  padding: 20px;
   background: white;
   &.open {
     transform: translateX(0px);
   }
   .profile-block {
+    padding: 20px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid grey;
     padding-bottom:15px;
+    background: $background-gradient;
+    color:$primary-color;
     .image {
       border-radius: 50%;
       border:1px solid grey;
@@ -72,7 +77,7 @@ a {
     }
   }
   .links-block {
-    margin-top: 40px;
+    padding: 20px;
     a {
       font-size: 16px;
       display: block;
@@ -80,6 +85,7 @@ a {
     }
   }
   .more-block {
+    padding: 20px;
     position: absolute;
     bottom:20px;
     a {
@@ -89,13 +95,25 @@ a {
 #headerMenu{
   display: flex;
   justify-content: flex-end;
+  align-content: center;
+  background: $background-gradient;
+  padding: 15px 5px;
+  margin-bottom: -1px;
+  a {
+  margin-right: 15px;
+    color:$primary-color;
+  }
+  .logo-link{
+    margin-right: 22%;
+  }
   .profile-image {
     width: 24px;
     height: 24px;
+    border-radius: 50%;
   }
 }
 #footerMenu {
-  background: white;
+  background: $background-gradient;
   z-index: 10;
   position: fixed;
   width:100vw;
@@ -108,7 +126,6 @@ a {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
-
   .block {
     flex: 1 1 0px;
     text-align: center;
@@ -116,10 +133,16 @@ a {
     display: flex;
     flex-flow: column;
     justify-content: space-between;
+    align-items: center;
     cursor: pointer;
+    color:$secondary-color;
+    font-weight: bold;
     i {
       margin-top:10px;
       font-size: 28px;
+    }
+    img {
+      margin-top:10px;
     }
   }
 }

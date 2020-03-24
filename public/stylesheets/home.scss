@@ -1,3 +1,15 @@
+@import "variables";
+#homeMenu {
+  background: $background-gradient;
+  padding:10px 0;
+  padding-bottom: 15px;
+  .searchbar{
+    border-radius: 5px;
+    padding: 5px 10px;
+    border:1px solid $primary-color;
+    color:$secondary-color;
+  }
+}
 #modalDrawMap {
   width:90vw;
   height: 80vh;
