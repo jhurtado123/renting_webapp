@@ -24,39 +24,52 @@
     {{>adCard}}
   {{/each}}
 </div>
-<div id="filterAds">
+<div id="filterAds" class="modal">
   <div class="close">X</div>
-  <div>
-    <p>Filtrar anuncios</p>
+  <p class="title-modal">Filtrar anuncios</p>
+  <div id="filterList">
     <input id="priceMin" type="number" placeholder="Precio mínimo">
     <input id="metersMin" type="number" placeholder="Mínimo metros">
     <input id="rooomsMin" type="number" placeholder="Mínimo Habitaciones">
     <input id="wcMin" type="number" placeholder="Mínimo Baños">
-    <label for="parking">Parking</label>
-    <input id="parking" type="checkbox">
-    <label for="terrace">Terraza</label>
-    <input id="terrace" type="checkbox">
-    <label for="elevator">Ascensor</label>
-    <input id="elevator" type="checkbox">
-    <label for="storage">Trastero</label>
-    <input id="storage" type="checkbox">
+    <div class="checkbox">
+      <span>Parking</span>
+      <input id="parking" type="checkbox">
+      <label for="parking"><span></span></label>
+    </div>
+    <div class="checkbox">
+      <span>Terraza</span>
+      <input id="terrace" type="checkbox">
+      <label for="terrace"><span></span></label>
+    </div>
+    <div class="checkbox">
+      <apan>Ascensor</apan>
+      <input id="elevator" type="checkbox">
+      <label for="elevator"><span></span></label>
+    </div>
+    <div class="checkbox">
+      <span>Trastero</span>
+      <input id="storage" type="checkbox">  
+      <label for="storage"><span></span></label>
+    </div>
     <button id="buttonFilter" type="submit">Filtrar</button>
   </div>
 </div>
-<div id="modalDrawMap">
+<div id="modalDrawMap" class="modal">
     <div class="close">X</div>
-    <h2>Dibuja en el mapa tu busqueda</h2>
+    <h2 class="title-search-map">Dibuja en el mapa tu búsqueda</h2>
+    <span><img src="/images/icons/area.svg" alt="Icon Area">Seleccionar la zona de búsqueda</span>
     <div id="mapDraw"></div>
     <div class="calculation-box">
         <div id="calculated-area"></div>
     </div>
     <div id="showFlats"><span></span> Mostrar pisos</div>
 </div>
-<div id="sortAds">
+<div id="sortAds" class="modal">
   <div class="close">X</div>
   <div class="orderSection">
-    <label for="order">Ordenar por:</label>
-    <select id="orderBy" name="order">
+    <label class="title-modal" for="order">Ordenar por:</label>
+    <select id="orderBy" name="order" class="order-options">
       <option value="data">Fecha más reciente</option>
       <option value="morePrice">Precio: Más caro primero</option>
       <option value="lessPrice">Precio: Más barato primero</option>
