@@ -1,8 +1,13 @@
+#root {
+  padding: 0 15px;
+  color: #3a424a; }
+
 .banner {
   width: 100%;
   height: 150px;
-  background: grey;
-  border: 3px solid lightgray;
+  background: grey url("https://i.pinimg.com/originals/9a/8b/91/9a8b9103f7ab3c47de1efb2e853a99e2.jpg") no-repeat center;
+  background-size: cover;
+  border-bottom: 3px solid #84d8e3;
   position: relative;
   margin-bottom: 60px; }
   .banner a {
@@ -10,10 +15,12 @@
     top: 10px;
     right: 10px;
     padding: 5px 6px;
-    background: white; }
+    background: #3a424a;
+    color: #84d8e3;
+    border-radius: 5px; }
   .banner .profile-image {
     border-radius: 100%;
-    border: 3px solid lightgray;
+    border: 3px solid #84d8e3;
     width: 110px;
     height: 110px;
     position: absolute;
@@ -31,14 +38,23 @@ h2 {
   display: flex;
   flex-flow: row wrap; }
   .user-ads .ad {
+    border: 1px solid #84d8e3;
+    border-radius: 10px;
     width: 100%;
     font-size: 14px;
     margin-bottom: 30px; }
+    .user-ads .ad:hover .padding h3 {
+      color: #84d8e3; }
     .user-ads .ad h3 {
-      margin-bottom: 5px; }
+      margin-bottom: 10px;
+      color: #324252; }
+    .user-ads .ad .padding {
+      padding: 0 15px;
+      color: #3a424a; }
     .user-ads .ad .ad-image {
       width: 100%;
-      height: 300px; }
+      height: 300px;
+      border-radius: 10px 10px 0 0; }
     .user-ads .ad .neighboorhood {
       margin-top: 2px;
       float: left;
