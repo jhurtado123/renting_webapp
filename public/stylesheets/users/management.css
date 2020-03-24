@@ -1,3 +1,7 @@
+#root {
+  padding: 0 15px;
+  color: #324252; }
+
 .management-block {
   padding: 30px;
   height: 100px;
@@ -11,10 +15,11 @@
   justify-content: space-between;
   font-size: 16px;
   font-weight: normal;
-  cursor: pointer; }
+  cursor: pointer;
+  color: #324252; }
   .management-block:hover {
-    background: #FF8A84;
-    color: white;
+    background: #84d8e3;
+    color: #3a424a;
     border: 1px solid white; }
 
 /*# sourceMappingURL=management.css.map */

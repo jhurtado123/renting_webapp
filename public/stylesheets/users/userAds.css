@@ -1,27 +1,48 @@
+#root {
+  padding: 0 15px;
+  color: #324252;
+  margin-top: 40px; }
+
 #ads {
   margin-top: 50px; }
   #ads #ad {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    margin-bottom: 20px; }
+    margin-bottom: 30px;
+    border: 1px solid #324252;
+    border-radius: 10px;
+    padding-right: 10px; }
     #ads #ad a {
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
       width: 80%; }
     #ads #ad .ad-image {
-      width: 100%;
-      min-height: 100px; }
+      max-width: 200px;
+      min-width: 200px;
+      min-height: 120px;
+      border-radius: 10px 0 0 10px; }
+      @media screen and (max-width: 475px) {
+        #ads #ad .ad-image {
+          max-width: 150px;
+          min-width: 150px; } }
     #ads #ad .info {
+      min-width: 50%;
       margin-left: 15px; }
       #ads #ad .info h2 {
         font-size: 16px; }
+      #ads #ad .info p {
+        color: #3a424a; }
     #ads #ad .edit {
       margin-left: 15px;
       display: flex;
       align-items: center;
       font-size: 30px; }
+      @media screen and (max-width: 475px) {
+        #ads #ad .edit {
+          font-size: 25px;
+          margin-left: 0px; } }
 
 #addNewAd {
   position: fixed;
@@ -33,7 +54,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 100%;
-  background: black;
-  color: white; }
+  background: #3a424a;
+  color: #84d8e3; }
 
 /*# sourceMappingURL=userAds.css.map */

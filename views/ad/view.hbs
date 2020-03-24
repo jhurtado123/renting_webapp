@@ -1,10 +1,9 @@
 {{#extend "stylesheets"}}
     <link rel="stylesheet" href="/stylesheets/ad/view.css"/>
-    <link rel="stylesheet" href="/stylesheets/components/slider.css" />
+    <link rel="stylesheet" href="/stylesheets/components/slider.css"/>
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet"/>
 {{/extend}}
-
 <div class="slideshow-container" data-id="{{ad._id}}">
     {{#each ad.images }}
         <div class="mySlides fade" data-index="{{@index}}">
@@ -16,33 +15,55 @@
 </div>
 <div class="ad-images-preview">
     {{#each ad.images }}
-        <div class="image-preview" data-index="{{@index}}" style='background: url("/uploads/picturesAd/{{this}}");background-position: center;background-repeat: no-repeat;background-size:100% 100%;'></div>
+        <div class="image-preview" data-index="{{@index}}"
+             style='background: url("/uploads/picturesAd/{{this}}");background-position: center;background-repeat: no-repeat;background-size:100% 100%;'></div>
     {{/each}}
 </div>
-<form action="/appointment/create" method="post">
-    <input type="hidden" name="lesser" value="{{currentUser._id}}">
-    <input type="hidden" name="lessor" value="{{ad.owner}}">
-    <input type="hidden" name="ad" value="{{ad._id}}">
-    <button type="submit">Pedir cita</button>
-</form>
+<div id="root">
+    <form action="/appointment/create" method="post">
+        <input type="hidden" name="lesser" value="{{currentUser._id}}">
+        <input type="hidden" name="lessor" value="{{ad.owner}}">
+        <input type="hidden" name="ad" value="{{ad._id}}">
+        <button type="submit">Pedir cita</button>
+    </form>
 
-<h1>{{ad.title}}</h1>
-<p>{{ad.neighborhood}}, {{ad.city}}</p>
-<p class="price">{{ad.price}}€</p>
-<p>{{ad.description}}</p>
-<a id="owner" href="/users/{{ad.owner._id}}">
-    <div class="owner-image" style='background: url("/uploads/userProfileImages{{ad.owner.profile_image}}");background-repeat: no-repeat;background-size: cover;background-position: center'></div>
-    <div class="info">
-        <div class="name">
-            {{ad.owner.name}}
-        </div>
-        <div class="date">
-            Publicado desde: {{formatDate ad.createdAt}}
-        </div>
+    <h1>{{ad.title}}</h1>
+    <p class="address"><i class="fa fa-map-marker"></i>{{ad.neighborhood}}, {{ad.city}}</p>
+    <p class="price"><i class="fa fa-tag"></i>{{ad.price}}€</p>
+    <p class="content">{{ad.description}}</p>
+    <div class="summary-info">
+        <p>{{ad.parameters.square_meters}} m² <img src="/images/icons/area.png"></p>
+        <p>{{ad.parameters.flat_status}}º piso<img src="/images/icons/ruler.png"></p>
+        <p>{{ad.parameters.rooms}} hab.<img src="/images/icons/bed.png"></p>
+        <p>{{ad.parameters.bathrooms}} bañ.<img src="/images/icons/shower.png"></p>
+        {{#if ad.parameters.elevator}}
+            <p>Ascensor<img src="/images/icons/elevator.png"></p>
+        {{/if}}
+        {{#if ad.parameters.parking}}
+            <p>Parking<img src="/images/icons/parking.png"></p>
+        {{/if}}
+        {{#if ad.parameters.storage_room}}
+            <p>Trastero<img src="/images/icons/storage_room.png"></p>
+        {{/if}}
+        {{#if ad.parameters.terrace}}
+            <p>Terraza<img src="/images/icons/terrace.png"></p>
+        {{/if}}
     </div>
-</a>
-
+    <a id="owner" href="/users/{{ad.owner._id}}">
+        <div class="owner-image"
+             style='background: url("/uploads/userProfileImages{{ad.owner.profile_image}}");background-repeat: no-repeat;background-size: cover;background-position: center'></div>
+        <div class="info">
+            <div class="name">
+                {{ad.owner.name}}
+            </div>
+            <div class="date">
+                Publicado desde: {{formatDate ad.createdAt}}
+            </div>
+        </div>
+    </a>
+</div>
 <div id="map"></div>
+
 
 
 {{#extend "scripts"}}
@@ -57,7 +78,7 @@
             zoom: 14,
             interactive: true
         });
-        map.on('load', function() {
+        map.on('load', function () {
             map.addSource("source_circle_500", {
                 "type": "geojson",
                 "data": {
