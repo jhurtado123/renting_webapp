@@ -119,7 +119,6 @@ a {
   width:100vw;
   left:0;
   top: calc(100vh - 80px);
-  border:1px solid black;
   max-height:80px;
   height: 80px;
   overflow: hidden;
@@ -153,6 +152,7 @@ a {
   width: 100vw;
   height: 100vh;
   background: rgba(140, 140, 140,0.9);
+  opacity: 0.3;
   display: none;
   overflow: hidden;
 }

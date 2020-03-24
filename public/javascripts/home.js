@@ -50,17 +50,21 @@ function enableDrawMapModal() {
 }
 
 function disableSortAdsModal() {
+  backdrop.style.display = "none";
   sortAdsModal.classList.remove('open');
 }
 
 function enableSortAdsModal() {
+  backdrop.style.display = "block";
   sortAdsModal.classList.add('open');
 }
 
 function disableFilterAdsModal(){
+  backdrop.style.display = "none";
   filterAdsModal.classList.remove('open');
 }
 function enableFilterAdsModal(){
+  backdrop.style.display = "block";
   filterAdsModal.classList.add('open');
 }
 
