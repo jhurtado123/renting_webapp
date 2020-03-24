@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import "variables";
+
 body {
   font-family: 'Roboto', sans-serif;
- background: #FF8A84;
+ background: $background-gradient;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -15,7 +17,7 @@ body {
   width: 100%;
   max-width: 450px;
   font-size: 18px;
-  color:black;
+  color:$secondary-color;
   padding:0 15px;
   form {
     margin-top: 50px;

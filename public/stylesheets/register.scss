@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import "variables";
+
 body {
   font-family: 'Roboto', sans-serif;
- // background-image: linear-gradient(to top, #da7797, #e57b93, #ef7f8f, #f7848a, #ff8a84);
-  background: #FF8A84;
+ background: $background-gradient;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -13,6 +14,7 @@ body {
   max-width: 450px;
   padding:0 15px;
   font-size: 18px;
+  color:$secondary-color;
   @media screen and (max-width: 500px) {
     margin-top: -15vh;
   }

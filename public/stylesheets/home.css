@@ -1,6 +1,7 @@
 #homeMenu {
   background: linear-gradient(90deg, #84d8e3 36%, #a7e7cc 100%);
-  padding: 10px 0; }
+  padding: 10px 0;
+  padding-bottom: 15px; }
   #homeMenu .searchbar {
     border-radius: 5px;
     padding: 5px 10px;
