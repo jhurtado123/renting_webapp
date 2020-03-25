@@ -16,14 +16,12 @@
   <span id="openDrawMap"><img src="/images/icons/pin.png"></span>
   <a id="openSortAds"><img src="/images/icons/sort.png"></a>
 </div>
-<div id="adList">
   {{#if messages.error}}
     <p>{{messages.error}}</p>
   {{/if}}
   {{#each ads}}
     {{>adCard}}
   {{/each}}
-</div>
 <div id="filterAds" class="modal">
   <div class="close">X</div>
   <p class="title-modal">Filtrar anuncios</p>

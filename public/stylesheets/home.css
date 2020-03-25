@@ -137,7 +137,7 @@
   font-size: 18px;
   font-weight: bold; }
 
-button {
+.button, button {
   width: 100%;
   padding: 10px 8px;
   border: 1px solid #84d8e3;
@@ -147,9 +147,23 @@ button {
   font-weight: bold;
   font-size: 18px;
   cursor: pointer; }
-  button.update {
+  .button.update, button.update {
     color: linear-gradient(90deg, #84d8e3 36%, #a7e7cc 100%);
     border: 1px solid #3a424a;
     background: #3a424a; }
+
+#adList .slideshow-container .mySlides img {
+  height: 200px; }
+
+#adList .ad-info {
+  padding: 0px 20px; }
+  #adList .ad-info h3 {
+    margin: 10px 0px; }
+  #adList .ad-info h4, #adList .ad-info p {
+    margin: 5px 0px; }
+  #adList .ad-info .button-ad {
+    display: flex;
+    width: fit-content;
+    margin: 0 auto; }
 
 /*# sourceMappingURL=home.css.map */

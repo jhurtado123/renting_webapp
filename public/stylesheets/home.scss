@@ -161,7 +161,7 @@
   font-size: 18px;
   font-weight: bold;
 }
-button {
+.button, button {
   width: 100%;
   padding:10px 8px;
   border: 1px solid $background;
@@ -175,5 +175,24 @@ button {
     color:$background-gradient;
     border: 1px solid $secondary-color;
     background: $secondary-color;
+  }
+}
+#adList{
+  .slideshow-container .mySlides img{
+    height: 200px;
+  }
+  .ad-info{
+    padding: 0px 20px;
+    h3{
+      margin: 10px 0px;
+    }
+    h4, p{
+      margin: 5px 0px;
+    }
+    .button-ad{
+      display: flex;
+      width: fit-content;
+      margin: 0 auto;
+    }
   }
 }
