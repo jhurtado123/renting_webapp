@@ -14,14 +14,13 @@
   <div class="ad-info">
     <h3>{{this.title}}</h3>
     <h4>{{this.price}}€</h4>
-    <p>{{this.city}}</p>
+    <p>{{this.neighborhood}}, {{this.city}}</p>
     <div class ="summary-info">
       <p><img src="/images/icons/area.png"> {{this.parameters.square_meters}} m²</p>
-      <p><img src="/images/icons/ruler.png"> {{this.parameters.flat_status}}º piso</p>
+      {{!-- <p><img src="/images/icons/ruler.png"> {{this.parameters.flat_status}}º piso</p> --}}
       <p><img src="/images/icons/bed.png"> {{this.parameters.rooms}}hab.</p>
       <p><img src="/images/icons/shower.png"> {{this.parameters.bathrooms}} bañ.</p>
     </div>
-    {{!-- <p>{{this.description}}</p> --}}
     <div class="button-ad">
       <a class="button" href="/ad/{{this._id}}" class="button">Ver piso</a>
     </div>
