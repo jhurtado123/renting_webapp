@@ -20,13 +20,6 @@
     {{/each}}
 </div>
 <div id="root">
-    <form action="/appointment/create" method="post">
-        <input type="hidden" name="lesser" value="{{currentUser._id}}">
-        <input type="hidden" name="lessor" value="{{ad.owner}}">
-        <input type="hidden" name="ad" value="{{ad._id}}">
-        <button type="submit">Pedir cita</button>
-    </form>
-
     <h1>{{ad.title}}</h1>
     <p class="address"><i class="fa fa-map-marker"></i>{{ad.neighborhood}}, {{ad.city}}</p>
     <p class="price"><i class="fa fa-tag"></i>{{ad.price}}€</p>
@@ -49,6 +42,10 @@
             <p>Terraza<img src="/images/icons/terrace.png"></p>
         {{/if}}
     </div>
+    <form action="/chats/create" method="post">
+        <input type="hidden" name="ad" value="{{ad._id}}">
+        <button class="initChat" type="submit">Iniciar chat</button>
+    </form>
     <a id="owner" href="/users/{{ad.owner._id}}">
         <div class="owner-image"
              style='background: url("/uploads/userProfileImages{{ad.owner.profile_image}}");background-repeat: no-repeat;background-size: cover;background-position: center'></div>

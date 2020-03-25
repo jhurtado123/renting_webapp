@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/chats/chat.css'/>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<div id="root">
+    <header>
+        <a href="/chats" class="return">
+            <img src="/images/icons/back.png">
+        </a>
+        <a href="/ad/{{chat.ad._id}}" class="ad">
+            <h3>{{chat.ad.title}}</h3>
+            <p>{{chat.ad.price}}€</p>
+        </a>
+        <a class="messager" href="/users/{{#ifEq currentUser._id
+                                                 chat.lessee._id}}{{chat.lessor._id}}{{else}}{{chat.lessee._id}}{{/ifEq}}">
+            <div class="preview-image" style="background: url('/uploads/userProfileImages{{#ifEq currentUser._id
+                                                                                                 chat.lessee._id}}{{chat.lessor.profile_image}}{{else}}{{chat.lessee.profile_image}}{{/ifEq}}') no-repeat center; background-size: cover"></div>
+        </a>
+    </header>
+    <div id="content">
+        {{#each messages}}
+            {{#ifEq this.sender ../currentUser._id}}
+                <p class="mine">{{this.message}}<span>{{formatHours this.createdAt}}</span></p>
+            {{else}}
+                <p class="other">{{this.message}}<span>{{formatHours this.createdAt}}</span></p>
+            {{/ifEq}}
+        {{/each}}
+    </div>
+    <footer>
+        <textarea id="message" rows="1"></textarea>
+        <img id="send" src="/images/icons/send-chat.png">
+    </footer>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const socket = io();
+
+        const message = document.querySelector('#message');
+        const output = document.querySelector('#content');
+        const send = document.querySelector('#send');
+
+        send.addEventListener('click', () => {
+            output.innerHTML += `<p class='mine'>${message.value}<span>${new Date().getHours()}:${new Date().getMinutes()}</span></p>`;
+            output.scrollTop = output.scrollHeight;
+            socket.emit('chat:message', {
+                message: message.value,
+                sender: '{{currentUser._id}}',
+                chatId: '{{chat._id}}',
+            });
+        });
+
+        socket.emit('room:join', '{{chat._id}}');
+
+        socket.on('chat:message', function (data) {
+            output.innerHTML += `<p class='other'>${data.message}<span>${new Date().getHours()}:${new Date().getMinutes()}</span></p>`;
+            output.scrollTop = output.scrollHeight;
+        });
+
+        output.scrollTop = output.scrollHeight;
+    });
+</script>
+</body>
+</html>

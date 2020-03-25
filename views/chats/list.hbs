@@ -1,0 +1,23 @@
+{{#extend "stylesheets"}}
+    <link rel="stylesheet" href="/stylesheets/chats/list.css"/>
+{{/extend}}
+<div id="root">
+    <h1>Chats</h1>
+    <div id="chats">
+        {{# if chats.length }}
+            {{#each chats }}
+                <a class="chat" href="/chats/{{this._id}}">
+                    <div class="preview-image" style="background: url('/uploads/picturesAd{{this.ad.images.[0]}}') no-repeat center; background-size: cover"></div>
+                    <div class="info">
+                        <h3>{{this.ad.title}}</h3>
+                        <p>Chat con: {{#ifEq this.lessee._id ../currentUser._id}}{{this.lessor.name}}{{else}}{{this.lessee.name}}{{/ifEq}}</p>
+                    </div>
+                    <img src="/images/icons/send.png">
+                    <span></span>
+                </a>
+            {{/each}}
+        {{else}}
+            No tienes chats abiertos todavía.
+        {{/if}}
+    </div>
+</div>
