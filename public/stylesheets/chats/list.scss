@@ -3,6 +3,7 @@
 #root {
   h1{
     padding: 0 15px;
+    color:$secondary-color;
   }
   #chats {
     color:$secondary-color;
@@ -46,4 +47,7 @@
       }
     }
   }
+}
+.no-chat {
+  padding: 0 15px;
 }

@@ -9,9 +9,9 @@ const Message = require('../models/Message');
 const io = require('socket.io')();
 app.socketIO = io;
 
-router.get('/', (req,res,next) => {
+router.get('/', (req, res, next) => {
   const userId = req.session.currentUser._id;
-  Chat.find({$or:[ {'lessee':userId}, {'lessor':userId}]}).populate('lessee lessor ad')
+  Chat.find({$or: [{'lessee': userId}, {'lessor': userId}]}).populate('lessee lessor ad')
     .then(chats => {
       res.render('chats/list', {chats})
     })
@@ -20,12 +20,19 @@ router.get('/', (req,res,next) => {
 
 router.post('/create', (req, res, next) => {
   const adId = req.body.ad;
-  Ad.findOne({_id: adId})
+  Chat.find({ad: adId, lessee: req.session.currentUser._id})
+    .then(chat => {
+      if(!chat.length) return Ad.findOne({_id: adId});
+
+      return res.redirect(`/chats/${chat[0]._id}`);
+    })
     .then(ad => {
       return new Chat({lessor: ad.owner, lessee: req.session.currentUser._id, ad: ad._id}).save();
     })
-    .then(result => res.redirect('/chats'))
-    .catch(error => next(error));
+    .then(result => {
+      return res.redirect(`/chats/${result._id}`);
+    })
+    .catch(error => console.log(error));
 });
 
 app.io.on('connection', (socket) => {
@@ -40,7 +47,7 @@ app.io.on('connection', (socket) => {
 
 router.get('/:chatId', (req, res, next) => {
   const {chatId} = req.params;
-  
+
   let chatEntity;
   Chat.findOne({_id: chatId}).populate('lessee lessor ad')
     .then(chat => {

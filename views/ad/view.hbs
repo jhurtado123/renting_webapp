@@ -42,10 +42,13 @@
             <p>Terraza<img src="/images/icons/terrace.png"></p>
         {{/if}}
     </div>
-    <form action="/chats/create" method="post">
-        <input type="hidden" name="ad" value="{{ad._id}}">
-        <button class="initChat" type="submit">Iniciar chat</button>
-    </form>
+    {{#ifEq currentUser._id ad.owner._id}}
+    {{else}}
+        <form action="/chats/create" method="post">
+            <input type="hidden" name="ad" value="{{ad._id}}">
+            <button class="initChat" type="submit">Iniciar chat</button>
+        </form>
+    {{/ifEq}}
     <a id="owner" href="/users/{{ad.owner._id}}">
         <div class="owner-image"
              style='background: url("/uploads/userProfileImages{{ad.owner.profile_image}}");background-repeat: no-repeat;background-size: cover;background-position: center'></div>

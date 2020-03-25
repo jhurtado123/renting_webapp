@@ -1,5 +1,6 @@
 #root h1 {
-  padding: 0 15px; }
+  padding: 0 15px;
+  color: #3a424a; }
 
 #root #chats {
   color: #3a424a;
@@ -35,5 +36,8 @@
     #root #chats .chat img {
       margin-left: 15px;
       width: 30px; }
+
+.no-chat {
+  padding: 0 15px; }
 
 /*# sourceMappingURL=list.css.map */
