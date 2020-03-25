@@ -25,6 +25,7 @@ const usersRouter = require('./routes/users');
 const adsRouter = require('./routes/ad');
 const appointmentsRouter = require('./routes/appointment');
 const chatsRouter = require('./routes/chat');
+const supportRouter = require('./routes/support');
 const apiRouter = require('./routes/api');
 
 
@@ -81,6 +82,8 @@ app.use('/users',authMiddleware.checkIfUserLoggedIn, usersRouter);
 app.use('/ad',authMiddleware.checkIfUserLoggedIn, adsRouter);
 app.use('/appointment', authMiddleware.checkIfUserLoggedIn, appointmentsRouter);
 app.use('/chats', authMiddleware.checkIfUserLoggedIn, chatsRouter);
+app.use('/support', authMiddleware.checkIfUserLoggedIn, supportRouter);
+
 app.use('/api', apiRouter); //TODO authMiddleware.checkIfUserLoggedIn ?
 
 //register partials

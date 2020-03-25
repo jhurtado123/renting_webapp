@@ -159,12 +159,15 @@ a {
 
 .has-error {
   input,textarea {
-    border:1px solid red;
+    border:1px solid red!important;
   }
   .error-message {
     color:red;
+    font-size: 12px;
   }
 }
 .form-error-message {
   color:red;
+  text-align: center;
+  font-size: 12px;
 }

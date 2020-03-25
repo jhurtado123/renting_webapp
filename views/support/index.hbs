@@ -1,0 +1,25 @@
+{{#extend "stylesheets"}}
+    <link rel="stylesheet" href="/stylesheets/support/index.css"/>
+{{/extend}}
+
+<div id="root">
+    <h1>Centro de soporte</h1>
+    <p>Si necesitas ayuda rellena el siguiente campo explicando con detalle cual es tu problema / duda y se
+        notificará automaticamente a los administradores de la página que te responderán lo antes posible.</p>
+    <form action="/support" method="post" class="validate">
+        <div class="form-group">
+            <label>Escribe aquí tu pregunta:</label>
+            <textarea name="question" data-validate="notEmpty"></textarea>
+        </div>
+        <button>Envíar</button>
+    </form>
+    {{#if error }}
+        {{error}}
+    {{/if}}
+    {{#if ok }}
+        {{ok}}
+    {{/if}}
+</div>
+{{#extend "scripts"}}
+    <script src="/javascripts/validator.js"></script>
+{{/extend}}

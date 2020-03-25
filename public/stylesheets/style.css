@@ -135,12 +135,15 @@ a {
   overflow: hidden; }
 
 .has-error input, .has-error textarea {
-  border: 1px solid red; }
+  border: 1px solid red !important; }
 
 .has-error .error-message {
-  color: red; }
+  color: red;
+  font-size: 12px; }
 
 .form-error-message {
-  color: red; }
+  color: red;
+  text-align: center;
+  font-size: 12px; }
 
 /*# sourceMappingURL=style.css.map */
