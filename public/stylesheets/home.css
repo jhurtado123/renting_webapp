@@ -152,18 +152,21 @@
     border: 1px solid #3a424a;
     background: #3a424a; }
 
-#adList .slideshow-container .mySlides img {
-  height: 200px; }
-
-#adList .ad-info {
-  padding: 0px 20px; }
-  #adList .ad-info h3 {
-    margin: 10px 0px; }
-  #adList .ad-info h4, #adList .ad-info p {
-    margin: 5px 0px; }
-  #adList .ad-info .button-ad {
-    display: flex;
-    width: fit-content;
-    margin: 0 auto; }
+#adList {
+  margin-bottom: 20px; }
+  #adList .slideshow-container .mySlides img {
+    height: 200px; }
+  #adList .ad-info {
+    padding: 0px 20px; }
+    #adList .ad-info h3 {
+      margin: 10px 0px; }
+    #adList .ad-info h4, #adList .ad-info p {
+      margin: 5px 0px; }
+    #adList .ad-info .button-ad {
+      display: flex;
+      width: fit-content;
+      margin: 0 auto; }
+      #adList .ad-info .button-ad .button {
+        padding: 14px; }
 
 /*# sourceMappingURL=home.css.map */
