@@ -16,14 +16,17 @@ const authMiddleware = require('./helpers/auth');
 
 hbs = extend(hbs);
 
+const app = module.exports = express();
+app.io = require('socket.io')();
+require('express-dynamic-helpers-patch')(app);
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const adsRouter = require('./routes/ad');
 const appointmentsRouter = require('./routes/appointment');
+const chatsRouter = require('./routes/chat');
 const apiRouter = require('./routes/api');
 
-const app = express();
-require('express-dynamic-helpers-patch')(app);
 
 mongoose
   .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
@@ -77,6 +80,7 @@ app.dynamicHelpers({
 app.use('/users',authMiddleware.checkIfUserLoggedIn, usersRouter);
 app.use('/ad',authMiddleware.checkIfUserLoggedIn, adsRouter);
 app.use('/appointment', authMiddleware.checkIfUserLoggedIn, appointmentsRouter);
+app.use('/chats', authMiddleware.checkIfUserLoggedIn, chatsRouter);
 app.use('/api', apiRouter); //TODO authMiddleware.checkIfUserLoggedIn ?
 
 //register partials
@@ -84,9 +88,11 @@ hbs.registerPartials(path.join(__dirname, '/views/partials'));
 hbs.registerHelper('ifEq', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
-// Deprecated since version 0.8.0
 hbs.registerHelper("formatDate", function(datetime) {
     return `${datetime.getUTCDate()}/${datetime.getUTCMonth()+1}/${datetime.getFullYear()}`;
+});
+hbs.registerHelper("formatHours", function(datetime) {
+  return `${datetime.getHours()}:${datetime.getMinutes()}`;
 });
 
 // catch 404 and forward to error handler
