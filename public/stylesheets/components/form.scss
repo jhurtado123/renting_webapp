@@ -43,6 +43,24 @@ form {
       border: none;
       outline: none;
     }
+    .bad-status{
+      color: #ff1100;
+    }
+    .notgood-status {
+      color: #ff6600;
+      margin-left: 25px;
+    }
+    .normal-status {
+      margin-left: 120px;
+    }
+    .good-status {
+      color: #3a9c2f;
+      margin-left: 200px;
+    }
+    .perfect-status {
+      color: #22991a;
+      margin-left: 230px;
+    }
   }
 
   button {
@@ -147,3 +165,4 @@ input[type=range]:focus::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-upper {
   background: #B6B6B6;
 }
+

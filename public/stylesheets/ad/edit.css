@@ -26,6 +26,19 @@ form {
     form .form-group input[type=range] {
       border: none;
       outline: none; }
+    form .form-group .bad-status {
+      color: #ff1100; }
+    form .form-group .notgood-status {
+      color: #ff6600;
+      margin-left: 25px; }
+    form .form-group .normal-status {
+      margin-left: 120px; }
+    form .form-group .good-status {
+      color: #3a9c2f;
+      margin-left: 200px; }
+    form .form-group .perfect-status {
+      color: #22991a;
+      margin-left: 230px; }
   form button {
     width: 100%;
     padding: 10px 8px;
