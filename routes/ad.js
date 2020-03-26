@@ -31,7 +31,10 @@ router.post('/create', function (req, res, next) {
     description, terrace, rooms, bathrooms,
     height, storage_room, parking, number, hasElevator
   } = req.body;
-
+  axios.post('/api/get/fairPrice', { data: { flat_status, parking, storage_room, postal_code, height, hasElevator, terrace, square_meters}})
+    .then(result => { console.log(result)})
+    .catch(error => console.log(error))
+    return false;
   getCoordsByAddress(address + ' ' + number + ', ' + postal_code, city)
     .then(async coords => {
       const neighborhood = await getNeighborhoodByPostalCode(postal_code);
