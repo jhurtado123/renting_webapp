@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/appointments/view.css'/>
+</head>
+<body>
+<div id="root">
+    <header>
+        <a href="/users/appointments" class="return">
+            <img src="/images/icons/back.png">
+        </a>
+        <a class="messager" href="/users/{{#ifEq currentUser._id
+                                                 appointment.lesser._id}}{{appointment.lessor._id}}{{else}}{{appointment.lesser._id}}{{/ifEq}}">
+            <div class="preview-image" style="background: url('/uploads/userProfileImages{{#ifEq currentUser._id
+                                                                                                 appointment.lessee._id}}{{appointment.lessor.profile_image}}{{else}}{{appointment.lesser.profile_image}}{{/ifEq}}') no-repeat center; background-size: cover"></div>
+            <div class="name">{{#ifEq currentUser._id
+                                      appointment.lesser._id}}{{appointment.lessor.name}}{{else}}{{appointment.lesser.name}}{{/ifEq}}</div>
+        </a>
+    </header>
+    <div id="content">
+        <div id="appointment">
+            <h1>Cita</h1>
+            <p><img src="/images/icons/pin-grey.png"
+                    class="icon icon-2"> {{appointment.ad.address}} {{appointment.ad.number}}, {{appointment.ad.city}}
+            </p>
+            <p><img src="/images/icons/minute.png" class="icon"> {{formatDate appointment.date}} {{formatHours
+                    appointment.date}}h
+            <p><img src="/images/icons/phone.png" class="icon">{{#ifEq currentUser._id
+                                                                       appointment.lesser._id}}{{appointment.lessor.phone}}{{else}}{{appointment.lesser.phone}}{{/ifEq}}
+            </p>
+        </div>
+        <a href="/chats/{{appointment.chat._id}}" class="button">Ir al chat</a>
+        <a href="/ad/{{appointment.ad._id}}" class="button">Ver anuncio</a>
+        <a class="button-transparent" onclick="openModal()">Cancelar cita</a>
+
+    </div>
+
+</div>
+<div id="backdrop"></div>
+
+<div id="cancelAppointment" class="modal-bts">
+    <div class="close" onclick="closeModal()">X</div>
+    <h2 class="title-search-map">¿Estas seguro que quieres cancelar esta cita?</h2>
+    <div id="button">
+        <a onclick="closeModal()" class="button-transparent">Volver</a>
+        <a href="/appointment/delete/{{appointment._id}}" class="button">Cancelar cita</a>
+    </div>
+</div>
+
+<script>
+    const modalCancel = document.querySelector('#cancelAppointment');
+    const backdrop = document.querySelector('#backdrop');
+
+    function openModal() {
+        modalCancel.classList.add('open');
+        backdrop.style.display = 'block';
+    }
+
+    function closeModal() {
+        modalCancel.classList.remove('open');
+        backdrop.style.display = 'none';
+    }
+</script>
+</body>
+</html>

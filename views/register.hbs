@@ -2,29 +2,34 @@
 <html>
 <head>
     <title>{{title}}</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/register.css'/>
 </head>
 <body>
 <div id="root">
     {{#if messages.success}}
         <h1>¡Te has registrado con éxito!</h1>
         <p>Ahora ya puedes loguearte con tu nueva cuenta </p>
-        <a href="/">Acceder</a>
+        <a class="button" href="/">Acceder</a>
     {{else}}
         <h1>Crear cuenta</h1>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad aliquam, aspernatur assumenda autem
-            dicta dignissimos eum expedita fugiat impedit iste labore minus natus obcaecati quia rerum sit tempora vel?
+            Al registrarte podrás acceder a todos los anuncios
         </p>
 
-        <form id="registerForm" method="post" action="/register">
+        <form id="registerForm" method="post" action="/register" class="validate">
             <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username">
+                <label>Nombre y apellidos</label>
+                <input type="text" name="name" data-validate="notEmpty" placeholder="Nombre y apellidos">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" name="username" data-validate="email" placeholder="Tu email">
             </div>
             <div class="form-group">
                 <label>Contraseña</label>
-                <input type="password" name="password">
+                <input type="password" name="password" data-validate="notEmpty" placeholder="Contraseña">
             </div>
             <button type="submit">Registrate</button>
             {{#if messages.error }}
@@ -33,5 +38,7 @@
         </form>
     {{/if}}
 </div>
+<script src="/javascripts/validator.js"></script>
+
 </body>
 </html>

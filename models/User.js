@@ -12,7 +12,8 @@ const userSchema = new Schema({
     required: true,
   },
   name: String,
-  rol:[],
+  role:[],
+  phone: String,
   profile_image: String,
   description: String,
   dni: String,
@@ -26,8 +27,12 @@ const userSchema = new Schema({
       type: String,
       required: true
     },
-  }]
-});
+  }],
+  lesseeMode: Boolean,
+},
+  {
+    timestamps: true
+  });
 
 
 const User = mongoose.model('User', userSchema);

@@ -1,0 +1,103 @@
+{{#extend "stylesheets"}}
+    <link rel="stylesheet" href="/stylesheets/ad/edit.css"/>
+{{/extend}}
+<div id="root">
+    <h1>Editar anuncio</h1>
+    <form action="/ad/edit/{{ad._id}}" class="validate" method="post">
+        <div class="form-group">
+            <label>Titulo</label>
+            <input type="text" name="title" value="{{ad.title}}" data-validate="notEmpty">
+        </div>
+        <div class="form-group">
+            <label>Ciudad</label>
+            <input type="text" name="city" value="{{ad.city}}" data-validate="notEmpty">
+        </div>
+        <div class="form-group">
+            <label>Código postal</label>
+            <input type="text" name="postal_code" value="{{ad.postal_code}}" data-validate="postal_code">
+        </div>
+        <div class="form-group">
+            <label>Dirección</label>
+            <input type="text" name="address" value="{{ad.address}}" data-validate="notNumbers">
+            <div class="info">Por seguridad la dirección exacta del inmueble no se mostrará al usuario hasta que usted
+                no confirme una cita con este.
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Número</label>
+            <input type="text" name="number" value="{{ad.number}}" data-validate="notEmpty">
+        </div>
+        <div class="form-group">
+            <label>Metros cuadrados</label>
+            <input type="number" name="square_meters" value="{{ad.parameters.square_meters}}" data-validate="notEmpty">
+        </div>
+        <div class="form-group chk">
+            <input type="checkbox" name="terrace" id="terrace" {{#if ad.parameters.terrace}}checked{{/if}}>
+            <label for="terrace">Terraza</label>
+        </div>
+        <div class="form-group chk">
+            <label>Estado del inmueble ( del 1 al 5, siendo 1 en mal estado y 5 en buen estado )</label>
+            <input id="rangeStatus" type="range" name="flat_status" min="1" max="5" step="1" value="{{ad.parameters.flat_status}}">
+            <div id="infoStatus"></div>
+        </div>
+        <div class="form-group">
+            <label>Altura del inmueble</label>
+            <input type="number" name="height" value="{{ad.parameters.height}}" data-validate="notEmpty">
+        </div>
+        <div class="form-group">
+            <label>Habitaciones</label>
+            <input type="number" name="rooms" value="{{ad.parameters.rooms}}">
+        </div>
+        <div class="form-group">
+            <label>Lavabos</label>
+            <input type="number" name="bathrooms" value="{{ad.parameters.bathrooms}}">
+        </div>
+        <div class="form-group chk">
+            <input id="hasElevator" type="checkbox" name="hasElevator" {{#if ad.parameters.hasElevator}}checked{{/if}}>
+            <label for="hasElevator">Tiene ascensor</label>
+        </div>
+        <div class="form-group chk">
+            <input id="parking" type="checkbox" name="parking" {{#if ad.parameters.parking}}checked{{/if}}>
+            <label for="parking">Incluye plaza de parking</label>
+        </div>
+        <div class="form-group chk">
+            <input id="storage_room" type="checkbox" name="storage_room"
+                   {{#if ad.parameters.storage_room}}checked{{/if}}>
+            <label for="storage_room">Incluye trastero</label>
+        </div>
+        <div class="form-group">
+            <label>Precio</label>
+            <input type="number" name="price" value="{{ad.price}}" data-validate="notEmpty">
+        </div>
+        <div class="form-group">
+            <label>Descripción</label>
+            <textarea name="description" data-validate="notEmpty">{{ad.description}}</textarea>
+        </div>
+        <div class="form-group">
+            <label>Imagenes</label>
+
+            <div id="imageList">
+                {{#each ad.images }}
+                    <div class='uploaded-image'>
+                        <img class="image-preview" src="/uploads/picturesAd/{{this}}">
+                        <input type="hidden" value="{{this}}" name="images">
+                    </div>
+                {{/each}}
+                <div id="addImage">
+                    <input type="file" id="imageUploadInput">
+                    +
+                </div>
+            </div>
+        </div>
+        <button class="update" type="submit">Actualizar</button>
+    </form>
+    <form action="/ad/remove/{{ad._id}}" method="post">
+        <button type="submit">Borrar anuncio</button>
+    </form>
+</div>
+
+{{#extend "scripts"}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/javascripts/validator.js"></script>
+    <script src="/javascripts/ad/edit.js"></script>
+{{/extend}}

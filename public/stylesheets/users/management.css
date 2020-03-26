@@ -1,0 +1,25 @@
+#root {
+  padding: 0 15px;
+  color: #324252; }
+
+.management-block {
+  padding: 30px;
+  height: 100px;
+  margin-top: 40px;
+  -webkit-box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.75);
+  display: flex;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: normal;
+  cursor: pointer;
+  color: #324252; }
+  .management-block:hover {
+    background: #84d8e3;
+    color: #3a424a;
+    border: 1px solid white; }
+
+/*# sourceMappingURL=management.css.map */

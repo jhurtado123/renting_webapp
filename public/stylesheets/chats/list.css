@@ -1,0 +1,43 @@
+#root h1 {
+  padding: 0 15px;
+  color: #3a424a; }
+
+#root #chats {
+  color: #3a424a;
+  margin-top: 40px; }
+  #root #chats .chat {
+    padding: 0 15px 15px;
+    margin: 15px 0;
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    transition: background 1s;
+    justify-content: space-between; }
+    #root #chats .chat:hover {
+      background: #84d8e3; }
+    #root #chats .chat h3 {
+      font-size: 16px; }
+    #root #chats .chat p {
+      font-size: 14px; }
+    #root #chats .chat .preview-image {
+      min-width: 75px;
+      width: 75px;
+      height: 75px;
+      border-radius: 10px;
+      margin-right: 20px; }
+    #root #chats .chat > span {
+      width: 80%;
+      border-bottom: 1px solid #84d8e3;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%); }
+    #root #chats .chat img {
+      margin-left: 15px;
+      width: 30px; }
+
+.no-chat {
+  padding: 0 15px; }
+
+/*# sourceMappingURL=list.css.map */

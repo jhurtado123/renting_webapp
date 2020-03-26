@@ -3,11 +3,84 @@
 <head>
     <title>{{title}}</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!--Font awseomse-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    {{{block "stylesheets"}}}
 </head>
 <body>
+<div id="wrapper">
+    <div id="headerMenu">
+        <a class="logo-link" href="/home">
+            <span>LOGO</span>
+        </a>
+        <a href="/users/{{currentUser._id}}">
+            <img class="profile-image" src="/uploads/userProfileImages/{{currentUser.profile_image}}">
+        </a>
+        <a href="/logout">
+            <img src="/images/icons/switch.png">
+        </a>
+    </div>
+    <div id="content">
+        {{{body}}}
+    </div>
+    <div id="lateralMenu">
+        <div class="profile-block">
+            <a href="/users/{{currentUser._id}}">
+                <img class="image" src="/uploads/userProfileImages/{{currentUser.profile_image}}">
+            </a>
+            <div class="wrap">
+                <p>Hola {{currentUser.name}}</p>
+                <div class="actions">
+                    <a href="/users/{{currentUser._id}}">Ver perfil</a> · <a href="/logout">Logout</a>
+                </div>
+            </div>
+            <i class="fa fa-times close-menu"></i>
+        </div>
+        <div class="links-block">
+            <a href="/users/profile">Editar mi perfil</a>
+            {{#if currentUser.lesseeMode}}
+                <a href="/users/ads">Mis anuncios</a>
+            {{/if}}
+            <a href="" onclick="alert('Proximamente');">Mis chats</a>
+            <a href="/users/appointments">Mis citas</a>
+            <a href="" onclick="alert('Proximamente');">Mis favoritos</a>
+            <a href="/support">Centro de soporte</a>
+        </div>
+        <div class="more-block">
+            <a href="">Help?</a> ·
+            <a href="">Aviso legal</a> ·
+            <a href="">Principios</a> ·
+            <a href="">Contribuir</a>
+        </div>
+    </div>
 
-{{{body}}}
-
+    <div id="footerMenu">
+        <a class="block" href="/home">
+            <img src="/images/icons/search.png">
+            <p>Buscar</p>
+        </a>
+        <a class="block" href="/users/management">
+            <img src="/images/icons/house.png">
+            <p>Gestión</p>
+        </a>
+        <a class="block" href="/users/appointments">
+            <img src="/images/icons/calendar.png">
+            <p>Citas</p>
+        </a>
+        <a class="block" href="/chats">
+            <img src="/images/icons/chat.png">
+            <p>Chats</p>
+        </a>
+        <div class="block" id="moreMenu">
+            <img src="/images/icons/menu.png">
+            <p>Más</p>
+        </div>
+    </div>
+    <div id="backdrop"></div>
+</div>
+<script src="/javascripts/main.js"></script>
+{{{block "scripts"}}}
 </body>
 </html>

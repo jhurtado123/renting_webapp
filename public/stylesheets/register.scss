@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import "variables";
+
+body {
+  font-family: 'Roboto', sans-serif;
+ background: $background-gradient;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#root {
+  width: 100%;
+  max-width: 450px;
+  padding:0 15px;
+  font-size: 18px;
+  color:$secondary-color;
+  @media screen and (max-width: 500px) {
+    margin-top: -15vh;
+  }
+  form {
+    margin-top:30px;
+    .form-group {
+      margin:15px 0;
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input {
+        width: 100%;
+        padding:10px 30px;
+        background: transparent;
+        border:1px solid black;
+        border-radius: 15px;
+        padding-left: 10px;
+      }
+    }
+    button {
+      margin-top:30px;
+      background: transparent;
+      border:1px solid black;
+      padding:15px 30px;
+      width: 100%;
+      border-radius: 15px;
+      color:black;
+      cursor: pointer;
+    }
+  }
+}
+button,.button {
+  display: inline-block;
+  text-align: center;
+  margin-top:20px;
+  background: transparent;
+  border:1px solid black;
+  padding:15px 30px;
+  width: 100%;
+  border-radius: 15px;
+  color:black;
+  cursor: pointer;
+}
+.error {
+  color: #ff2d4b;
+}

@@ -2,25 +2,35 @@
 <html>
 <head>
     <title>{{title}}</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/login.css'/>
 </head>
 <body>
-<div id="root">
+<div id="login">
     <div>
         <img src="/public/images/logo.jpg">
     </div>
     <form id="form" action="/login" method="POST">
-        <label for="username">Username</label><br>
-        <input type="text" name="username" placeholder="Your username">
+        <div class="form-group">
+            <label for="username">Correo electronico</label>
+            <input type="text" name="username" placeholder="Tu correo electrónico">
+        </div>
+        <div class="form-group">
+            <label for="userPassword">Contraseña</label>
+            <input type="password" name="userPassword" placeholder="Tu contraseña">
+        </div>
 
-        <label for="userPassword">Password</label><br>
-        <input type="password" name="userPassword" placeholder="********">
-
-        <button type="submit">login</button>
-        {{#if error}}
-            <p>{{error}}</p>
+        <button type="submit">Login</button>
+        {{#if messages}}
+            <p class="error">{{messages}}</p>
         {{/if}}
     </form>
+    <div class="register">
+        <p>¿Todavía no tienes cuenta?
+            <a href="/register">Registrate aquí</a>
+        </p>
+    </div>
 </div>
 </body>
 </html>

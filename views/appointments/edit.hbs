@@ -1,0 +1,10 @@
+<form method="post" action="/appointment/edit/{{appointment.id}}">
+    <div id="appointment">
+        <h2>Cita con {{#ifEq currentUser._id
+                             appointment.lesser._id }}{{appointment.lessor.username}}{{else}}{{appointment.lesser.username}}{{/ifEq}}  </h2>
+        <p>Direccion: {{appointment.ad.address}}, {{appointment.ad.city}}</p>
+        <p>Fecha: {{appointment.date}}</p>
+        <p>Estado: <input type="text" name="status" value="{{appointment.status}}"></p>
+        <button type="submit">Actualizar</button>
+    </div>
+</form>

@@ -1,2 +1,85 @@
-<h1>Ads</h1>
-<span>Page of Ads</span>
+{{#extend "stylesheets"}}
+    <link rel="stylesheet" href="/stylesheets/components/slider.css" />
+    <link rel="stylesheet" href="/stylesheets/ad/view.css" />
+    <link rel="stylesheet" href="/stylesheets/home.css" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+    <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css" type="text/css"/>
+{{/extend}}
+<div id="homeMenu">
+  <form action="/home" method="get">
+    <input class="searchbar" type="text" name="search" placeholder="Barrio, Código postal">
+  </form>
+  <a  id="openFilterAds"><img src="/images/icons/filter.png"></a>
+  <span id="openDrawMap"><img src="/images/icons/pin.png"></span>
+  <a id="openSortAds"><img src="/images/icons/sort.png"></a>
+</div>
+  {{#if messages.error}}
+    <p>{{messages.error}}</p>
+  {{/if}}
+  {{#each ads}}
+    {{>adCard}}
+  {{/each}}
+<div id="filterAds" class="modal">
+  <div class="close">X</div>
+  <p class="title-modal">Filtrar anuncios</p>
+  <div id="filterList">
+    <input id="priceMin" type="number" placeholder="Precio mínimo">
+    <input id="metersMin" type="number" placeholder="Mínimo metros">
+    <input id="rooomsMin" type="number" placeholder="Mínimo Habitaciones">
+    <input id="wcMin" type="number" placeholder="Mínimo Baños">
+    <div class="checkbox">
+      <span>Parking</span>
+      <input id="parking" type="checkbox">
+      <label for="parking"><span></span></label>
+    </div>
+    <div class="checkbox">
+      <span>Terraza</span>
+      <input id="terrace" type="checkbox">
+      <label for="terrace"><span></span></label>
+    </div>
+    <div class="checkbox">
+      <apan>Ascensor</apan>
+      <input id="elevator" type="checkbox">
+      <label for="elevator"><span></span></label>
+    </div>
+    <div class="checkbox">
+      <span>Trastero</span>
+      <input id="storage" type="checkbox">  
+      <label for="storage"><span></span></label>
+    </div>
+    <button id="buttonFilter" type="submit">Filtrar</button>
+  </div>
+</div>
+<div id="modalDrawMap" class="modal">
+    <div class="close">X</div>
+    <h2 class="title-search-map">Dibuja en el mapa tu búsqueda</h2>
+    <span><img src="/images/icons/area.svg" alt="Icon Area">Seleccionar la zona de búsqueda</span>
+    <div id="mapDraw"></div>
+    <div class="calculation-box">
+        <div id="calculated-area"></div>
+    </div>
+    <div id="showFlats"><span></span> Mostrar pisos</div>
+</div>
+<div id="sortAds" class="modal">
+  <div class="close">X</div>
+  <div class="orderSection">
+    <label class="title-modal" for="order">Ordenar por:</label>
+    <select id="orderBy" name="order" class="order-options">
+      <option value="data">Fecha más reciente</option>
+      <option value="morePrice">Precio: Más caro primero</option>
+      <option value="lessPrice">Precio: Más barato primero</option>
+      <option value="moreMeters">Metros: Más metros primero</option>
+      <option value="lessMeters">Metros: Menos metros primero</option>
+    </select>
+    <button id="buttonOrder" type="submit">Ordenar</button>
+  </div>
+</div>
+{{#extend "scripts"}}
+    <script src="/javascripts/components/slider.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/javascripts/home.js"></script>
+{{/extend}}
+

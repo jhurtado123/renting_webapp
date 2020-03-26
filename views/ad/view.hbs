@@ -1,0 +1,116 @@
+{{#extend "stylesheets"}}
+    <link rel="stylesheet" href="/stylesheets/ad/view.css"/>
+    <link rel="stylesheet" href="/stylesheets/components/slider.css"/>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet"/>
+{{/extend}}
+<div class="slideshow-container" data-id="{{ad._id}}">
+    {{#each ad.images }}
+        <div class="mySlides fade" data-index="{{@index}}">
+            <img src="/uploads/picturesAd/{{this}}" class="slide">
+        </div>
+    {{/each}}
+    <a class="prev" onclick="minusSlides('{{ad._id}}')">&#10094;</a>
+    <a class="next" onclick="plusSlides('{{ad._id}}')">&#10095;</a>
+</div>
+<div class="ad-images-preview">
+    {{#each ad.images }}
+        <div class="image-preview" data-index="{{@index}}"
+             style='background: url("/uploads/picturesAd/{{this}}");background-position: center;background-repeat: no-repeat;background-size:100% 100%;'></div>
+    {{/each}}
+</div>
+<div id="root">
+    <h1>{{ad.title}}</h1>
+    <p class="address"><i class="fa fa-map-marker"></i>{{ad.neighborhood}}, {{ad.city}}</p>
+    <p class="price"><i class="fa fa-tag"></i>{{ad.price}}€</p>
+    <p class="content">{{ad.description}}</p>
+    <div class="summary-info">
+        <p>{{ad.parameters.square_meters}} m² <img src="/images/icons/area.png"></p>
+        <p>{{ad.parameters.flat_status}}º piso<img src="/images/icons/ruler.png"></p>
+        <p>{{ad.parameters.rooms}} hab.<img src="/images/icons/bed.png"></p>
+        <p>{{ad.parameters.bathrooms}} bañ.<img src="/images/icons/shower.png"></p>
+        {{#if ad.parameters.elevator}}
+            <p>Ascensor<img src="/images/icons/elevator.png"></p>
+        {{/if}}
+        {{#if ad.parameters.parking}}
+            <p>Parking<img src="/images/icons/parking.png"></p>
+        {{/if}}
+        {{#if ad.parameters.storage_room}}
+            <p>Trastero<img src="/images/icons/storage_room.png"></p>
+        {{/if}}
+        {{#if ad.parameters.terrace}}
+            <p>Terraza<img src="/images/icons/terrace.png"></p>
+        {{/if}}
+    </div>
+    {{#ifEq currentUser._id ad.owner._id}}
+    {{else}}
+        <form action="/chats/create" method="post">
+            <input type="hidden" name="ad" value="{{ad._id}}">
+            <button class="initChat" type="submit">Iniciar chat</button>
+        </form>
+    {{/ifEq}}
+    <a id="owner" href="/users/{{ad.owner._id}}">
+        <div class="owner-image"
+             style='background: url("/uploads/userProfileImages{{ad.owner.profile_image}}");background-repeat: no-repeat;background-size: cover;background-position: center'></div>
+        <div class="info">
+            <div class="name">
+                {{ad.owner.name}}
+            </div>
+            <div class="date">
+                Publicado desde: {{formatDate ad.createdAt}}
+            </div>
+        </div>
+    </a>
+</div>
+<div id="map"></div>
+
+
+
+{{#extend "scripts"}}
+    <script src="/javascripts/components/slider.js"></script>
+    <script src="/javascripts/ad/view.js"></script>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoiamh1cnRhZG8xMjMiLCJhIjoiY2s3dGlqZWtlMHFveTNvbjF1bjJxYTg2ayJ9.zbzGWyoeQ52ddJTrK2gjdA';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [{{ad.location.coordinates.[0]}}, {{ad.location.coordinates.[1]}}],
+            zoom: 14,
+            interactive: true
+        });
+        map.on('load', function () {
+            map.addSource("source_circle_500", {
+                "type": "geojson",
+                "data": {
+                    "type": "FeatureCollection",
+                    "features": [{
+                        "type": "Feature",
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [{{ad.location.coordinates.[0]}}, {{ad.location.coordinates.[1]}}]
+                        }
+                    }]
+                }
+            });
+
+            map.addLayer({
+                "id": "circle500",
+                "type": "circle",
+                "source": "source_circle_500",
+                "paint": {
+                    "circle-radius": {
+                        stops: [
+                            [1, 2],
+                            [15, 150]
+                        ],
+                        base: 2
+                    },
+                    "circle-color": "lightblue",
+                    "circle-opacity": 0.6
+                }
+            });
+        });
+
+    </script>
+
+{{/extend}}

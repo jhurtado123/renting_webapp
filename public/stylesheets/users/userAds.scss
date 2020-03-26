@@ -1,0 +1,67 @@
+@import "../variables";
+#root {
+  padding:0 15px;
+  color:$primary-color;
+  margin-top: 40px;
+}
+#ads {
+  margin-top:50px;
+  #ad {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin-bottom:30px;
+    border:1px solid $primary-color;
+    border-radius: 10px;
+    padding-right: 10px;
+    a {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      width:80%;
+    }
+    .ad-image {
+      max-width:200px;
+      min-width: 200px;
+      min-height: 120px;
+      @media screen and (max-width: 475px) {
+        max-width:150px;
+        min-width: 150px;
+      }
+      border-radius: 10px 0 0 10px;
+    }
+    .info {
+      min-width: 50%;
+      margin-left: 15px;
+      h2 {
+        font-size: 16px;
+      }
+      p {
+        color:$secondary-color;
+      }
+    }
+    .edit {
+      margin-left: 15px;
+      display: flex;
+      align-items: center;
+      font-size: 30px;
+      @media screen and (max-width: 475px) {
+        font-size: 25px;
+        margin-left: 0px;
+      }
+    }
+  }
+}
+#addNewAd {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  background: $secondary-color;
+  color:$background;
+}
