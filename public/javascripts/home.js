@@ -32,9 +32,7 @@ document.querySelector("#openFilterAds").addEventListener("click", () => {
     enableFilterAdsModal();
   }
 });
-document
-  .querySelector("#filterAds .close")
-  .addEventListener("click", disableFilterAdsModal);
+document.querySelector("#filterAds .close").addEventListener("click", disableFilterAdsModal);
 
 
 function disableDrawMapModal() {
@@ -50,21 +48,21 @@ function enableDrawMapModal() {
 }
 
 function disableSortAdsModal() {
-  backdrop.style.display = "none";
+  backdrop.style.display = 'none';
   sortAdsModal.classList.remove('open');
 }
 
 function enableSortAdsModal() {
-  backdrop.style.display = "block";
+  backdrop.style.display = 'block';
   sortAdsModal.classList.add('open');
 }
 
 function disableFilterAdsModal(){
-  backdrop.style.display = "none";
+  backdrop.style.display = 'none';
   filterAdsModal.classList.remove('open');
 }
 function enableFilterAdsModal(){
-  backdrop.style.display = "block";
+  backdrop.style.display = 'block';
   filterAdsModal.classList.add('open');
 }
 
@@ -159,12 +157,11 @@ filterAdsButton.addEventListener("click", () => {
     terrace: document.querySelector("#terrace").checked,
     elevator: document.querySelector("#elevator").checked,
     storage: document.querySelector("#storage").checked
-
   };
   axios.post('/api/filter/ads', { 'filter': filter })
     .then(result => {
       createAdsOnView(result.data.ads);
-      disableSortAdsModal();
+      disableFilterAdsModal();
     })
     .catch(error => console.log(error));
 });
@@ -178,23 +175,25 @@ function createAdsOnView(ads) {
   }
   ads.forEach(ad => {
     const imagesHtmlString = getHtmlImagesString(ad.images);
-    let string = `<div>
+    let string = `<div id="adList">
             <div class="slideshow-container" data-id="${ad._id}">
                 ${imagesHtmlString}
               <a class="prev" onclick="plusSlides('${ad._id}')">&#10094;</a>
               <a class="next" onclick="plusSlides('${ad._id}')">&#10095;</a>
             </div>
-            <h3>${ad.title}</h3>
-            <h4>${ad.price}€</h4>
-            <p>${ad.city}</p>
-            <div class ="summary-info">
-              <p>${ad.parameters.square_meters} m² <img src="/images/icons/area.png"></p>
-              <p>${ad.parameters.flat_status}º piso<img src="/images/icons/ruler.png"></p>
-              <p>${ad.parameters.rooms} hab.<img src="/images/icons/bed.png"></p>
-              <p>${ad.parameters.bathrooms} bañ.<img src="/images/icons/shower.png"></p>
+            <div class="ad-info">
+              <h3>${ad.title}</h3>
+              <h4>${ad.price}€</h4>
+              <p>${ad.neighborhood}, ${ad.city}</p>
+              <div class ="summary-info">
+                <p><img src="/images/icons/area.png"> ${ad.parameters.square_meters} m²</p>
+                <p><img src="/images/icons/bed.png"> ${ad.parameters.rooms} hab.</p>
+                <p><img src="/images/icons/shower.png"> ${ad.parameters.bathrooms} bañ.</p>
+              </div>
+              <div class="button-ad">
+              <a href="/ad/${ad._id}" class="button">Ver piso</a>
+              </div> 
             </div>
-            <p>${ad.description}</p>
-            <a href="/ad/${ad._id}" class="button">Ver piso</a>
           </div>`;
     adList.innerHTML += string;
   });
