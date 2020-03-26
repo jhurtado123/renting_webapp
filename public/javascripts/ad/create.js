@@ -35,3 +35,19 @@ function removeImageAtServer(event) {
 
   image.parentElement.remove();
 }
+
+const rangeStatus = document.querySelector('#rangeStatus');
+
+rangeStatus.addEventListener('change', (event) => {
+  if (event.currentTarget.value == 1) {
+    document.getElementById("infoStatus").innerHTML = "<span class='bad-status'>Mal estado</span>";
+  } else if (event.currentTarget.value == 2) {
+    document.getElementById("infoStatus").innerHTML = "<span class='notgood-status'>No muy buen estado</span>";
+  } else if (event.currentTarget.value == 3) {
+    document.getElementById("infoStatus").innerHTML = "<span class='normal-status'>Estado correcto</span>";
+  } else if (event.currentTarget.value == 4) {
+    document.getElementById("infoStatus").innerHTML = "<span class='good-status'>Buen estado</span>";
+  } else {
+    document.getElementById("infoStatus").innerHTML = "<span class='perfect-status'>Perfecto estado</span>";
+  }
+})

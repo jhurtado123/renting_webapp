@@ -37,7 +37,8 @@
         </div>
         <div class="form-group chk">
             <label>Estado del inmueble ( del 1 al 5, siendo 1 en mal estado y 5 en buen estado )</label>
-            <input type="range" name="flat_status" min="1" max="5" step="1" value="{{ad.parameters.flat_status}}">
+            <input id="rangeStatus" type="range" name="flat_status" min="1" max="5" step="1" value="{{ad.parameters.flat_status}}">
+            <div id="infoStatus"></div>
         </div>
         <div class="form-group">
             <label>Altura del inmueble</label>
