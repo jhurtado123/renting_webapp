@@ -168,6 +168,7 @@
   }
 }
 #adList{
+  margin-bottom: 20px;
   .slideshow-container .mySlides img{
     height: 200px;
   }
@@ -183,6 +184,9 @@
       display: flex;
       width: fit-content;
       margin: 0 auto;
+      .button{
+        padding: 14px;
+      }
     }
   }
 }
