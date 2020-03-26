@@ -3,6 +3,10 @@
 <head>
     <title>{{title}}</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel='stylesheet' href='/stylesheets/chats/chat.css'/>
     <script src="/socket.io/socket.io.js"></script>
@@ -24,6 +28,12 @@
         </a>
     </header>
     <div id="content">
+        {{#ifEq currentUser._id chat.lessor._id }}
+            <div class="owner-info">
+                Solo el propietario tiene capacidad para crear una cita para ver el piso.<br>
+                Para crear la cita escribe '/cita' y se te abrirá un formulario para crearla.
+            </div>
+        {{/ifEq}}
         {{#each messages}}
             {{#ifEq this.sender ../currentUser._id}}
                 <p class="mine">{{this.message}}<span>{{formatHours this.createdAt}}</span></p>
@@ -37,22 +47,139 @@
         <img id="send" src="/images/icons/send-chat.png">
     </footer>
 </div>
+<div id="backdrop"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    var socket = io();
+</script>
+{{#ifEq currentUser._id chat.lessor._id }}
+    <div id="appointment" class="modal-bts">
+        <div class="close">X</div>
+        <h2 class="title-search-map">Crear nueva cita</h2>
+        <p>Nueva cita con {{chat.lessee.name}} para {{chat.ad.title}}</p>
+        <form id="createAppointmentForm">
+            <div class="form-group">
+                <label>Selecciona una fecha:</label>
+                <input type="text" id="datetime">
+                <div class="error-message"></div>
+            </div>
+            <button id="createAppointment">Crear cita</button>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script>
+        let hasAppointment = false;
+        {{#if chat.hasAppointment}}
+            hasAppointment = true;
+        {{/if}}
+        const appointmentModal = document.querySelector('#appointment');
+        const closeAppointmentModal = appointmentModal.querySelector('.close');
+        const datePicker = $('#datetime');
+        const datePickerError = document.querySelector('.error-message');
+        const appointmentForm = document.querySelector('#createAppointmentForm');
+        const backdrop = document.querySelector('#backdrop');
+
+
+        closeAppointmentModal.addEventListener('click', closeModal);
+
+        function closeModal() {
+            backdrop.style.display = 'none';
+            appointmentModal.classList.remove('open');
+        }
+
+        function openModal() {
+          if (!hasAppointment) {
+              backdrop.style.display = 'block';
+              appointmentModal.classList.add('open');
+          } else {
+              document.querySelector('#content').innerHTML += `<p class='mine gray'>Ya hay una cita concertada con este usuario</p>`;
+              document.querySelector('#content').scrollTop = document.querySelector('#content').scrollHeight;
+          }
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            datePicker.datetimepicker({format: 'DD/MM/YYYY HH:mm'});
+        });
+
+        let currentpickedDate;
+        datePicker.on('dp.hide', () => {
+            datePickerError.innerHTML = '';
+            let pickedDate = datePicker.data("DateTimePicker").date()._d;
+            const currentDate = new Date();
+            if (pickedDate <= currentDate) {
+                datePickerError.innerHTML = 'La fecha no puede ser anterior o igual a la actual';
+            } else {
+                axios.post('/api/have/appointments', {
+                    'chatId': '{{chat._id}}',
+                    'dateTime': new Date(pickedDate.getFullYear(), pickedDate.getUTCMonth(), pickedDate.getUTCDate(), pickedDate.getHours(), pickedDate.getUTCMinutes())
+                })
+                .then(result => {
+                    if (!result.data.isPosible) {
+                        datePickerError.innerHTML = result.data.message;
+                    } else {
+                      currentpickedDate = pickedDate;
+                    }
+                })
+                .catch(error => {
+                    datePickerError.innerHTML = 'Error en el servidor, prueba de nuevo más tarde';
+                })
+            }
+        });
+        appointmentForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (datePickerError.innerHTML === '' && currentpickedDate !== undefined) {
+            axios.post('/api/create/appointment', {'chatId': '{{chat._id}}', 'dateTime': currentpickedDate})
+              .then(result => {
+                  hasAppointment = true;
+                  closeModal();
+                  const message = `Se ha concertado una cita para el ${currentpickedDate.getUTCDate()}/${currentpickedDate.getUTCMonth()}/${currentpickedDate.getUTCFullYear()} ${currentpickedDate.getUTCHours()}:${currentpickedDate.getUTCMinutes()}:00 . Puedes consultar tus citas en el apartado 'Citas'`;
+                  document.querySelector('#content').innerHTML += `<p class='mine'>${message}</p>`;
+                  document.querySelector('#content').scrollTop = document.querySelector('#content').scrollHeight;
+                  socket.emit('chat:message', {
+                      message: `${message}`,
+                      sender: '{{currentUser._id}}',
+                      chatId: '{{chat._id}}',
+                  });
+              })
+            .catch(error => {
+                datePickerError.innerHTML = 'Error en el servidor, prueba de nuevo más tarde';
+            })
+          }
+        })
+    </script>
+{{/ifEq}}
+
+<script src="/javascripts/chat/chat.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const socket = io();
 
         const message = document.querySelector('#message');
         const output = document.querySelector('#content');
         const send = document.querySelector('#send');
 
         send.addEventListener('click', () => {
-            output.innerHTML += `<p class='mine'>${message.value}<span>${new Date().getHours()}:${new Date().getMinutes()}</span></p>`;
-            output.scrollTop = output.scrollHeight;
-            socket.emit('chat:message', {
-                message: message.value,
-                sender: '{{currentUser._id}}',
-                chatId: '{{chat._id}}',
-            });
+            if (message.value === '/cita' || message.value === '/cita ') {
+                openModal();
+            } else if (message.value === '') {
+                return false;
+            } else {
+                output.innerHTML += `<p class='mine'>${message.value}<span>${new Date().getHours()}:${new Date().getMinutes()}</span></p>`;
+                output.scrollTop = output.scrollHeight;
+                socket.emit('chat:message', {
+                    message: message.value,
+                    sender: '{{currentUser._id}}',
+                    chatId: '{{chat._id}}',
+                });
+            }
+            message.value = '';
         });
 
         socket.emit('room:join', '{{chat._id}}');
@@ -64,6 +191,7 @@
 
         output.scrollTop = output.scrollHeight;
     });
+
 </script>
 </body>
 </html>

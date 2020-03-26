@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Appointment = require('../models/Appointment');
 const Ad = require('../models/Ad');
+const Chat = require('../models/Chat');
 const User = require('../models/User');
 
 /* create appointment */
@@ -41,16 +42,25 @@ router.post('/edit/:appointmentId', (req, res, next) => {
 router.get('/view/:appointmentId', (req, res, next) => {
   Appointment.findOne({_id: req.params.appointmentId}).populate('ad lesser lessor')
     .then(appointment => {
-      res.render('appointments/view', {appointment});
+      res.render('appointments/view', {appointment, layout: false});
     })
     .catch(error => next(error));
 });
 
 /*delete appointment*/
 router.get('/delete/:appointmentId', (req, res, next) => {
+  let appointmentToRemove;
   Appointment.findOne({_id: req.params.appointmentId})
     .then(appointment => {
-      return appointment.remove();
+      appointmentToRemove = appointment;
+      return Chat.findOne({_id: appointmentToRemove.chat});
+    })
+    .then(chat => {
+      chat.hasAppointment = false;
+      return chat.save();
+    })
+    .then(res => {
+      return appointmentToRemove.remove();
     })
     .then(result => res.redirect(`/users/appointments`))
     .catch(error => next(error));

@@ -150,64 +150,62 @@ input[type=range]:focus::-ms-fill-upper {
       #root header .ad p {
         margin-top: 5px;
         margin-bottom: 0; }
-    #root header .messager .preview-image {
-      width: 50px;
-      height: 50px;
-      border-radius: 15px;
-      border: 1px solid #3a424a; }
+    #root header .messager {
+      display: flex;
+      align-items: center;
+      flex-flow: row; }
+      #root header .messager .preview-image {
+        width: 50px;
+        height: 50px;
+        border-radius: 15px;
+        border: 1px solid #3a424a; }
+      #root header .messager .name {
+        margin-left: 10px; }
   #root #content {
-    height: 78vh;
-    max-height: 78vh;
-    overflow: auto;
-    padding: 0 25px;
-    color: #3a424a;
-    font-size: 18px; }
-    #root #content .owner-info {
-      color: lightgray;
+    padding: 0 15px;
+    color: #3a424a; }
+    #root #content #appointment {
+      margin-bottom: 40px; }
+      #root #content #appointment p {
+        display: flex;
+        align-items: center; }
+      #root #content #appointment .icon {
+        width: 20px;
+        margin-right: 10px; }
+      #root #content #appointment .icon-2 {
+        width: 23px;
+        margin-left: -2px; }
+    #root #content .button {
+      display: block;
       text-align: center;
-      margin: 30px auto; }
-    #root #content p {
-      position: relative;
-      margin-bottom: 25px; }
-      #root #content p span {
-        font-size: 12px;
-        position: relative;
-        margin-left: 5px;
-        bottom: 0;
-        right: 0;
-        color: lightgray; }
-    #root #content .mine {
-      text-align: right; }
-      #root #content .mine.gray {
-        color: lightgray; }
-  #root footer {
-    height: 10vh;
-    background: #84d8e3;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 15px; }
-    #root footer img {
-      width: 30px;
-      margin-right: 3px; }
-    #root footer #send {
-      cursor: pointer; }
-    #root footer textarea {
-      background: white;
-      border: none;
-      padding: 8px;
-      width: 80%;
+      width: 90%;
+      margin: 0 auto;
+      margin-top: 10px;
+      padding: 10px 8px;
+      background: #3a424a;
+      color: #84d8e3;
       border-radius: 15px;
-      resize: none;
-      font-size: 16px;
-      overflow: auto;
-      height: 60%;
-      color: #3a424a; }
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer; }
+      #root #content .button-transparent {
+        display: block;
+        text-align: center;
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 20px;
+        padding: 10px 8px;
+        background: transparent;
+        color: #3a424a;
+        border-radius: 15px;
+        font-weight: bold;
+        font-size: 18px;
+        cursor: pointer;
+        border: 1px solid #84d8e3; }
 
-#appointment {
+#cancelAppointment {
   width: 90vw;
-  height: 50vh;
+  height: 45vh;
   margin: 0 auto;
   position: fixed;
   background: white;
@@ -216,36 +214,46 @@ input[type=range]:focus::-ms-fill-upper {
   left: 50%;
   padding: 20px;
   z-index: 100;
-  transform: translate(-50%, -200%); }
-  #appointment.open {
+  transform: translate(-50%, -250%);
+  color: #3a424a; }
+  #cancelAppointment.open {
     transform: translate(-50%, -56%); }
-  #appointment .close {
+  #cancelAppointment .close {
     position: absolute;
     top: 20px;
     right: 20px;
     cursor: pointer; }
-  #appointment p {
-    margin-top: 20px; }
-  #appointment .form-group {
-    position: relative;
-    margin-top: 40px; }
-    #appointment .form-group label {
-      margin-bottom: 5px; }
-    #appointment .form-group .error-message {
-      color: red;
-      margin-top: 5px;
-      font-size: 12px; }
-  #appointment #createAppointment {
-    margin: 40px auto 0;
-    border: 1px solid #84d8e3;
-    background: #84d8e3;
-    border-radius: 15px;
-    font-weight: bold;
-    width: 90%;
-    text-align: center;
-    cursor: pointer;
-    padding: 10px 0;
-    display: block; }
+  #cancelAppointment #button {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end; }
+    #cancelAppointment #button .button {
+      display: block;
+      text-align: center;
+      width: 90%;
+      margin: 0 auto;
+      margin-top: 10px;
+      padding: 10px 8px;
+      background: #3a424a;
+      color: #84d8e3;
+      border-radius: 15px;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer; }
+      #cancelAppointment #button .button-transparent {
+        display: block;
+        text-align: center;
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 20px;
+        padding: 10px 8px;
+        background: transparent;
+        color: #3a424a;
+        border-radius: 15px;
+        font-weight: bold;
+        font-size: 18px;
+        cursor: pointer;
+        border: 1px solid #84d8e3; }
 
 #backdrop {
   opacity: 0.8; }
@@ -253,4 +261,4 @@ input[type=range]:focus::-ms-fill-upper {
 .modal-bts {
   box-shadow: none; }
 
-/*# sourceMappingURL=chat.css.map */
+/*# sourceMappingURL=view.css.map */

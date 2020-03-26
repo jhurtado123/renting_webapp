@@ -171,3 +171,15 @@ a {
   text-align: center;
   font-size: 12px;
 }
+
+.modal, .modal-bts {
+  border-radius: 15px;
+  border: 0px solid;
+  -webkit-box-shadow: 11px 10px 5px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 11px 10px 5px -9px rgba(0,0,0,0.75);
+  box-shadow: 11px 10px 5px -9px rgba(0,0,0,0.75);
+}
+.title-modal{
+  font-size: 18px;
+  font-weight: bold;
+}

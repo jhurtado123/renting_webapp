@@ -6,6 +6,7 @@ const appointmentSchema = new Schema({
     lessor: {type: Schema.Types.ObjectId, ref: 'User'}, //inquilino
     lesser: {type: Schema.Types.ObjectId, ref: 'User'}, //propietario
     ad: {type: Schema.Types.ObjectId, ref: 'Ad'},
+    chat:{type: Schema.Types.ObjectId, ref: 'Chat'},
     status: String,
     date: Date
   },

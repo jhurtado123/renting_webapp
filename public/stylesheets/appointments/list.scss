@@ -1,0 +1,47 @@
+@import "../variables";
+
+#root {
+  padding:0 15px;
+  color:$secondary-color;
+
+  #appointments {
+    #appointment {
+      border:1px solid $background;
+      padding:15px;
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      display: block;
+      color:$secondary-color;
+      border-radius: 15px;
+      position: relative;
+      font-size: 16px;
+      p {
+        display: flex;
+        align-items: center;
+      }
+      .icon {
+        width: 20px;
+        margin-right: 10px;
+      }
+      .icon-2 {
+        width: 23px;
+        margin-left: -2px;
+      }
+      h2 {
+        font-size: 20px;
+      }
+      .status {
+        position: absolute;
+        bottom:0px;
+        right: 15px;
+        text-align: right;
+        font-size: 12px;
+        color:red;
+        &.active {
+          color:green;
+        }
+
+      }
+    }
+  }
+}

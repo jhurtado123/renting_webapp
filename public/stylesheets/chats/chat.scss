@@ -1,4 +1,5 @@
 @import "../variables";
+@import '../components/form';
 
 #root {
   height: 100vh;
@@ -20,10 +21,11 @@
     .ad {
       font-size: 12px;
       margin:0 15px;
-      margin-left: 35px;
+      margin-left: 25px;
       color:$secondary-color;
       h3 {
         margin: 0;
+        font-size: 18px;
       }
       p {
         margin-top: 5px;
@@ -46,6 +48,11 @@
     padding:0 25px;
     color:$secondary-color;
     font-size: 18px;
+    .owner-info {
+      color:lightgray;
+      text-align: center;
+      margin:30px auto;
+    }
     p {
       position: relative;
       margin-bottom: 25px;
@@ -60,6 +67,9 @@
     }
     .mine {
       text-align: right;
+      &.gray {
+        color:lightgray;
+      }
     }
   }
   footer {
@@ -74,6 +84,9 @@
       width: 30px;
       margin-right: 3px;
     }
+    #send {
+      cursor: pointer;
+    }
     textarea {
       background: white;
       border:none;
@@ -87,4 +100,60 @@
       color:$secondary-color;
     }
   }
+}
+
+#appointment {
+  width:90vw;
+  height: 50vh;
+  margin:0 auto;
+  position: fixed;
+  background: white;
+  top: 50%;
+  transition: transform 1s;
+  left: 50%;
+  padding:20px;
+  z-index: 100;
+  transform: translate(-50%, -200%);
+  &.open {
+    transform: translate(-50%, -56%);
+  }
+  .close {
+    position: absolute;
+    top: 20px;
+    right:20px;
+    cursor:pointer;
+  }
+  p {
+    margin-top: 20px;
+  }
+  .form-group {
+    position: relative;
+    margin-top: 40px;
+    label {
+      margin-bottom: 5px;
+    }
+    .error-message {
+      color:red;
+      margin-top: 5px;
+      font-size: 12px;
+    }
+  }
+  #createAppointment {
+    margin: 40px auto 0;
+    border: 1px solid $background;
+    background: $background;
+    border-radius: 15px;
+    font-weight: bold;
+    width: 90%;
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 0;
+    display: block;
+  }
+}
+#backdrop {
+  opacity: 0.8;
+}
+.modal-bts {
+  box-shadow: none;
 }
