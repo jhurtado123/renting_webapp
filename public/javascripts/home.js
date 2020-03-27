@@ -69,8 +69,10 @@ function enableFilterAdsModal(){
 mapboxgl.accessToken = 'pk.eyJ1Ijoiamh1cnRhZG8xMjMiLCJhIjoiY2s3dGlqZWtlMHFveTNvbjF1bjJxYTg2ayJ9.zbzGWyoeQ52ddJTrK2gjdA';
 
 function getCurrentCoords() {
-  let coords =  navigator.geolocation.getCurrentPosition(function (coords) { return coords});
-  console.log(coords);
+  let coords =  navigator.geolocation.getCurrentPosition(function (coords) {
+    console.log(coords);
+  });
+
   if (coords === undefined) return [2.154007, 41.390205];
 }
 
