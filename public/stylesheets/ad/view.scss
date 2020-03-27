@@ -9,6 +9,14 @@
       margin-right: 5px;
     }
   }
+  .maintenance{
+    display: flex;
+    align-items: center;
+    img {
+      width: 18px;
+      margin-right: 5px;
+    }
+  }
   .address {
     i {
       font-size: 20px;
@@ -49,14 +57,12 @@
 
 .ad-images-preview {
   margin-top: -5px;
-  border-top:1px solid $secondary-color;
   display: flex;
   flex-flow: row wrap;
   .image-preview {
     width:13%;
     height:45px;
-    border-right: 1px solid $secondary-color;
-    border-bottom: 1px solid $secondary-color;
+
     cursor:pointer;
   }
 }
@@ -103,4 +109,11 @@
   font-weight: bold;
   font-size: 18px;
   cursor: pointer;
+}
+.slideshow-container {
+  .mySlides {
+    img {
+      height: 300px!important;
+    }
+  }
 }
