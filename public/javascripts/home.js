@@ -76,6 +76,34 @@ function getCurrentCoords() {
   if (coords === undefined) return [2.154007, 41.390205];
 }
 
+
+function showLocation(position) {
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+  alert("Latitude : " + latitude + " Longitude: " + longitude);
+}
+
+function errorHandler(err) {
+  if(err.code == 1) {
+    alert("Error: Access is denied!");
+  } else if( err.code == 2) {
+    alert("Error: Position is unavailable!");
+  }
+}
+
+function getLocation() {
+
+  if(navigator.geolocation) {
+
+    // timeout at 60000 milliseconds (60 seconds)
+    var options = {timeout:60000};
+    navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+  } else {
+    alert("Sorry, browser does not support geolocation!");
+  }
+}
+getLocation();
+
 var map = new mapboxgl.Map({
   container: 'mapDraw', // container id
   style: 'mapbox://styles/mapbox/streets-v11',
