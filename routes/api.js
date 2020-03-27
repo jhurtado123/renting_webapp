@@ -7,6 +7,7 @@ const Ad = require('../models/Ad');
 const Chat = require('../models/Chat');
 const User = require('../models/User');
 const Appointment = require('../models/Appointment');
+const getFairPrice = require('../helpers/getFairPrice');
 
 
 /* POST, COORDS AND PRICE OF ADS INSIDE A POLYGON */
@@ -118,7 +119,7 @@ router.post('/create/appointment', (req, res, next) => {
   const {chatId, dateTime} = req.body;
   Chat.findOne({_id: chatId})
     .then(chat => {
-       chat.hasAppointment = true;
+      chat.hasAppointment = true;
       return chat.save();
     })
     .then(chat => {
@@ -131,55 +132,10 @@ router.post('/create/appointment', (req, res, next) => {
 
 });
 
-router.post('/get/fairPrice', (req, res, next)=>{
-  let {flat_status, parking, storage_room, postal_code, height, hasElevator, terrace, square_meters} = req.body.data;
-  console.log(flat_status)
-  getSalaryByPostalCode(postal_code)
-    .then(response=>{
-      let basePrice = (response / 12) * 0.25;
-      let meterPrice = (response / 12) * 0.003;
-      let fairPrice = basePrice;
-      if (!hasElevator && height >= 2) fairPrice-= 50;
-      if(terrace) fairPrice += 50;
-      if(parking) fairPrice += 75;
-      if(storage_room) fairPrice += 25;
-      if(square_meters && square_meters > 60) { fairPrice += ((square_meters-60)*meterPrice)}
-      else if (square_meters && square_meters < 60) { fairPrice -= ((60 - square_meters) * meterPrice) 
-      }
-      switch (parseInt(flat_status)) {
-        case 1:
-          fairPrice -= (fairPrice * 0.1)
-          break;
-        case 2:
-          fairPrice -= (fairPrice * 0.05)
-          break;  
-        case 4:
-          fairPrice += (fairPrice * 0.05)
-          break;
-        case 5:
-          fairPrice += (fairPrice * 0.1)
-          break;   
-        default:
-          break;
-      }
-      return res.send({fairPrice})
-    })
-    .catch(error => console.log(error))
+router.post('/get/fairPrice', getFairPrice, (req, res, next)=>{
+
 })
 
-async function getSalaryByPostalCode(postal_code) {
-  const url = `https://seguro.elpais.com/estaticos/2019/01/renta_codigos_postal/suggest.pl?q=${postal_code}&code=9`;
-  const { data } = await curly.get(url);
-  const response = getJsonFromResponse(data);
 
-  return response !== '' ? parseInt(response.renta) : 22000;
-}
-
-function getJsonFromResponse(response) {
-  response = response.split('[')[1];
-  response = response.split(']')[0];
-
-  return response === '' ? '' : JSON.parse(response);
-}
 
 module.exports = router;
