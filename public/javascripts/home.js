@@ -74,8 +74,8 @@ function getCurrentCoords() {
       console.log(coords);
       map.flyTo({
         center: [
-         coords.coords.latitude,
-          coords.coords.longitude,
+         coords.coords.longitude,
+          coords.coords.latitude,
         ],
         essential: true
       });
