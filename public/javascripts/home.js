@@ -70,7 +70,15 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoiamh1cnRhZG8xMjMiLCJhIjoiY2s3dGlqZWtlMHFveTNvb
 
 function getCurrentCoords() {
   let coords =  navigator.geolocation.getCurrentPosition(function (coords) {
-    console.log(coords);
+    if (coords) {
+      map.flyTo({
+        center: [
+         coords.coords.latitude,
+          coords.coords.longitude,
+        ],
+        essential: true
+      });
+    }
   });
 
   if (coords === undefined) return [2.154007, 41.390205];
