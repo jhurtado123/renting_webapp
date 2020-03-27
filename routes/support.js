@@ -1,37 +1,45 @@
 const express = require('express');
 const router = express.Router();
 const app = require('../app');
-const mailer = require('express-mailer');
+const nodemailer = require('nodemailer');
 
-/*MAILER CONF*/
-mailer.extend(app, {
-  from: 'no-reply@fairrent.com',
-  host: 'smtp.gmail.com',
-  secureConnection: true,
-  port: 587,
-  transportMethod: 'SMTP',
+var transporter = nodemailer.createTransport({
+  service: 'Gmail',
   auth: {
     user: 'fairrentironhack@gmail.com',
     pass: 'fairrent2020*'
   }
 });
 
+
 router.get('/', (req, res, next) => {
   res.render('support/index', {'error': req.flash('error'), 'ok': req.flash('ok')});
 });
 
 router.post('/', (req, res, next) => {
-  app.mailer.send('email', {
-    to: 'hurtadojose89@gmail.com',
-    subject: 'Petición de soporte',
-  }, function (err) {
-    if (err) {
-      req.flash('error', 'Error en el envío del ticket'+ err);
+
+  const mailOptions = {
+    from: 'fairrentironhack@gmail.com',
+    to: ['hurtadojose89@gmail.com', 'jaimemoravallejo@gmail.com'],
+    subject: 'FairRent | Nuevo ticket de soporte',
+    text: `
+      Mensaje:
+      ${req.body.question}
+      Nombre del usuario:
+      ${req.session.currentUser.name}
+      Email de contacto:
+      ${req.session.currentUser.username}
+    `
+  };
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      req.flash('error', 'Error en el envío del ticket' + error);
     } else {
       req.flash('ok', 'Ticket envíado correctamente, en breves recibirás respuesta');
     }
     res.redirect('/support');
   });
+
 });
 
 
