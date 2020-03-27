@@ -71,6 +71,7 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoiamh1cnRhZG8xMjMiLCJhIjoiY2s3dGlqZWtlMHFveTNvb
 function getCurrentCoords() {
   let coords =  navigator.geolocation.getCurrentPosition(function (coords) {
     if (coords) {
+      console.log(coords);
       map.flyTo({
         center: [
          coords.coords.latitude,
