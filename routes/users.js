@@ -103,6 +103,8 @@ router.post('/api/uploadImage', upload.any('photo'), function (req, res, next) {
 /* POST REMOVE IMAGE */
 router.post('/api/removeImage', function (req, res, next) {
   const {image} = req.body;
+  if (image === 'default-profileImage.png') return res.json({'ok': true});
+
   fs.unlinkSync(`./public/uploads/userProfileImages/${image}`)
     .then(res => {
       return res.json({'ok': true})
