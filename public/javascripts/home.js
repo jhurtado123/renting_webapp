@@ -79,7 +79,7 @@ function getCurrentCoords() {
         essential: true
       });
     }
-  });
+  }, (error) => console.log(error), {timeout:60000});
 
   if (coords === undefined) return [2.154007, 41.390205];
 }
