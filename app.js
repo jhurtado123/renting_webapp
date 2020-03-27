@@ -97,6 +97,15 @@ hbs.registerHelper("formatDate", function(datetime) {
 hbs.registerHelper("formatHours", function(datetime) {
   return `${datetime.getHours()}:${datetime.getMinutes()}`;
 });
+hbs.registerHelper('switch', function(value, options) {
+  this.switch_value = value;
+  return options.fn(this);
+});
+hbs.registerHelper('case', function(value, options) {
+  if (value == this.switch_value) {
+    return options.fn(this);
+  }
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

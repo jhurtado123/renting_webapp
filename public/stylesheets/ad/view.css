@@ -6,6 +6,12 @@
     #root .price i {
       font-size: 20px;
       margin-right: 5px; }
+  #root .maintenance {
+    display: flex;
+    align-items: center; }
+    #root .maintenance img {
+      width: 18px;
+      margin-right: 5px; }
   #root .address i {
     font-size: 20px;
     margin-right: 5px; }
@@ -38,14 +44,11 @@
 
 .ad-images-preview {
   margin-top: -5px;
-  border-top: 1px solid #3a424a;
   display: flex;
   flex-flow: row wrap; }
   .ad-images-preview .image-preview {
     width: 13%;
     height: 45px;
-    border-right: 1px solid #3a424a;
-    border-bottom: 1px solid #3a424a;
     cursor: pointer; }
 
 #owner {
@@ -86,5 +89,8 @@
   font-weight: bold;
   font-size: 18px;
   cursor: pointer; }
+
+.slideshow-container .mySlides img {
+  height: 300px !important; }
 
 /*# sourceMappingURL=view.css.map */

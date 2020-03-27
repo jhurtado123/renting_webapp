@@ -22,7 +22,18 @@
 <div id="root">
     <h1>{{ad.title}}</h1>
     <p class="address"><i class="fa fa-map-marker"></i>{{ad.neighborhood}}, {{ad.city}}</p>
+    <p class="maintenance">
+        <img src="/images/icons/repair.png">
+        {{#switch ad.parameters.flat_status}}
+            {{#case '1'}} Mal estado {{/case}}
+            {{#case '2'}} No muy buen estado {{/case}}
+            {{#case '3'}} Estado correcto {{/case}}
+            {{#case '4'}} Buen estado {{/case}}
+            {{#case '5'}} Perfecto estado {{/case}}
+        {{/switch}}
+    </p>
     <p class="price"><i class="fa fa-tag"></i>{{ad.price}}€</p>
+
     <p class="content">{{ad.description}}</p>
     <div class="summary-info">
         <p>{{ad.parameters.square_meters}} m² <img src="/images/icons/area.png"></p>
