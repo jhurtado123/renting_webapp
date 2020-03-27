@@ -35,6 +35,16 @@ body {
         padding-left: 10px;
       }
     }
+    .input-feedback {
+      position: relative;
+    }
+    .password-strength {
+      font-size: 12px;
+      position: absolute;
+      right: 10px;
+      top:50%;
+      transform: translateY(-50%);
+    }
     button {
       margin-top:30px;
       background: transparent;

@@ -30,6 +30,14 @@ body {
         border: 1px solid black;
         border-radius: 15px;
         padding-left: 10px; }
+    #root form .input-feedback {
+      position: relative; }
+    #root form .password-strength {
+      font-size: 12px;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%); }
     #root form button {
       margin-top: 30px;
       background: transparent;
