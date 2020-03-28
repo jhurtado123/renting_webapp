@@ -39,7 +39,8 @@
             <i class="fa fa-times close-menu"></i>
         </div>
         <div class="links-block">
-            <a href="/users/profile">Editar mi perfil</a>
+            <a href="/users/profile">{{#ifEq currentUser.phone undefined}}<span class="warning">!</span>{{/ifEq}} Editar mi perfil</a>
+            {{#ifEq currentUser.phone undefined}}<div class="warning-text">Aún no has acabado de rellenar tu perfil</div>{{/ifEq}}
             {{#if currentUser.lesseeMode}}
                 <a href="/users/ads">Mis anuncios</a>
             {{/if}}
@@ -75,7 +76,7 @@
         </a>
         <div class="block" id="moreMenu">
             <img src="/images/icons/menu.png">
-            <p>Más</p>
+            <p>Más {{#ifEq currentUser.phone undefined}}<span class="warning">!</span>{{/ifEq}}</p>
         </div>
     </div>
     <div id="backdrop"></div>

@@ -183,3 +183,21 @@ a {
   font-size: 18px;
   font-weight: bold;
 }
+
+.warning {
+  background: darkorange;
+  border-radius: 15px;
+  color:white;
+  width: 17px;
+  height: 17px;
+  text-align: center;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.warning-text {
+  font-size: 10px;
+  color:darkorange;
+  margin-top: -10px;
+}
