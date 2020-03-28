@@ -3,6 +3,7 @@ const imagesInput = document.querySelector('#imageUploadInput');
 const imageList = document.querySelector('#imageList');
 
 
+
 document.querySelectorAll('.uploaded-image').forEach(node => {
   node.removeEventListener('click', removeImageAtServer);
   node.addEventListener('click', removeImageAtServer);
@@ -47,6 +48,7 @@ function removeImageAtServer(event) {
 // Range Status Flat
 const rangeStatus = document.querySelector('#rangeStatus');
 
+
 rangeStatus.addEventListener('change', (event) =>{
   if (event.currentTarget.value == 1) {
     document.getElementById("infoStatus").innerHTML = "<span class='bad-status'>Mal estado</span>";
@@ -60,6 +62,7 @@ rangeStatus.addEventListener('change', (event) =>{
     document.getElementById("infoStatus").innerHTML = "<span class='perfect-status'>Perfecto estado</span>";
   }
 })
+rangeStatus.dispatchEvent(new Event("change"));
 
 document
   .querySelectorAll(

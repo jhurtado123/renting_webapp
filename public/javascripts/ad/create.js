@@ -51,6 +51,8 @@ rangeStatus.addEventListener('change', (event) => {
     document.getElementById("infoStatus").innerHTML = "<span class='perfect-status'>Perfecto estado</span>";
   }
 })
+rangeStatus.dispatchEvent(new Event("change"));
+
 
 document.querySelectorAll('[name=square_meters], [name=postal_code], [name=terrace], [name=hasElevator], [name=height], [name=flat_status], [name=parking], [name=storage_room]').forEach(element =>{
   element.addEventListener('change', event => {
