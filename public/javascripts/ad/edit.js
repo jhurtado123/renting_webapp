@@ -60,3 +60,30 @@ rangeStatus.addEventListener('change', (event) =>{
     document.getElementById("infoStatus").innerHTML = "<span class='perfect-status'>Perfecto estado</span>";
   }
 })
+
+document
+  .querySelectorAll(
+    "[name=square_meters], [name=postal_code], [name=terrace], [name=hasElevator], [name=height], [name=flat_status], [name=parking], [name=storage_room]"
+  )
+  .forEach(element => {
+    element.addEventListener("change", event => {
+      let data = {
+        terrace: document.querySelector("[name=terrace]").checked,
+        hasElevator: document.querySelector("[name=hasElevator]").checked,
+        storage_room: document.querySelector("[name=storage_room]").checked,
+        parking: document.querySelector("[name=parking]").checked,
+        square_meters: document.querySelector("[name=square_meters]").value,
+        height: document.querySelector("[name=height]").value,
+        flat_status: document.querySelector("[name=flat_status]").value,
+        postal_code: document.querySelector("[name=postal_code]").value
+      };
+      axios
+        .post("/api/get/fairPrice", { data })
+        .then(result => {
+          document.querySelector("#fairPrice span").innerHTML = Math.floor(
+            result.data.fairPrice
+          );
+        })
+        .catch(error => console.log(error));
+    });
+  });

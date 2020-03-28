@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const { curly } = require('node-libcurl');
+
 
 const Ad = require('../models/Ad');
 const Chat = require('../models/Chat');
 const User = require('../models/User');
 const Appointment = require('../models/Appointment');
+const getFairPrice = require('../helpers/getFairPrice');
 
 
 /* POST, COORDS AND PRICE OF ADS INSIDE A POLYGON */
@@ -116,7 +119,7 @@ router.post('/create/appointment', (req, res, next) => {
   const {chatId, dateTime} = req.body;
   Chat.findOne({_id: chatId})
     .then(chat => {
-       chat.hasAppointment = true;
+      chat.hasAppointment = true;
       return chat.save();
     })
     .then(chat => {
@@ -128,5 +131,14 @@ router.post('/create/appointment', (req, res, next) => {
     .catch(err => console.log(err));
 
 });
+
+router.post('/get/fairPrice', (req, res, next) =>{
+  getFairPrice(req.body.data)
+  .then(fairPrice => {
+    res.send({fairPrice})
+    });
+})
+
+
 
 module.exports = router;

@@ -29,6 +29,7 @@ const adSchema = new Schema({
       }]
     },
     price: Number,
+    fairPrice: Number,
     parameters: {
       'square_meters': Number,
       'flat_status': Number,
