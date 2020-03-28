@@ -4,6 +4,7 @@ const router = express.Router();
 const multer = require('multer');
 const axios = require('axios');
 const {curly} = require('node-libcurl');
+const getFairPrice = require("../helpers/getFairPrice");
 
 
 const storage = multer.diskStorage({
@@ -31,37 +32,38 @@ router.post('/create', function (req, res, next) {
     description, terrace, rooms, bathrooms,
     height, storage_room, parking, number, hasElevator
   } = req.body;
-  axios.post('/api/get/fairPrice', { data: { flat_status, parking, storage_room, postal_code, height, hasElevator, terrace, square_meters}})
-    .then(result => { console.log(result)})
-    .catch(error => console.log(error))
-    return false;
-  getCoordsByAddress(address + ' ' + number + ', ' + postal_code, city)
-    .then(async coords => {
-      const neighborhood = await getNeighborhoodByPostalCode(postal_code);
-      return new Ad({
-        title,
-        owner: req.session.currentUser._id,
-        neighborhood: neighborhood === '' ? city : neighborhood,
-        address, number, city, postal_code, price, description,
-        location: {
-          type: 'Point',
-          coordinates: coords
-        },
-        parameters: {
-          square_meters, flat_status,
-          terrace: terrace === 'on',
-          rooms, bathrooms, height,
-          storage_room: storage_room === 'on',
-          parking: parking === 'on',
-          hasElevator: hasElevator === 'on',
-        },
-        images
-      }).save();
+  let resultFairPrice
+  getFairPrice({flat_status, parking: parking === 'on' , storage_room: storage_room === 'on' , postal_code, height, hasElevator: hasElevator === 'on' , terrace: terrace === 'on' , square_meters})
+    .then(fairPrice => {
+      resultFairPrice = Math.floor(fairPrice);
+    return getCoordsByAddress(address + ' ' + number + ', ' + postal_code, city)
     })
-    .then(result => {
-      res.redirect('/users/ads')
-    })
-    .catch(error => next(error));
+      .then(async coords => {
+        const neighborhood = await getNeighborhoodByPostalCode(postal_code);
+        return new Ad({
+          title,
+          owner: req.session.currentUser._id,
+          neighborhood: neighborhood === '' ? city : neighborhood,
+          address, number, city, postal_code, price, fairPrice: resultFairPrice, description,
+          location: {
+            type: 'Point',
+            coordinates: coords
+          },
+          parameters: {
+            square_meters, flat_status,
+            terrace: terrace === 'on',
+            rooms, bathrooms, height,
+            storage_room: storage_room === 'on',
+            parking: parking === 'on',
+            hasElevator: hasElevator === 'on',
+          },
+          images
+        }).save();
+      })
+      .then(result => {
+        res.redirect('/users/ads')
+      })
+      .catch(error => next(error));
 });
 
 /* GET VIEW AD */
@@ -84,6 +86,8 @@ router.get('/edit/:adId', (req, res, next) => {
     })
     .catch(error => next(error));
 });
+
+
 router.post('/edit/:adId', (req, res, next) => {
   Ad.findOne({_id: req.params.adId})
     .then(async ad => {
@@ -92,36 +96,41 @@ router.post('/edit/:adId', (req, res, next) => {
         title, city, postal_code, address, square_meters, flat_status, price, images, description, terrace, rooms, bathrooms,
         height, storage_room, parking, number, hasElevator
       } = req.body;
-
-      if (postal_code !== ad.postal_code) {
-        const neighborhood = await getNeighborhoodByPostalCode(postal_code);
-        ad.neighborhood = neighborhood === '' ? ad.city : neighborhood;
-      }
-      ad.title = title;
-      ad.city = city;
-      ad.postal_code = postal_code;
-      if (address !== ad.address) {
-        ad.location = {
-          type: 'Point',
-          coordinates: await getCoordsByAddress(address + ' ' + number + ', ' + postal_code, city)
-        }
-      }
-      ad.address = address;
-      ad.parameters = {
-        square_meters, flat_status,
-        terrace: terrace === 'on',
-        rooms, bathrooms, height,
-        storage_room: storage_room === 'on',
-        parking: parking === 'on',
-        hasElevator: hasElevator === 'on'
-      };
-      ad.description = description;
-      ad.images = images;
-      ad.price = price;
-      ad.number = number;
-
-      return ad.save();
-    })
+      getFairPrice({flat_status, parking: parking === 'on' , storage_room: storage_room === 'on' , postal_code, height, hasElevator: hasElevator === 'on' , terrace: terrace === 'on' , square_meters})
+        .then(fairPrice => {
+        return Math.floor(fairPrice);
+        })
+        .then(async (resultFairPrice) =>{
+          if (postal_code !== ad.postal_code) {
+            const neighborhood = await getNeighborhoodByPostalCode(postal_code);
+            ad.neighborhood = neighborhood === '' ? ad.city : neighborhood;
+          }
+          ad.title = title;
+          ad.city = city;
+          ad.postal_code = postal_code;
+          if (address !== ad.address) {
+            ad.location = {
+              type: 'Point',
+              coordinates: await getCoordsByAddress(address + ' ' + number + ', ' + postal_code, city)
+            }
+          }
+          ad.fairPrice = resultFairPrice;
+          ad.address = address;
+          ad.parameters = {
+            square_meters, flat_status,
+            terrace: terrace === 'on',
+            rooms, bathrooms, height,
+            storage_room: storage_room === 'on',
+            parking: parking === 'on',
+            hasElevator: hasElevator === 'on'
+          };
+          ad.description = description;
+          ad.images = images;
+          ad.price = price;
+          ad.number = number;
+    
+          return ad.save();})
+        })
     .then(result => res.redirect(`/ad/${req.params.adId}`))
     .catch(error => next(error));
 });

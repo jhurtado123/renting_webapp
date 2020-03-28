@@ -69,6 +69,8 @@
             <label>Descripción</label>
             <textarea name="description" data-validate="notEmpty">{{ad.description}}</textarea>
         </div>
+        <div id="fairPrice">El precio recomendado es: <span>{{ad.fairPrice}}</span> €
+        </div>
         <div class="form-group">
             <label>Precio</label>
             <input type="number" name="price" value="{{ad.price}}" data-validate="notEmpty">

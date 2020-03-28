@@ -132,8 +132,11 @@ router.post('/create/appointment', (req, res, next) => {
 
 });
 
-router.post('/get/fairPrice', getFairPrice, (req, res, next)=>{
-
+router.post('/get/fairPrice', (req, res, next) =>{
+  getFairPrice(req.body.data)
+  .then(fairPrice => {
+    res.send({fairPrice})
+    });
 })
 
 

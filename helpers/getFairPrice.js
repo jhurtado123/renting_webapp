@@ -1,7 +1,9 @@
-function getFairPrice(req, res, next){
-  let { flat_status, parking, storage_room, postal_code, height, hasElevator, terrace, square_meters } = req.body.data;
-  console.log(flat_status)
-  getSalaryByPostalCode(postal_code)
+const { curly } = require("node-libcurl");
+
+async function getFairPrice(data){
+  console.log("data", data)
+  let { flat_status, parking, storage_room, postal_code, height, hasElevator, terrace, square_meters } = data;
+  return await getSalaryByPostalCode(postal_code)
     .then(response => {
       let basePrice = (response / 12) * 0.25;
       let meterPrice = (response / 12) * 0.003;
@@ -30,7 +32,7 @@ function getFairPrice(req, res, next){
         default:
           break;
       }
-      return res.send({ fairPrice })
+      return fairPrice;
     })
     .catch(error => console.log(error))
 }
