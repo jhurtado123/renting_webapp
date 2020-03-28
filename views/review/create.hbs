@@ -1,0 +1,46 @@
+{{#extend "stylesheets"}}
+<link rel="stylesheet" href="/stylesheets/review/create.css" />
+{{/extend}}
+
+<div id="root">
+    <h1>Poner review</h1>
+    <form action="/review/create" method="post">
+      <div class="form-group">
+        <label>Titulo</label>
+        <input type="text" name="title" data-validate="notEmpty">
+      </div>
+      <div class="form-group">
+        <label>Opinión general</label>
+        <p id="starsContainer">
+        <input id="reviewStars5" type="radio" name="stars" value="5">
+        <label for="reviewStars5">★</label>
+        <input id="reviewStars4" type="radio" name="stars" value="4">
+        <label for="reviewStars4">★</label>
+        <input id="reviewStars3" type="radio" name="stars" value="3">
+        <label for="reviewStars3">★</label>
+        <input id="reviewStars2" type="radio" name="stars" value="2">
+        <label for="reviewStars2">★</label>
+        <input id="reviewStars1" type="radio" name="stars" value="1">
+        <label for="reviewStars1">★</label>
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Trato</label>
+        <input id="rangeTreatment" type="range" name="treatment" min="1" max="5" step="1">
+        <div id="infoTreatment"></div>
+      </div>
+      <div class="form-group">
+        <label>Veracidad del anuncio</label>
+        <input id="rangeVeracity" type="range" name="veracity" min="1" max="5" step="1">
+        <div id="infoVeracity"></div>
+      </div>
+      <div class="form-group">
+        <label>Review</label>
+        <textarea name="description" rows="10" cols="30"></textarea>
+      </div>
+      <button type="submit">Publicar</button>
+</div>
+
+{{#extend "scripts"}}
+<script src="/javascripts/review/create.js"></script>
+{{/extend}}

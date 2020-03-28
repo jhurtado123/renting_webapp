@@ -33,6 +33,7 @@ form {
       border: 1px solid $background;
       padding: 5px;
       min-height: 150px;
+      border-radius:15px;
     }
 
     input[type=checkbox] {
@@ -43,23 +44,38 @@ form {
       border: none;
       outline: none;
     }
-    .bad-status{
+    .bad-status, .bad-treatment, .bad-veracity{
       color: #ff1100;
     }
-    .notgood-status {
+    .notgood-status, .notgood-treatment, .notgood-veracity {
       color: #ff6600;
       margin-left: 25px;
     }
-    .normal-status {
+    .normal-status, .normal-treatment {
       margin-left: 120px;
     }
-    .good-status {
+    .normal-veracity {
+      margin-left: 105px;
+    }
+    .good-status, .good-treatment {
       color: #3a9c2f;
       margin-left: 200px;
+    }
+    .good-veracity {
+      color: #3a9c2f;
+      margin-left: 180px;
+    }
+    .perfect-veracity {
+      color: #22991a;
+      margin-left: 275px;
     }
     .perfect-status {
       color: #22991a;
       margin-left: 230px;
+    }
+    .perfect-treatment {
+      color: #22991a;
+      margin-left: 240px;
     }
   }
 
