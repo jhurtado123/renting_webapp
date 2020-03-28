@@ -18,11 +18,17 @@ const userSchema = new Schema({
   description: String,
   dni: String,
   reviews: [{
-    content: {
+    title: {
       type: String,
       required: true
     },
-    valoration: Number,
+    stars: Number,
+    treatment: Number,
+    veracity: Number,
+    description: {
+      type: String,
+      required: true
+    },
     userid: {
       type: String,
       required: true

@@ -4,9 +4,9 @@
 
 <div id="root">
     <h1>Poner review</h1>
-    <form action="/review/create" method="post">
+    <form action="/review/{{idAppointment}}/create" method="post">
       <div class="form-group">
-        <label>Titulo</label>
+        <label>Título</label>
         <input type="text" name="title" data-validate="notEmpty">
       </div>
       <div class="form-group">
@@ -36,7 +36,7 @@
       </div>
       <div class="form-group">
         <label>Review</label>
-        <textarea name="description" rows="10" cols="30"></textarea>
+        <textarea name="description" rows="10" cols="30" data-validate="notEmpty"></textarea>
       </div>
       <button type="submit">Publicar</button>
 </div>

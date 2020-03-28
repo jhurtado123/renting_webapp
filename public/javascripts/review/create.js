@@ -19,6 +19,7 @@ rangeTreatment.addEventListener("change", event => {
       "<span class='perfect-treatment'>Perfecto trato</span>";
   }
 });
+rangeTreatment.dispatchEvent(new Event("change"));
 
 // Range Treatment Owner Flat
 const rangeVeracity = document.querySelector("#rangeVeracity");
@@ -41,3 +42,5 @@ rangeVeracity.addEventListener("change", event => {
       "<span class='perfect-veracity'>Perfecto</span>";
   }
 });
+
+rangeVeracity.dispatchEvent(new Event('change'));
