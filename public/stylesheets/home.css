@@ -8,6 +8,12 @@
     border: 1px solid #324252;
     color: #3a424a; }
 
+#openDrawMap, #openSortAds, #openFilterAds {
+  cursor: pointer; }
+
+#openSortAds img {
+  width: 24px; }
+
 #modalDrawMap {
   width: 90vw;
   height: 75vh;

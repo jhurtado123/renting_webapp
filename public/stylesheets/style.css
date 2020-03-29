@@ -83,9 +83,80 @@ a {
   background: linear-gradient(90deg, #84d8e3 36%, #a7e7cc 100%);
   padding: 15px 5px;
   margin-bottom: -1px; }
-  #headerMenu a {
+  #headerMenu a, #headerMenu .notifications {
     margin-right: 15px;
     color: #324252; }
+    #headerMenu a img, #headerMenu .notifications img {
+      cursor: pointer;
+      width: 24px; }
+  #headerMenu .notifications {
+    position: relative; }
+    #headerMenu .notifications .notifications-count {
+      font-size: 12px;
+      background: darkorange;
+      border-radius: 15px;
+      height: 15px;
+      width: 15px;
+      bottom: 0;
+      right: -5px;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+    #headerMenu .notifications #notificationsList {
+      display: none;
+      position: absolute;
+      bottom: -52vh;
+      left: -45vw;
+      width: 75vw;
+      height: 50vh;
+      background: white;
+      padding: 15px 0;
+      font-size: 16px;
+      z-index: 20;
+      border-radius: 5px;
+      -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); }
+      #headerMenu .notifications #notificationsList h2 {
+        font-size: 16px;
+        text-align: center;
+        margin-top: 0px !important; }
+      #headerMenu .notifications #notificationsList #list {
+        overflow: scroll;
+        max-height: 288px; }
+      #headerMenu .notifications #notificationsList:after {
+        content: " ";
+        position: absolute;
+        right: 90px;
+        top: -12px;
+        border-top: none;
+        border-right: 12px solid transparent;
+        border-left: 12px solid transparent;
+        border-bottom: 12px solid white; }
+    #headerMenu .notifications.open #notificationsList {
+      display: block; }
+      #headerMenu .notifications.open #notificationsList #list .notification {
+        color: #3a424a;
+        padding: 15px 15px;
+        font-size: 14px;
+        margin: 0;
+        display: block;
+        transition: background-color 1s;
+        position: relative; }
+        #headerMenu .notifications.open #notificationsList #list .notification.unreaded {
+          background: rgba(132, 216, 227, 0.4); }
+        #headerMenu .notifications.open #notificationsList #list .notification:hover {
+          background: #84d8e3; }
+        #headerMenu .notifications.open #notificationsList #list .notification hr {
+          color: #84d8e3;
+          width: 60%;
+          margin: 0 auto;
+          position: absolute;
+          opacity: 0.3;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%); }
   #headerMenu .logo-link {
     margin-right: 22%; }
   #headerMenu .profile-image {

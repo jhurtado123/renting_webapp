@@ -37,7 +37,7 @@ mongoose
   .catch(err => {
     console.error('Error connecting to mongo', err)
   });
-  
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,14 +45,14 @@ app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false}));
 app.use(cookieParser('secret'));
-app.use(session({cookie: { maxAge: new Date(Date.now() + (60 * 1000 * 30)) }}));
+app.use(session({cookie: {maxAge: new Date(Date.now() + (60 * 1000 * 30))}}));
 app.use(flash());
 
 app.use(session({
   secret: "renting-app-secret",
-  cookie: { maxAge: new Date(Date.now() + (60 * 1000 * 30)) }, // 60 seconds
+  cookie: {maxAge: new Date(Date.now() + (60 * 1000 * 30))}, // 60 seconds
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     resave: true,
@@ -62,7 +62,7 @@ app.use(session({
 }));
 
 app.use(require('node-sass-middleware')({
-  src:  path.join(__dirname, 'public'),
+  src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
   sourceMap: true
 }));
@@ -70,16 +70,39 @@ app.use(require('node-sass-middleware')({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
-app.use('/', indexRouter);
 
+const User = require('./models/User');
+
+let notifications;
+
+function getUserNotifcations(_id) {
+  return User.findOne({_id}).select('notifications').sort({'createdAt': -1});
+}
+
+app.use( async  function (req, res, next) {
+  if (req.session.currentUser) {
+     await getUserNotifcations(req.session.currentUser._id)
+      .then(res => {
+        notifications = res.notifications.sort((a,b) => b.createdAt-a.createdAt);
+      })
+      .catch(err => {notifications = []});
+  } else {
+    notifications = [];
+  }
+
+  next();
+});
 app.dynamicHelpers({
   currentUser: function (req, res) {
     return req.session.currentUser;
   },
+  notifications:  function (req, res) { return notifications; },
+
 });
 
-app.use('/users',authMiddleware.checkIfUserLoggedIn, usersRouter);
-app.use('/ad',authMiddleware.checkIfUserLoggedIn, adsRouter);
+app.use('/', indexRouter);
+app.use('/users', authMiddleware.checkIfUserLoggedIn, usersRouter);
+app.use('/ad', authMiddleware.checkIfUserLoggedIn, adsRouter);
 app.use('/appointment', authMiddleware.checkIfUserLoggedIn, appointmentsRouter);
 app.use('/chats', authMiddleware.checkIfUserLoggedIn, chatsRouter);
 app.use('/support', authMiddleware.checkIfUserLoggedIn, supportRouter);
@@ -88,13 +111,13 @@ app.use('/api', apiRouter); //TODO authMiddleware.checkIfUserLoggedIn ?
 
 //register partials
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
-hbs.registerHelper('ifEq', function(arg1, arg2, options) {
+hbs.registerHelper('ifEq', function (arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
-hbs.registerHelper("formatDate", function(datetime) {
-    return `${datetime.getUTCDate()}/${datetime.getUTCMonth()+1}/${datetime.getFullYear()}`;
+hbs.registerHelper("formatDate", function (datetime) {
+  return `${datetime.getUTCDate()}/${datetime.getUTCMonth() + 1}/${datetime.getFullYear()}`;
 });
-hbs.registerHelper("formatHours", function(datetime) {
+hbs.registerHelper("formatHours", function (datetime) {
   return `${datetime.getHours()}:${datetime.getMinutes()}`;
 });
 hbs.registerHelper('switch', function(value, options) {
@@ -106,14 +129,21 @@ hbs.registerHelper('case', function(value, options) {
     return options.fn(this);
   }
 });
+hbs.registerHelper("getUnreadedNotifications", function (notifications) {
+  let count = 0;
+  notifications.forEach(notification => {
+    if (!notification.isReaded) count++;
+  });
+  return count;
+});
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = process.env.ENV === 'development' ? err : {};

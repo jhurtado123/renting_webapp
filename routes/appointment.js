@@ -5,6 +5,8 @@ const Appointment = require('../models/Appointment');
 const Ad = require('../models/Ad');
 const Chat = require('../models/Chat');
 const User = require('../models/User');
+const createNotifications = require('../helpers/notifications');
+
 
 /* create appointment */
 router.post('/create', (req, res, next) => {
@@ -50,9 +52,10 @@ router.get('/view/:appointmentId', (req, res, next) => {
 /*delete appointment*/
 router.get('/delete/:appointmentId', (req, res, next) => {
   let appointmentToRemove;
-  Appointment.findOne({_id: req.params.appointmentId})
+  Appointment.findOne({_id: req.params.appointmentId}).populate('ad')
     .then(appointment => {
       appointmentToRemove = appointment;
+      createNotifications([appointment.lesser, appointment.lessor], {'title':`${req.session.currentUser.name} ha cancelado la cita en ${appointment.ad.address}, ${appointment.ad.number}`, 'href': '/users/appointments'});
       return Chat.findOne({_id: appointmentToRemove.chat});
     })
     .then(chat => {

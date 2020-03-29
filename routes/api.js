@@ -8,6 +8,7 @@ const Chat = require('../models/Chat');
 const User = require('../models/User');
 const Appointment = require('../models/Appointment');
 const getFairPrice = require('../helpers/getFairPrice');
+const createNotifications = require('../helpers/notifications');
 
 
 /* POST, COORDS AND PRICE OF ADS INSIDE A POLYGON */
@@ -126,18 +127,30 @@ router.post('/create/appointment', (req, res, next) => {
       return new Appointment({lesser: chat.lessee, lessor: chat.lessor, date: dateTime, ad: chat.ad, status: 'Active', chat: chat._id }).save();
     })
     .then(appointment => {
+      createNotifications([appointment.lesser, appointment.lessor], {'title': 'Tienes una nueva cita!', 'href': `/appointment/view/${appointment._id}`});
       res.send({appointment});
     })
     .catch(err => console.log(err));
 
 });
 
+router.post('/notifications/read', (req,res,next) => {
+  User.findOne({'_id': req.session.currentUser._id})
+    .then(user => {
+      user.notifications.forEach(notification => notification.isReaded = true);
+      return user.save();
+    })
+    .then(res => res.send({'response' : true}))
+    .catch(err => console.log(err));
+});
+
+
 router.post('/get/fairPrice', (req, res, next) =>{
   getFairPrice(req.body.data)
   .then(fairPrice => {
     res.send({fairPrice})
     });
-})
+});
 
 
 

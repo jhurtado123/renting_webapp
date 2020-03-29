@@ -76,6 +76,13 @@ router.post('/register', (req, res, next) => {
       return new User({name, username, password: hash, profile_image: 'default-profileImage.png', role: ['ROLE_USER']}).save();
     })
     .then(user => {
+      user.notifications.push({
+        title: 'Bienvenido! Puedes pulsar aquí para acabar de rellenar tu perfil',
+        href: '/users/profile'
+      });
+      return user.save();
+    })
+    .then(user => {
       req.flash('success', true);
       res.redirect('/register');
     })
@@ -83,7 +90,6 @@ router.post('/register', (req, res, next) => {
 });
 
 router.get('/home', (req, res, next) => {
-  
   if(req.query.search) {
     if(isNaN(req.query.search)){
     Ad.find({ neighborhood: { $regex: ".*" + req.query.search + ".*" } })

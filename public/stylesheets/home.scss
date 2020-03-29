@@ -10,6 +10,14 @@
     color:$secondary-color;
   }
 }
+#openDrawMap, #openSortAds, #openFilterAds {
+  cursor: pointer;
+}
+#openSortAds {
+  img {
+    width: 24px;
+  }
+}
 #modalDrawMap {
   width:90vw;
   height: 75vh;
