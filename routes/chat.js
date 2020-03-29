@@ -4,6 +4,8 @@ const app = require('../app');
 const Chat = require('../models/Chat');
 const Ad = require('../models/Ad');
 const Message = require('../models/Message');
+const createNotifications = require('../helpers/notifications');
+
 
 //Socketio
 const io = require('socket.io')();
@@ -30,6 +32,7 @@ router.post('/create', (req, res, next) => {
       return new Chat({lessor: ad.owner, lessee: req.session.currentUser._id, ad: ad._id}).save();
     })
     .then(result => {
+      createNotifications([result.lessor],{'title': 'Tienes un nuevo chat!', 'href': `/chats/${result._id}`});
       return res.redirect(`/chats/${result._id}`);
     })
     .catch(error => console.log(error));

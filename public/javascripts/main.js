@@ -15,6 +15,9 @@ document.querySelectorAll('#content, .close-menu, #backdrop').forEach(element =>
     if (lateralMenu.classList.contains('open')) {
       enableLateralMenu();
     }
+    if (notifications.classList.contains('open')) {
+      notifications.classList.remove('open');
+    }
   });
 });
 
@@ -28,3 +31,21 @@ function disableLateralMenu() {
   content.style.overflowY = 'hidden';
   backdrop.style.display = 'block';
 }
+
+//NOTIFICATIONS
+const notifications = document.querySelector('.notifications');
+const notificationsList = document.querySelector('#notificationsList');
+const notificationsCount = document.querySelector('.notifications-count');
+
+
+notifications.addEventListener('click', () => {
+  if (notifications.classList.contains('open')) {
+    notifications.classList.remove('open');
+  } else {
+    notifications.classList.add('open');
+    notificationsCount.innerHTML = '0';
+    axios.post('/api/notifications/read');
+  }
+
+
+});

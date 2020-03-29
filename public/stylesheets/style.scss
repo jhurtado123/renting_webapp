@@ -99,9 +99,96 @@ a {
   background: $background-gradient;
   padding: 15px 5px;
   margin-bottom: -1px;
-  a {
+  a,.notifications {
   margin-right: 15px;
     color:$primary-color;
+    img {
+      cursor: pointer;
+      width: 24px;
+    }
+  }
+  .notifications {
+    position: relative;
+    .notifications-count {
+      font-size: 12px;
+      background: darkorange;
+      border-radius: 15px;
+      height: 15px;
+      width: 15px;
+      bottom:0;
+      right: -5px;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #notificationsList {
+      display: none;
+      position: absolute;
+      bottom:-52vh;
+      left:-45vw;
+      width: 75vw;
+      height: 50vh;
+      background: white;
+      padding:15px 0;
+      font-size: 16px;
+      z-index: 20;
+      border-radius: 5px;
+      -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+      -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+      h2 {
+        font-size: 16px;
+        text-align: center;
+        margin-top: 0px!important;
+      }
+      #list {
+        overflow: scroll;
+        max-height: 288px;
+      }
+      &:after {
+        content: " ";
+        position: absolute;
+        right: 90px;
+        top: -12px;
+        border-top: none;
+        border-right: 12px solid transparent;
+        border-left: 12px solid transparent;
+        border-bottom: 12px solid white;
+      }
+    }
+    &.open {
+      #notificationsList {
+        display: block;
+        #list {
+          .notification {
+            color:$secondary-color;
+            padding:15px 15px;
+            font-size: 14px;
+            margin: 0;
+            display: block;
+            transition: background-color 1s;
+            position: relative;
+            &.unreaded {
+              background: rgba(132,216,227,.4);
+            }
+            &:hover {
+              background: $background;
+            }
+            hr {
+              color: $background;
+              width: 60%;
+              margin:0 auto;
+              position: absolute;
+              opacity: 0.3;
+              bottom:0;
+              left:50%;
+              transform: translateX(-50%);
+            }
+          }
+        }
+      }
+    }
   }
   .logo-link{
     margin-right: 22%;

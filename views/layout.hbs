@@ -10,11 +10,28 @@
     {{{block "stylesheets"}}}
 </head>
 <body>
+
 <div id="wrapper">
     <div id="headerMenu">
         <a class="logo-link" href="/home">
             <span>LOGO</span>
         </a>
+
+        <div class="notifications">
+            <img src="/images/icons/notification.png">
+            <span class="notifications-count">{{getUnreadedNotifications notifications}}</span>
+            <div id="notificationsList">
+                <h2>Notificaciones</h2>
+                <div id="list">
+                    {{#each notifications}}
+                        <a href="{{this.href}}" class="notification {{#if this.isReaded}}{{else}}unreaded{{/if}}">
+                            {{this.title}}
+                            <hr>
+                        </a>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
         <a href="/users/{{currentUser._id}}">
             <img class="profile-image" src="/uploads/userProfileImages/{{currentUser.profile_image}}">
         </a>
@@ -80,6 +97,7 @@
     </div>
     <div id="backdrop"></div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/javascripts/main.js"></script>
 {{{block "scripts"}}}
 </body>

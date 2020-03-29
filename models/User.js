@@ -1,35 +1,56 @@
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose;
+const {Schema} = mongoose;
 
 const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  name: String,
-  role:[],
-  phone: String,
-  profile_image: String,
-  description: String,
-  dni: String,
-  reviews: [{
-    content: {
+    username: {
       type: String,
-      required: true
+      required: true,
     },
-    valoration: Number,
-    userid: {
+    password: {
       type: String,
-      required: true
+      required: true,
     },
-  }],
-  lesseeMode: Boolean,
-},
+    name: String,
+    role: [],
+    phone: String,
+    profile_image: String,
+    description: String,
+    dni: String,
+    reviews: [{
+      title: {
+        type: String,
+        required: true
+      },
+      stars: Number,
+      treatment: Number,
+      veracity: Number,
+      description: {
+        type: String,
+        required: true
+      },
+      userid: {
+        type: String,
+        required: true
+      },
+    }],
+    lesseeMode: Boolean,
+    notifications: [
+      {
+        type: new mongoose.Schema(
+          {
+            'title': String,
+            'href': String,
+            'isReaded': {
+              type: Boolean,
+              default: false,
+            }
+          },
+          {timestamps: true}
+        )
+      }
+    ]
+  },
   {
     timestamps: true
   });
