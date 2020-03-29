@@ -1,0 +1,40 @@
+@import "../variables";
+@import '../components/form';
+
+
+.review{
+  margin:20px 0px ;
+  padding:0 15px;
+  border-radius: 15px;
+  border: 1px solid $background;
+  .stars{
+    font-size: 30px;
+    color: #a3a3a3;
+    direction: rtl;/* right to left */
+    display: flex;
+    justify-content: flex-end;
+    margin: 15px 0px;
+    .star-active{
+      color:#ffcd05;
+    }
+  }
+  .inline{
+    display:flex;
+    margin: 15px 0px;
+    .line{
+      margin: 0; 
+    }
+  }
+  .bad-treatment, .bad-veracity{
+  color: #ff1100;
+  }
+  .notgood-treatment, .notgood-veracity {
+    color: #ff6600;
+  }
+  .good-treatment, .good-veracity {
+    color: #3a9c2f;
+  }
+  .perfect-treatment, .perfect-veracity {
+    color: #22991a;
+  }
+}

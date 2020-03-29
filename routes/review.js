@@ -11,25 +11,21 @@ router.get('/:idAppointment/create', function (req, res, next) {
 });
 
 /* POST CREATE REVIEW */
-router.post("/:idAppointment/create", function(req, res) {
+router.post("/:idAppointment/create", function(req, res, next) {
   const { title, stars, treatment, veracity, description } = req.body;
   const { idAppointment } = req.params; 
   let review = { title: title, stars: stars, treatment: treatment, veracity: veracity, description: description, userid: 1 }
   Appointment.findById(idAppointment)
-    .then(result => {
-      review.userid = result.lessor;
-      User.find({ _id: result.lessor }).then(user => {
-        console.log(review);
-        User.review.push(review).then(resultUser => {
-          User.save().then(resultUserUpdate => {
-            return resultUserUpdate;
-          })
+    .then(async result => {
+      review.userid = result.lesser;
+      await User.findOne({ _id: result.lessor })
+        .then(async user => {
+        await user.reviews.push(review)
+        user.save()
         })
+      res.redirect("/home");
       })
-    })
-  .then(result =>
-    res.resdirect("/home")
-  )
-  .catch(error => next(error));
+    .catch(error => next(error));
 });
+
 module.exports = router;  
