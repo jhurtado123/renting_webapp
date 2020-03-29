@@ -17,6 +17,17 @@
     margin-right: 5px; }
   #root .content {
     text-transform: lowercase; }
+  #root .fairPrice {
+    font-size: 12px;
+    display: inline-block; }
+    #root .fairPrice i {
+      margin-right: 10px; }
+    #root .fairPrice.ok {
+      color: green; }
+    #root .fairPrice.expensive {
+      color: red; }
+    #root .fairPrice.cheap {
+      color: green; }
   #root .summary-info {
     display: flex;
     justify-content: flex-start;

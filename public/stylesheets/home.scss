@@ -178,23 +178,35 @@
 #adList{
   margin-bottom: 20px;
   .slideshow-container .mySlides img{
-    height: 200px;
+    height: 200px!important;
   }
   .ad-info{
-    padding: 0px 20px;
+    color:$secondary-color;
+    padding: 0px 15px;
+    display: block;
     h3{
       margin: 10px 0px;
     }
     h4, p{
       margin: 5px 0px;
     }
-    .button-ad{
-      display: flex;
-      width: fit-content;
-      margin: 0 auto;
-      .button{
-        padding: 14px;
+    .fairPrice {
+      font-size: 12px;
+      i {
+        margin-right: 10px;
       }
+      &.ok {
+        color:green;
+      }
+      &.expensive {
+        color:red;
+      }
+      &.cheap {
+        color:green;
+      }
+    }
+    .summary-info {
+      margin-top: 15px;
     }
   }
 }

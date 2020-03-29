@@ -11,17 +11,15 @@
     </div>
     
   </div>
-  <div class="ad-info">
+  <a class="ad-info" href="/ad/{{this._id}}">
     <h3>{{this.title}}</h3>
     <h4>{{this.price}}€</h4>
+      {{{fairPricePercent this.fairPrice this.price}}}
     <p>{{this.neighborhood}}, {{this.city}}</p>
     <div class ="summary-info">
       <p><img src="/images/icons/area.png"> {{this.parameters.square_meters}} m²</p>
       <p><img src="/images/icons/bed.png"> {{this.parameters.rooms}}hab.</p>
       <p><img src="/images/icons/shower.png"> {{this.parameters.bathrooms}} bañ.</p>
     </div>
-    <div class="button-ad">
-      <a class="button" href="/ad/{{this._id}}" class="button">Ver piso</a>
-    </div>
-  </div>
+  </a>
 </div>

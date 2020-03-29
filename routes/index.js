@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Ad = require('../models/Ad');
+const authMiddleware = require('../helpers/auth');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -89,7 +91,7 @@ router.post('/register', (req, res, next) => {
     .catch(error => console.log(error));
 });
 
-router.get('/home', (req, res, next) => {
+router.get('/home', authMiddleware.checkIfUserLoggedIn, (req, res, next) => {
   if(req.query.search) {
     if(isNaN(req.query.search)){
     Ad.find({ neighborhood: { $regex: ".*" + req.query.search + ".*" } })

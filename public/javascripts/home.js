@@ -1,6 +1,6 @@
 const drawMapModal = document.querySelector('#modalDrawMap');
 const showFlatsButton = document.querySelector('#showFlats');
-const adList = document.querySelector('#adList');
+const adList = document.querySelector('#adList-list');
 const sortAdsModal = document.querySelector('#sortAds');
 const buttonOrder = document.querySelector('#buttonOrder');
 const filterAdsModal = document.querySelector('#filterAds');
@@ -193,31 +193,48 @@ function createAdsOnView(ads) {
   }
   ads.forEach(ad => {
     const imagesHtmlString = getHtmlImagesString(ad.images);
+    const fairPriceString = getFairPriceString(ad.fairPrice, ad.price);
     let string = `<div id="adList">
             <div class="slideshow-container" data-id="${ad._id}">
                 ${imagesHtmlString}
               <a class="prev" onclick="plusSlides('${ad._id}')">&#10094;</a>
               <a class="next" onclick="plusSlides('${ad._id}')">&#10095;</a>
             </div>
-            <div class="ad-info">
+            <a href="/ad/${ad._id}" class="ad-info">
               <h3>${ad.title}</h3>
               <h4>${ad.price}€</h4>
+              ${fairPriceString}
               <p>${ad.neighborhood}, ${ad.city}</p>
-              <div class ="summary-info">
+              <div class="summary-info">
                 <p><img src="/images/icons/area.png"> ${ad.parameters.square_meters} m²</p>
                 <p><img src="/images/icons/bed.png"> ${ad.parameters.rooms} hab.</p>
                 <p><img src="/images/icons/shower.png"> ${ad.parameters.bathrooms} bañ.</p>
               </div>
-              <div class="button-ad">
-              <a href="/ad/${ad._id}" class="button">Ver piso</a>
-              </div> 
-            </div>
+            </a>
           </div>`;
     adList.innerHTML += string;
   });
   disableDrawMapModal();
   activateSliders();
 
+}
+
+function getFairPriceString(fairPrice, price) {
+  if (!fairPrice || !price) return;
+  let percentDifference, result;
+  if (fairPrice > price) {
+    percentDifference = -(Math.round(((price - fairPrice) / price * 100)));
+  } else {
+    percentDifference = Math.round(((price - fairPrice) / price * 100));
+  }
+  if (fairPrice < price && percentDifference >= 5){
+    result = `<div class="fairPrice expensive"><i class="fa fa-arrow-up"></i>El piso es un ${percentDifference}% mas caro de lo recomendado</div>`;
+  } else if ( fairPrice > price && percentDifference >= 5) {
+    result = `<div class="fairPrice cheap"><i class="fa fa-arrow-down"></i>El piso es un ${percentDifference}% más barato de lo recomendado</div>`;
+  } else {
+    result = `<div class="fairPrice ok">El precio del piso está dentro la cantidad recomendada</div>`;
+  }
+  return result;
 }
 
 function getHtmlImagesString(images) {

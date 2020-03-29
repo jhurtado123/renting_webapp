@@ -150,18 +150,26 @@
 #adList {
   margin-bottom: 20px; }
   #adList .slideshow-container .mySlides img {
-    height: 200px; }
+    height: 200px !important; }
   #adList .ad-info {
-    padding: 0px 20px; }
+    color: #3a424a;
+    padding: 0px 15px;
+    display: block; }
     #adList .ad-info h3 {
       margin: 10px 0px; }
     #adList .ad-info h4, #adList .ad-info p {
       margin: 5px 0px; }
-    #adList .ad-info .button-ad {
-      display: flex;
-      width: fit-content;
-      margin: 0 auto; }
-      #adList .ad-info .button-ad .button {
-        padding: 14px; }
+    #adList .ad-info .fairPrice {
+      font-size: 12px; }
+      #adList .ad-info .fairPrice i {
+        margin-right: 10px; }
+      #adList .ad-info .fairPrice.ok {
+        color: green; }
+      #adList .ad-info .fairPrice.expensive {
+        color: red; }
+      #adList .ad-info .fairPrice.cheap {
+        color: green; }
+    #adList .ad-info .summary-info {
+      margin-top: 15px; }
 
 /*# sourceMappingURL=home.css.map */

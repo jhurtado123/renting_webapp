@@ -136,6 +136,23 @@ hbs.registerHelper("getUnreadedNotifications", function (notifications) {
   });
   return count;
 });
+hbs.registerHelper("fairPricePercent", function (fairPrice, price) {
+  if (!fairPrice || !price) return;
+  let percentDifference, result;
+  if (fairPrice > price) {
+    percentDifference = -(Math.round(((price - fairPrice) / price * 100)));
+  } else {
+    percentDifference = Math.round(((price - fairPrice) / price * 100));
+  }
+  if (fairPrice < price && percentDifference >= 5){
+    result = `<div class="fairPrice expensive"><i class="fa fa-arrow-up"></i>El piso es un ${percentDifference}% mas caro de lo recomendado</div>`;
+  } else if ( fairPrice > price && percentDifference >= 5) {
+    result = `<div class="fairPrice cheap"><i class="fa fa-arrow-down"></i>El piso es un ${percentDifference}% más barato de lo recomendado</div>`;
+  } else {
+    result = `<div class="fairPrice ok">El precio del piso está dentro la cantidad recomendada</div>`;
+  }
+  return result;
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

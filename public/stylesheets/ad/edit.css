@@ -140,7 +140,8 @@ input[type=range]:focus::-ms-fill-upper {
   background: #B6B6B6; }
 
 #root {
-  padding: 0 15px; }
+  padding: 0 15px;
+  color: #3a424a; }
 
 .update {
   color: #84d8e3;
@@ -158,6 +159,9 @@ input[type=range]:focus::-ms-fill-upper {
     #images_preview .image-preview-wrapper img {
       width: 100%;
       border-radius: 15px; }
+
+#fairPrice {
+  margin-bottom: 5px; }
 
 #imageList {
   display: flex;

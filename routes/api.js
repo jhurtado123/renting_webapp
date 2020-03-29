@@ -30,7 +30,9 @@ router.post('/get/ads', (req, res, next) => {
     'parameters': 1,
     'title': 1,
     'description': 1,
-    'city': 1
+    'city': 1,
+    'neighborhood':1,
+    'fairPrice': 1,
   })
     .then(ads => {
       res.send({'ads': ads});

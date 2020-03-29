@@ -26,6 +26,25 @@
   .content {
     text-transform: lowercase;
   }
+  .fairPrice {
+    font-size: 12px;
+    display: inline-block;
+    i {
+      margin-right: 10px;
+    }
+
+    &.ok {
+      color: green;
+    }
+
+    &.expensive {
+      color: red;
+    }
+
+    &.cheap {
+      color: green;
+    }
+  }
   .summary-info {
     display: flex;
     justify-content: flex-start;
