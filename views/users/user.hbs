@@ -1,5 +1,7 @@
 {{#extend "stylesheets"}}
     <link rel="stylesheet" href="/stylesheets/users/view.css"/>
+    <link rel="stylesheet" href="/stylesheets/review/view.css"/>
+    <link rel="stylesheet" href="/stylesheets/review/create.css"/>
 {{/extend}}
 <div class="banner">
     {{#ifEq currentUser._id user._id}}
@@ -36,11 +38,24 @@
 
     <h2>Reviews del usuario</h2>
     <div class="users-reviews">
-        {{#if reviews.length }}
+        {{#if user.reviews.length }}
+            {{#each user.reviews}}
+                <div class="review">
+                    <h4>{{this.title}}</h4>
+                    <div>Valoración general: <p class="stars">{{this.stars}}</p></div>
+                    <div class="inline">Trato: <p class="treatment line">{{this.treatment}}</p></div>
+                    <div class="inline">Veracidad anuncio: <p class="veracity line">{{this.veracity}}</p></div>
+                    <div>Review:
+                    <p>{{this.description}}</p>
+                    </div>
+                </div>
+            {{/each}}
         {{else}}
             <p>El usuario no tiene reviews</p>
         {{/if}}
     </div>
 </div>
-
+{{#extend "scripts"}}
+<script src="/javascripts/review/view.js"></script>
+{{/extend}}
 

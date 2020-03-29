@@ -27,6 +27,7 @@ const appointmentsRouter = require('./routes/appointment');
 const chatsRouter = require('./routes/chat');
 const supportRouter = require('./routes/support');
 const apiRouter = require('./routes/api');
+const reviewRouter = require('./routes/review');
 
 
 mongoose
@@ -106,6 +107,7 @@ app.use('/ad', authMiddleware.checkIfUserLoggedIn, adsRouter);
 app.use('/appointment', authMiddleware.checkIfUserLoggedIn, appointmentsRouter);
 app.use('/chats', authMiddleware.checkIfUserLoggedIn, chatsRouter);
 app.use('/support', authMiddleware.checkIfUserLoggedIn, supportRouter);
+app.use('/review', authMiddleware.checkIfUserLoggedIn, reviewRouter);
 
 app.use('/api', apiRouter); //TODO authMiddleware.checkIfUserLoggedIn ?
 

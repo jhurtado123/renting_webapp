@@ -1,0 +1,30 @@
+@import "../variables";
+@import '../components/form';
+
+#root {
+  padding:0 15px;
+  color:$secondary-color;
+}
+
+#starsContainer{
+  display: flex;
+  justify-content: center;
+  direction: rtl;/* right to left */
+  unicode-bidi: bidi-override;
+  label{
+    font-size: 35px;
+    color: #a3a3a3;
+  }
+  input[type = "radio"]{
+    display:none;
+  }
+  label:hover{
+    color:#ffcd05;
+  }
+  input[type = "radio"]:checked ~ label{
+    color: #ffcd05;
+  }
+
+}
+
+
