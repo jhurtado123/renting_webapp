@@ -129,6 +129,12 @@ hbs.registerHelper('case', function(value, options) {
     return options.fn(this);
   }
 });
+hbs.registerHelper('ifIn', function(elem, list, options) {
+  if(list.indexOf(elem+'') !== -1) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
 hbs.registerHelper("getUnreadedNotifications", function (notifications) {
   let count = 0;
   notifications.forEach(notification => {

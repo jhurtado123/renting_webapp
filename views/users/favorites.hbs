@@ -1,0 +1,25 @@
+{{#extend "stylesheets"}}
+    <link rel="stylesheet" href="/stylesheets/users/userAds.css"/>
+{{/extend}}
+<div id="root">
+    <h1>Mis favoritos</h1>
+
+    {{#ifEq ads.length 0}}
+        <p>Aún no tienes favoritos</p>
+    {{else}}
+        <div id="ads">
+            {{#each ads}}
+                <div id="ad">
+                    <a href="/ad/{{this._id}}">
+                        <div class="ad-image"
+                             style="background: url('/uploads/picturesAd/{{this.images.[0]}}'); background-size: cover;background-repeat: no-repeat"></div>
+                        <div class="info">
+                            <h2>{{this.title}}</h2>
+                            <p>{{this.price}}€</p>
+                        </div>
+                    </a>
+                </div>
+            {{/each}}
+        </div>
+    {{/ifEq}}
+</div>

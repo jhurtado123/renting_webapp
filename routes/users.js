@@ -32,6 +32,14 @@ router.get('/ads', (req, res, next) => {
     .catch(error => next(error));
 });
 
+router.get('/favorites', (req,res,next) => {
+  User.findOne({'_id': req.session.currentUser._id}).populate('favorites')
+    .then(user => {
+      res.render('users/favorites', {ads: user.favorites});
+    })
+    .catch(err => next(err));
+});
+
 /*List user apppointments*/
 router.get('/appointments', (req, res, next) => {
   const userId = req.session.currentUser._id;
@@ -95,6 +103,8 @@ router.post('/:userid/delete', (req, res, next) => {
     .catch(next);
 });
 
+
+
 /* POST UPLOAD IMAGE */
 router.post('/api/uploadImage', upload.any('photo'), function (req, res, next) {
   req.session.currentUser.profile_image = req.files[0].filename;
@@ -111,5 +121,6 @@ router.post('/api/removeImage', function (req, res, next) {
     })
     .catch(error => console.log(error));
   });
+
 
 module.exports = router;

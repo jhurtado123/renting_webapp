@@ -12,7 +12,7 @@
     {{/each}}
     <a class="prev" onclick="minusSlides('{{ad._id}}')">&#10094;</a>
     <a class="next" onclick="plusSlides('{{ad._id}}')">&#10095;</a>
-    <div class="favorite">
+    <div id="favorites" class="{{#ifIn ad._id currentUser.favorites}}favorite{{/ifIn}}">
         ★
     </div>
 </div>
@@ -128,7 +128,17 @@
 
     </script>
     <script>
+        const addToFavorite = document.querySelector('#favorites');
 
+        addToFavorite.addEventListener('click', () => {
+            if (addToFavorite.classList.contains('favorite')) {
+                addToFavorite.classList.remove('favorite');
+                axios.post('/api/removeFromFavorites/{{ad._id}}');
+            } else {
+                addToFavorite.classList.add('favorite');
+                axios.post('/api/addToFavorites/{{ad._id}}');
+            }
+        });
     </script>
 
 {{/extend}}

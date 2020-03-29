@@ -104,4 +104,16 @@
 .slideshow-container .mySlides img {
   height: 300px !important; }
 
+#favorites {
+  position: absolute;
+  bottom: 10px;
+  text-shadow: 2px 0 0 #84d8e3, -2px 0 0 #84d8e3, 0 2px 0 #84d8e3, 0 -2px 0 #84d8e3, 1px 1px #84d8e3, -1px -1px 0 #84d8e3, 1px -1px 0 #84d8e3, -1px 1px 0 #84d8e3;
+  right: 15px;
+  color: #3a424a;
+  font-size: 40px;
+  cursor: pointer; }
+  #favorites.favorite {
+    color: yellow;
+    text-shadow: 2px 0 0 #3a424a, -2px 0 0 #3a424a, 0 2px 0 #3a424a, 0 -2px 0 #3a424a, 1px 1px #3a424a, -1px -1px 0 #3a424a, 1px -1px 0 #3a424a, -1px 1px 0 #3a424a; }
+
 /*# sourceMappingURL=view.css.map */
