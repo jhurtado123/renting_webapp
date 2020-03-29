@@ -154,6 +154,35 @@ router.post('/get/fairPrice', (req, res, next) =>{
     });
 });
 
+router.post('/addToFavorites/:adId', (req, res, next) => {
+  console.log(req.params.adId);
+  User.findOne({'_id': req.session.currentUser._id})
+    .then(user => {
+      user.favorites.push(req.params.adId);
+      return user.save();
+    })
+    .then(user => {
+      req.session.currentUser = user;
+      res.send({'status': 'ok'});
+    })
+    .catch(err => console.log(err));
+});
+
+router.post('/removeFromFavorites/:adId', (req, res, next) => {
+  User.findOne({'_id': req.session.currentUser._id})
+    .then(user => {
+      user.favorites = user.favorites.filter(element => {
+        return element+'' !== req.params.adId+'';
+      });
+      return user.save();
+    })
+    .then(user => {
+      req.session.currentUser = user;
+      res.send({'status': 'ok'});
+    })
+    .catch(err => console.log(err));
+});
+
 
 
 module.exports = router;

@@ -1,6 +1,6 @@
 #root {
   padding: 0 15px;
-  color: #324252;
+  color: #3a424a;
   margin-top: 40px; }
 
 #ads {
@@ -14,6 +14,7 @@
     border-radius: 10px;
     padding-right: 10px; }
     #ads #ad a {
+      color: #3a424a;
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;

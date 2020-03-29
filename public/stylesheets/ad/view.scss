@@ -136,3 +136,16 @@
     }
   }
 }
+#favorites {
+  position: absolute;
+  bottom: 10px;
+  text-shadow: 2px 0 0 $background, -2px 0 0 $background, 0 2px 0 $background, 0 -2px 0 $background, 1px 1px $background, -1px -1px 0 $background, 1px -1px 0 $background, -1px 1px 0 $background;
+  right: 15px;
+  color:$secondary-color;
+  font-size: 40px;
+  cursor:pointer;
+  &.favorite {
+    color:yellow;
+    text-shadow: 2px 0 0 $secondary-color, -2px 0 0 $secondary-color, 0 2px 0 $secondary-color, 0 -2px 0 $secondary-color, 1px 1px $secondary-color, -1px -1px 0 $secondary-color, 1px -1px 0 $secondary-color, -1px 1px 0 $secondary-color;
+  }
+}
