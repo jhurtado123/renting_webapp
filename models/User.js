@@ -35,6 +35,7 @@ const userSchema = new Schema({
       },
     }],
     lesseeMode: Boolean,
+    favorites: [{type: Schema.Types.ObjectId, ref: 'Ad'}],
     notifications: [
       {
         type: new mongoose.Schema(

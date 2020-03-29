@@ -1,7 +1,7 @@
 @import "../variables";
 #root {
   padding:0 15px;
-  color:$primary-color;
+  color:$secondary-color;
   margin-top: 40px;
 }
 #ads {
@@ -15,6 +15,7 @@
     border-radius: 10px;
     padding-right: 10px;
     a {
+      color:$secondary-color;
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;

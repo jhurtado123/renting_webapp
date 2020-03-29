@@ -12,6 +12,9 @@
     {{/each}}
     <a class="prev" onclick="minusSlides('{{ad._id}}')">&#10094;</a>
     <a class="next" onclick="plusSlides('{{ad._id}}')">&#10095;</a>
+    <div class="favorite">
+        ★
+    </div>
 </div>
 <div class="ad-images-preview">
     {{#each ad.images }}
@@ -78,6 +81,7 @@
 
 
 {{#extend "scripts"}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/javascripts/components/slider.js"></script>
     <script src="/javascripts/ad/view.js"></script>
     <script>
@@ -121,6 +125,9 @@
                 }
             });
         });
+
+    </script>
+    <script>
 
     </script>
 
