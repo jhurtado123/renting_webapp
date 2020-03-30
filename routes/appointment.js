@@ -14,8 +14,7 @@ router.post('/create', (req, res, next) => {
   Ad.findOne({_id: ad})
     .then(ad => {
       const date = Date.now(); //TODO el date ha de llegar en el post
-      console.log('lesser', lesser);
-      return new Appointment({lesser, lessor, ad, date, status: 'Active'}).save();
+      return new Appointment({lesser, lessor, ad, date, status: 'Activa'}).save();
     })
     .then(result => res.send({status: 200}))
     .catch(error => next(error) );
@@ -55,7 +54,12 @@ router.get('/delete/:appointmentId', (req, res, next) => {
   Appointment.findOne({_id: req.params.appointmentId}).populate('ad')
     .then(appointment => {
       appointmentToRemove = appointment;
-      createNotifications([appointment.lesser, appointment.lessor], {'title':`${req.session.currentUser.name} ha cancelado la cita en ${appointment.ad.address}, ${appointment.ad.number}`, 'href': '/users/appointments'});
+      if (appointment.status === 'Activa') {
+        createNotifications([appointment.lesser, appointment.lessor], {
+          'title': `${req.session.currentUser.name} ha cancelado la cita en ${appointment.ad.address}, ${appointment.ad.number}`,
+          'href': '/users/appointments'
+        });
+      }
       return Chat.findOne({_id: appointmentToRemove.chat});
     })
     .then(chat => {

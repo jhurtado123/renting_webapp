@@ -22,6 +22,7 @@
     "handlebars-extend-block": "^1.0.0",
     "hbs": "^4.1.0",
     "http-errors": "~1.6.3",
+    "moment": "^2.24.0",
     "mongoose": "^5.9.4",
     "morgan": "~1.9.1",
     "multer": "^1.4.2",

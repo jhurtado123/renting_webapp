@@ -1,7 +1,6 @@
 const { curly } = require("node-libcurl");
 
 async function getFairPrice(data){
-  console.log("data", data)
   let { flat_status, parking, storage_room, postal_code, height, hasElevator, terrace, square_meters } = data;
   return await getSalaryByPostalCode(postal_code)
     .then(response => {
@@ -18,16 +17,16 @@ async function getFairPrice(data){
       }
       switch (parseInt(flat_status)) {
         case 1:
-          fairPrice -= (fairPrice * 0.1)
+          fairPrice -= (fairPrice * 0.1);
           break;
         case 2:
-          fairPrice -= (fairPrice * 0.05)
+          fairPrice -= (fairPrice * 0.05);
           break;
         case 4:
-          fairPrice += (fairPrice * 0.05)
+          fairPrice += (fairPrice * 0.05);
           break;
         case 5:
-          fairPrice += (fairPrice * 0.1)
+          fairPrice += (fairPrice * 0.1);
           break;
         default:
           break;
