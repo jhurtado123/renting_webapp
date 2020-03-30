@@ -82,7 +82,7 @@ router.post('/profile',  upload.any('photo'), (req, res, next) => {
 router.get('/:userId', (req, res, next) => {
   const { userId } = req.params;
   let matchUser;
-  User.findById(userId)
+  User.findById(userId).populate('reviews.userid')
     .then(user => {
       matchUser = user;
      return Ad.find({'owner': userId});

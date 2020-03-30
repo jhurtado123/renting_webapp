@@ -116,7 +116,13 @@ app.use('/review', reviewRouter);
 app.use('/api', apiRouter);
 
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
+
+hbs.registerHelper('averageReviews', function (reviews) {
+  return Math.round(reviews.reduce(( accumulator, review)=>review.stars + accumulator, 0) / reviews.length);
+});
+
 require('./helpers/appHbsHelpers')(hbs);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

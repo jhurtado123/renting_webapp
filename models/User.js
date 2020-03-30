@@ -29,10 +29,7 @@ const userSchema = new Schema({
         type: String,
         required: true
       },
-      userid: {
-        type: String,
-        required: true
-      },
+      userid: { type: Schema.Types.ObjectId, ref: 'User' }
     }],
     lesseeMode: Boolean,
     favorites: [{type: Schema.Types.ObjectId, ref: 'Ad'}],
