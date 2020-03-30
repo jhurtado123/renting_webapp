@@ -1,4 +1,23 @@
-// Range Treatment Owner Flat
+const averageStars = document.querySelector("#averageStars");
+switch (parseInt(averageStars.innerHTML)) {
+    case 1:
+      averageStars.innerHTML = "★★★★<span class='star-active'>★<span>";
+      break;
+    case 2:
+      averageStars.innerHTML = "★★★<span class='star-active'>★<span>";
+      break;
+    case 3:
+      averageStars.innerHTML = "★★<span class='star-active'>★★★<span>";
+      break;
+    case 4:
+      averageStars.innerHTML = "★<span class='star-active'>★★★★<span>";
+      break;
+    case 5:
+      averageStars.innerHTML = "<span class='star-active'>★★★★★<span>";
+      break;
+    default:
+      break;
+  }
 const stars = document.querySelectorAll(".stars");
 stars.forEach((star)=>{
   let starsDisplay = parseInt(star.innerHTML)
@@ -22,7 +41,7 @@ stars.forEach((star)=>{
       break;
   }
 })
-// Range Treatment Owner Flat
+
 const treament = document.querySelectorAll(".treatment");
 treament.forEach((treat)=>{
   let treatsDisplay = parseInt(treat.innerHTML)
@@ -46,7 +65,7 @@ treament.forEach((treat)=>{
       break;
   }
 })
-// Range Treatment Owner Flat
+
 const veracity = document.querySelectorAll(".veracity");
 veracity.forEach((v)=>{
   let veracityDisplay = parseInt(v.innerHTML)

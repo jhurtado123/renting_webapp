@@ -161,6 +161,9 @@ hbs.registerHelper("fairPricePercent", function (fairPrice, price) {
   }
   return result;
 });
+hbs.registerHelper('averageReviews', function (reviews) {
+  return Math.round(reviews.reduce(( accumulator, review)=>review.stars + accumulator, 0) / reviews.length);
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

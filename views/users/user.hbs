@@ -36,17 +36,21 @@
         {{/if}}
     </div>
 
-    <h2>Reviews del usuario</h2>
+    <h2>Reviews sobre {{ user.name }}</h2>
     <div class="users-reviews">
         {{#if user.reviews.length }}
+        <span>Media de todas las valoraciones </span>
+        <div id="averageStars" class="stars">{{averageReviews user.reviews}}</div>
+        <span>Reviews: </span>
             {{#each user.reviews}}
                 <div class="review">
-                    <h4>{{this.title}}</h4>
+                    <h4 class="title-review">{{this.title}}</h4>
+                    <p class="text-review">{{this.userid.name}}</p>
                     <div>Valoración general: <p class="stars">{{this.stars}}</p></div>
-                    <div class="inline">Trato: <p class="treatment line">{{this.treatment}}</p></div>
-                    <div class="inline">Veracidad anuncio: <p class="veracity line">{{this.veracity}}</p></div>
+                    <div class="inline">Trato: <p class="treatment line"> {{this.treatment}}</p></div>
+                    <div class="inline">Veracidad anuncio: <p class="veracity line"> {{this.veracity}}</p></div>
                     <div>Review:
-                    <p>{{this.description}}</p>
+                    <p class="text-review">{{this.description}}</p>
                     </div>
                 </div>
             {{/each}}

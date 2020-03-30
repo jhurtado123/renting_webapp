@@ -3,20 +3,16 @@
 
 
 .review{
-  margin:20px 0px ;
+  margin:20px 0px;
   padding:0 15px;
   border-radius: 15px;
   border: 1px solid $background;
-  .stars{
-    font-size: 30px;
-    color: #a3a3a3;
-    direction: rtl;/* right to left */
-    display: flex;
-    justify-content: flex-end;
-    margin: 15px 0px;
-    .star-active{
-      color:#ffcd05;
-    }
+  .title-review{
+    margin-bottom: 5px;
+  }
+  .text-review{
+    margin: 10px 0px;
+    font-style: italic;
   }
   .inline{
     display:flex;
@@ -36,5 +32,16 @@
   }
   .perfect-treatment, .perfect-veracity {
     color: #22991a;
+  }
+}
+.stars{
+  font-size: 30px;
+  color: #a3a3a3;
+  direction: rtl;/* right to left */
+  display: flex;
+  justify-content: flex-end;
+  margin: 15px 0px;
+  .star-active{
+    color:#ffcd05;
   }
 }

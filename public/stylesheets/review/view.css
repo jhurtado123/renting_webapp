@@ -156,16 +156,11 @@ input[type=range]:focus::-ms-fill-upper {
   padding: 0 15px;
   border-radius: 15px;
   border: 1px solid #84d8e3; }
-  .review .stars {
-    font-size: 30px;
-    color: #a3a3a3;
-    direction: rtl;
-    /* right to left */
-    display: flex;
-    justify-content: flex-end;
-    margin: 15px 0px; }
-    .review .stars .star-active {
-      color: #ffcd05; }
+  .review .title-review {
+    margin-bottom: 5px; }
+  .review .text-review {
+    margin: 10px 0px;
+    font-style: italic; }
   .review .inline {
     display: flex;
     margin: 15px 0px; }
@@ -179,5 +174,16 @@ input[type=range]:focus::-ms-fill-upper {
     color: #3a9c2f; }
   .review .perfect-treatment, .review .perfect-veracity {
     color: #22991a; }
+
+.stars {
+  font-size: 30px;
+  color: #a3a3a3;
+  direction: rtl;
+  /* right to left */
+  display: flex;
+  justify-content: flex-end;
+  margin: 15px 0px; }
+  .stars .star-active {
+    color: #ffcd05; }
 
 /*# sourceMappingURL=view.css.map */
