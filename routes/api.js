@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { curly } = require('node-libcurl');
+const moment = require('moment');
 
 
 const Ad = require('../models/Ad');
@@ -120,9 +121,10 @@ router.post('/have/appointments', (req, res, next) => {
 
 router.post('/create/appointment', (req, res, next) => {
   const {chatId, dateTime} = req.body;
+  console.log(moment(dateTime).add(2, 'hours'));
   Chat.findOne({_id: chatId})
     .then(chat => {
-      chat.hasAppointment = true;
+      chat.hasAppointment = false;//TODO ############################################################################################################################################3
       return chat.save();
     })
     .then(chat => {

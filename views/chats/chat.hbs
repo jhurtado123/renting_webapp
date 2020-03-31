@@ -118,7 +118,7 @@
             } else {
                 axios.post('/api/have/appointments', {
                     'chatId': '{{chat._id}}',
-                    'dateTime': new Date(pickedDate.getFullYear(), pickedDate.getUTCMonth()+1, pickedDate.getUTCDate(), pickedDate.getHours(), pickedDate.getUTCMinutes())
+                    'dateTime': new Date(pickedDate.getFullYear(), pickedDate.getUTCMonth()+1, pickedDate.getUTCDate(), pickedDate.getUTCHours(), pickedDate.getUTCMinutes())
                 })
                 .then(result => {
                     if (!result.data.isPosible) {
