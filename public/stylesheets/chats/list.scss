@@ -43,7 +43,22 @@
       }
       img {
         margin-left:15px;
-        width: 30px;
+        min-width: 20px;
+        max-width: 20px;
+      }
+      .unreaded-messages {
+        position: absolute;
+        bottom:20px;
+        left: calc(100% - 15px - 15px);
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        background: lightgreen;
+        color:$secondary-color;
+        border-radius: 10px;
       }
     }
   }
