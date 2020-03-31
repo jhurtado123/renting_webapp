@@ -15,8 +15,8 @@
         </a>
         <a class="messager" href="/users/{{#ifEq currentUser._id
                                                  appointment.lesser._id}}{{appointment.lessor._id}}{{else}}{{appointment.lesser._id}}{{/ifEq}}">
-            <div class="preview-image" style="background: url('/uploads/userProfileImages{{#ifEq currentUser._id
-                                                                                                 appointment.lessee._id}}{{appointment.lessor.profile_image}}{{else}}{{appointment.lesser.profile_image}}{{/ifEq}}') no-repeat center; background-size: cover"></div>
+            <div class="preview-image" style="background: url('/uploads/userProfileImages/{{#ifEq currentUser._id
+                                                                                                 appointment.lesser._id}}{{appointment.lessor.profile_image}}{{else}}{{appointment.lesser.profile_image}}{{/ifEq}}') no-repeat center; background-size: cover"></div>
             <div class="name">{{#ifEq currentUser._id
                                       appointment.lesser._id}}{{appointment.lessor.name}}{{else}}{{appointment.lesser.name}}{{/ifEq}}</div>
         </a>
