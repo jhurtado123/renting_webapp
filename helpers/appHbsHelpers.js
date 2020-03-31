@@ -10,7 +10,8 @@ module.exports = function (hbs) {
     return `${datetime.getUTCDate()}/${datetime.getUTCMonth() + 1}/${datetime.getFullYear()}`;
   });
   hbs.registerHelper("formatHours", function (datetime) {
-    return `${datetime.getHours()}:${datetime.getMinutes()}`;
+
+    return `${datetime.getHours()}:${datetime.getMinutes()<10?'0' + datetime.getMinutes(): datetime.getMinutes()}`;
   });
   hbs.registerHelper('switch', function (value, options) {
     this.switch_value = value;
