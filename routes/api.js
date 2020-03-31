@@ -123,7 +123,7 @@ router.post('/create/appointment', (req, res, next) => {
   const {chatId, dateTime} = req.body;
   Chat.findOne({_id: chatId})
     .then(chat => {
-      chat.hasAppointment = false;//TODO ############################################################################################################################################3
+      chat.hasAppointment = true;
       return chat.save();
     })
     .then(chat => {
