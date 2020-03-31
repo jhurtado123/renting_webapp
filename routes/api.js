@@ -121,14 +121,13 @@ router.post('/have/appointments', (req, res, next) => {
 
 router.post('/create/appointment', (req, res, next) => {
   const {chatId, dateTime} = req.body;
-  console.log(moment(dateTime).add(2, 'hours'));
   Chat.findOne({_id: chatId})
     .then(chat => {
       chat.hasAppointment = false;//TODO ############################################################################################################################################3
       return chat.save();
     })
     .then(chat => {
-      return new Appointment({lesser: chat.lessee, lessor: chat.lessor, date: dateTime, ad: chat.ad, status: 'Active', chat: chat._id }).save();
+      return new Appointment({lesser: chat.lessee, lessor: chat.lessor, date: moment(dateTime).add(2, 'hours'), ad: chat.ad, status: 'Active', chat: chat._id }).save();
     })
     .then(appointment => {
       createNotifications([appointment.lesser, appointment.lessor], {'title': 'Tienes una nueva cita!', 'href': `/appointment/view/${appointment._id}`});
