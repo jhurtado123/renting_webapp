@@ -35,7 +35,21 @@
       transform: translateX(-50%); }
     #root #chats .chat img {
       margin-left: 15px;
-      width: 30px; }
+      min-width: 20px;
+      max-width: 20px; }
+    #root #chats .chat .unreaded-messages {
+      position: absolute;
+      bottom: 20px;
+      left: calc(100% - 15px - 15px);
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      background: lightgreen;
+      color: #3a424a;
+      border-radius: 10px; }
 
 .no-chat {
   padding: 0 15px; }

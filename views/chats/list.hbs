@@ -14,6 +14,14 @@
                     </div>
                     <img src="/images/icons/send.png">
                     <span></span>
+                    {{#each ../unreadedMessages}}
+                        {{#ifEq this.chat ../this._id}}
+                            {{#ifEq this.count 0}}
+                            {{else}}
+                                <span class="unreaded-messages">{{this.count}}</span>
+                            {{/ifEq}}
+                        {{/ifEq}}
+                    {{/each}}
                 </a>
             {{/each}}
         {{else}}
