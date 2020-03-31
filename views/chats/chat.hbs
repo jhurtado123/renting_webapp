@@ -23,7 +23,7 @@
         </a>
         <a class="messager" href="/users/{{#ifEq currentUser._id
                                                  chat.lessee._id}}{{chat.lessor._id}}{{else}}{{chat.lessee._id}}{{/ifEq}}">
-            <div class="preview-image" style="background: url('/uploads/userProfileImages{{#ifEq currentUser._id
+            <div class="preview-image" style="background: url('/uploads/userProfileImages/{{#ifEq currentUser._id
                                                                                                  chat.lessee._id}}{{chat.lessor.profile_image}}{{else}}{{chat.lessee.profile_image}}{{/ifEq}}') no-repeat center; background-size: cover"></div>
         </a>
     </header>
