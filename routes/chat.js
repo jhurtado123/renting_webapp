@@ -13,7 +13,7 @@ app.socketIO = io;
 
 router.get('/', (req, res, next) => {
   const userId = req.session.currentUser._id;
-  Chat.find({$or: [{'lessee': userId}, {'lessor': userId}]}).populate('lessee lessor ad')
+  Chat.find({$or: [{'lessee': userId}, {'lessor': userId}]}).sort({createdAt: -1}).populate('lessee lessor ad')
     .then(async chats => {
       let unreadedMessages = [];
       for (let i = 0; i < chats.length; i++) {

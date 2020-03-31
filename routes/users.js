@@ -43,7 +43,7 @@ router.get('/favorites', (req,res,next) => {
 /*List user apppointments*/
 router.get('/appointments', (req, res, next) => {
   const userId = req.session.currentUser._id;
-  Appointment.find({$or:[ {'lesser':userId}, {'lessor':userId}]}).populate('ad lesser lessor')
+  Appointment.find({$or:[ {'lesser':userId}, {'lessor':userId}]}).sort({createdAt: -1}).populate('ad lesser lessor')
     .then(appointments => res.render('appointments/list', {appointments}))
     .catch(error => next(error));
 });
