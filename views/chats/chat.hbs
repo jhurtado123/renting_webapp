@@ -118,7 +118,7 @@
             } else {
                 axios.post('/api/have/appointments', {
                     'chatId': '{{chat._id}}',
-                    'dateTime': new Date(pickedDate.getFullYear(), pickedDate.getUTCMonth(), pickedDate.getUTCDate(), pickedDate.getHours(), pickedDate.getUTCMinutes())
+                    'dateTime': new Date(pickedDate.getFullYear(), pickedDate.getUTCMonth()+1, pickedDate.getUTCDate(), pickedDate.getHours(), pickedDate.getUTCMinutes())
                 })
                 .then(result => {
                     if (!result.data.isPosible) {
@@ -139,7 +139,7 @@
               .then(result => {
                   hasAppointment = true;
                   closeModal();
-                  const message = `Se ha concertado una cita para el ${currentpickedDate.getUTCDate()}/${currentpickedDate.getUTCMonth()}/${currentpickedDate.getUTCFullYear()} ${currentpickedDate.getUTCHours()}:${currentpickedDate.getUTCMinutes()}:00 . Puedes consultar tus citas en el apartado 'Citas'`;
+                  const message = `Se ha concertado una cita para el ${currentpickedDate.getUTCDate()}/${currentpickedDate.getUTCMonth()+1}/${currentpickedDate.getUTCFullYear()} ${currentpickedDate.getHours()}:${currentpickedDate.getUTCMinutes()}:00 . Puedes consultar tus citas en el apartado 'Citas'`;
                   document.querySelector('#content').innerHTML += `<p class='mine'>${message}</p>`;
                   document.querySelector('#content').scrollTop = document.querySelector('#content').scrollHeight;
                   socket.emit('chat:message', {
