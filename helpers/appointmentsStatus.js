@@ -8,7 +8,7 @@ const notification = require('./notifications');
 function changeAppointmentStatusIfFinished(req, res, next) {
   const userId = req.session.currentUser._id;
   const now = moment().add(2, 'hours');
-  Appointment.find({'status': 'Active', $or: [{'lesser': userId, date : {$lt: now}}, {'lessor': userId, date : {$lt: now}}]}).populate('lesser lessor')
+  Appointment.find({'status': 'Activa', $or: [{'lesser': userId, date : {$lt: now}}, {'lessor': userId, date : {$lt: now}}]}).populate('lesser lessor')
     .then(appointments => {
       appointments.forEach(appointment => {
         appointment.status = 'Finalizada';

@@ -13,7 +13,7 @@
                                          this.lesser._id }}{{this.lessor.name}}{{else}}{{this.lesser.name}}{{/ifEq}}  </h2>
                     <p><img src="/images/icons/pin-grey.png" class="icon icon-2"> {{this.ad.address}} {{this.ad.number}}, {{this.ad.city}}</p>
                     <p><img src="/images/icons/minute.png" class="icon"> {{formatDate this.date}} {{formatHours this.date}}h</p>
-                    <p class="status {{#ifEq this.status 'Active'}}active{{else}}canceled{{/ifEq}} ">{{this.status}}</p>
+                    <p class="status {{#ifEq this.status 'Activa'}}active{{else}}canceled{{/ifEq}} ">{{this.status}}</p>
                 </a>
             {{/each}}
         </div>
