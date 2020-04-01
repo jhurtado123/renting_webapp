@@ -158,7 +158,9 @@ a {
           left: 50%;
           transform: translateX(-50%); }
   #headerMenu .logo-link {
-    margin-right: 22%; }
+    margin-right: 13%; }
+    #headerMenu .logo-link #logo {
+      width: 100px; }
   #headerMenu .profile-image {
     width: 24px;
     height: 24px;
