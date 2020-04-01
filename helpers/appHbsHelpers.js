@@ -11,7 +11,7 @@ module.exports = function (hbs) {
   });
   hbs.registerHelper("formatHours", function (datetime) {
 
-    return `${datetime.getHours()}:${datetime.getMinutes()<10?'0' + datetime.getMinutes(): datetime.getMinutes()}`;
+    return `${datetime.getUTCHours()}:${datetime.getMinutes()<10?'0' + datetime.getMinutes(): datetime.getMinutes()}`;
   });
   hbs.registerHelper('switch', function (value, options) {
     this.switch_value = value;
