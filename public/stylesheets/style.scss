@@ -94,11 +94,17 @@ a {
 }
 #headerMenu{
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-content: center;
   background: $background-gradient;
   padding: 15px 5px;
   margin-bottom: -1px;
+  .header-icons {
+    display: flex;
+    flex-flow: row;
+    position: relative;
+
+  }
   a,.notifications {
   margin-right: 15px;
     color:$primary-color;
