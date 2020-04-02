@@ -94,11 +94,17 @@ a {
 }
 #headerMenu{
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-content: center;
   background: $background-gradient;
   padding: 15px 5px;
   margin-bottom: -1px;
+  .header-icons {
+    display: flex;
+    flex-flow: row;
+    position: relative;
+
+  }
   a,.notifications {
   margin-right: 15px;
     color:$primary-color;
@@ -191,7 +197,10 @@ a {
     }
   }
   .logo-link{
-    margin-right: 22%;
+    margin-right: 13%;
+    #logo{
+      width: 102px;
+    }
   }
   .profile-image {
     width: 24px;

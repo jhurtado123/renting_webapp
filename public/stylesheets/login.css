@@ -18,7 +18,6 @@ body {
   color: #3a424a;
   padding: 0 15px; }
   #login form {
-    margin-top: 50px;
     width: 100%; }
     #login form .form-group {
       margin: 15px 0; }

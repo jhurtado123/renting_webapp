@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="shortcut icon" href="/images/icons/fairent.ico" type="image/x-icon">
     {{{block "stylesheets"}}}
 </head>
 <body>
@@ -14,30 +15,31 @@
 <div id="wrapper">
     <div id="headerMenu">
         <a class="logo-link" href="/home">
-            <span>LOGO</span>
+            <span><img id="logo" src="/images/icons/FaiRent-home.png" alt="Fair Rent Logo"> </span>
         </a>
-
-        <div class="notifications">
-            <img src="/images/icons/notification.png">
-            <span class="notifications-count">{{getUnreadedNotifications notifications}}</span>
-            <div id="notificationsList">
-                <h2>Notificaciones</h2>
-                <div id="list">
-                    {{#each notifications}}
-                        <a href="{{this.href}}" class="notification {{#if this.isReaded}}{{else}}unreaded{{/if}}">
-                            {{this.title}}
-                            <hr>
-                        </a>
-                    {{/each}}
+        <div class="header-icons">
+            <div class="notifications">
+                <img src="/images/icons/notification.png">
+                <span class="notifications-count">{{getUnreadedNotifications notifications}}</span>
+                <div id="notificationsList">
+                    <h2>Notificaciones</h2>
+                    <div id="list">
+                        {{#each notifications}}
+                            <a href="{{this.href}}" class="notification {{#if this.isReaded}}{{else}}unreaded{{/if}}">
+                                {{this.title}}
+                                <hr>
+                            </a>
+                        {{/each}}
+                    </div>
                 </div>
             </div>
+            <a href="/users/{{currentUser._id}}">
+                <img class="profile-image" src="/uploads/userProfileImages/{{currentUser.profile_image}}">
+            </a>
+            <a href="/logout">
+                <img src="/images/icons/switch.png">
+            </a>
         </div>
-        <a href="/users/{{currentUser._id}}">
-            <img class="profile-image" src="/uploads/userProfileImages/{{currentUser.profile_image}}">
-        </a>
-        <a href="/logout">
-            <img src="/images/icons/switch.png">
-        </a>
     </div>
     <div id="content">
         {{{body}}}
@@ -56,8 +58,10 @@
             <i class="fa fa-times close-menu"></i>
         </div>
         <div class="links-block">
-            <a href="/users/profile">{{#ifEq currentUser.phone undefined}}<span class="warning">!</span>{{/ifEq}} Editar mi perfil</a>
-            {{#ifEq currentUser.phone undefined}}<div class="warning-text">Aún no has acabado de rellenar tu perfil</div>{{/ifEq}}
+            <a href="/users/profile">{{#ifEq currentUser.phone undefined}}<span class="warning">!</span>{{/ifEq}} Editar
+                mi perfil</a>
+            {{#ifEq currentUser.phone undefined}}
+                <div class="warning-text">Aún no has acabado de rellenar tu perfil</div>{{/ifEq}}
             {{#if currentUser.lesseeMode}}
                 <a href="/users/ads">Mis anuncios</a>
             {{/if}}
