@@ -33,6 +33,7 @@ body {
   #content {
     min-height: 800px;
     overflow-x: hidden;
+    padding-bottom: 90px;
   }
 }
 * {
@@ -50,6 +51,9 @@ a {
   font-size: 14px;
   height: 100vh;
   position: fixed;
+  @media (min-width:400px) {
+    display: none;
+  }
   top:0;
   left:0;
   transform: translateX(-100%);
@@ -57,6 +61,7 @@ a {
   background: white;
   &.open {
     transform: translateX(0px);
+    display: block;
   }
   .profile-block {
     padding: 20px;
@@ -144,10 +149,10 @@ a {
     #notificationsList {
       display: none;
       position: absolute;
-      bottom:-52vh;
-      left:-45vw;
-      width: 75vw;
-      height: 50vh;
+      left:-104px;
+      top:52px;
+      width: 218px;
+      height: 300px;
       background: white;
       padding:15px 0;
       font-size: 16px;

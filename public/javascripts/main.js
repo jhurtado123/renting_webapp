@@ -59,4 +59,7 @@ function stickyFooter() {
   footerMenu.style.maxWidth = wrapper.offsetWidth -4 + 'px';
   footerMenu.style.left = wrapper.offsetLeft + 2+ 'px';
   footerMenu.style.top = wrapper.offsetTop + (wrapper.offsetHeight - footerMenu.offsetHeight - 2 ) + 'px';
+  lateralMenu.style.width = 350+ 'px';
+  lateralMenu.style.left = wrapper.offsetLeft + 'px';
+  lateralMenu.style.top = wrapper.offsetTop + 'px';
 }

@@ -20,25 +20,37 @@ form {
       width: 100%;
       border: 1px solid #84d8e3;
       padding: 5px;
-      min-height: 150px; }
+      min-height: 150px;
+      border-radius: 15px; }
     form .form-group input[type=checkbox] {
       width: auto; }
     form .form-group input[type=range] {
       border: none;
       outline: none; }
-    form .form-group .bad-status {
+    form .form-group .bad-status, form .form-group .bad-treatment, form .form-group .bad-veracity {
       color: #ff1100; }
-    form .form-group .notgood-status {
+    form .form-group .notgood-status, form .form-group .notgood-treatment, form .form-group .notgood-veracity {
       color: #ff6600;
       margin-left: 25px; }
-    form .form-group .normal-status {
+    form .form-group .normal-status, form .form-group .normal-treatment {
       margin-left: 120px; }
-    form .form-group .good-status {
+    form .form-group .normal-veracity {
+      margin-left: 105px; }
+    form .form-group .good-status, form .form-group .good-treatment {
       color: #3a9c2f;
       margin-left: 200px; }
+    form .form-group .good-veracity {
+      color: #3a9c2f;
+      margin-left: 180px; }
+    form .form-group .perfect-veracity {
+      color: #22991a;
+      margin-left: 275px; }
     form .form-group .perfect-status {
       color: #22991a;
       margin-left: 230px; }
+    form .form-group .perfect-treatment {
+      color: #22991a;
+      margin-left: 240px; }
   form button {
     width: 100%;
     padding: 10px 8px;
