@@ -46,6 +46,17 @@ notifications.addEventListener('click', () => {
     notificationsCount.innerHTML = '0';
     axios.post('/api/notifications/read');
   }
-
-
 });
+
+const footerMenu = document.querySelector('#footerMenu');
+
+stickyFooter();
+
+window.addEventListener('resize', stickyFooter);
+
+function stickyFooter() {
+  footerMenu.style.width = wrapper.offsetWidth -4+ 'px';
+  footerMenu.style.maxWidth = wrapper.offsetWidth -4 + 'px';
+  footerMenu.style.left = wrapper.offsetLeft + 2+ 'px';
+  footerMenu.style.top = wrapper.offsetTop + (wrapper.offsetHeight - footerMenu.offsetHeight - 2 ) + 'px';
+}

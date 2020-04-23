@@ -8,6 +8,7 @@
 
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="shortcut icon" href="/images/icons/fairent.ico" type="image/x-icon">
+
     {{{block "stylesheets"}}}
 </head>
 <body>
@@ -78,32 +79,34 @@
         </div>
     </div>
 
-    <div id="footerMenu">
-        <a class="block" href="/home">
-            <img src="/images/icons/search.png">
-            <p>Buscar</p>
-        </a>
-        <a class="block" href="/users/management">
-            <img src="/images/icons/house.png">
-            <p>Gestión</p>
-        </a>
-        <a class="block" href="/users/appointments">
-            <img src="/images/icons/calendar.png">
-            <p>Citas</p>
-        </a>
-        <a class="block" href="/chats">
-            <img src="/images/icons/chat.png">
-            <p>Chats</p>
-        </a>
-        <div class="block" id="moreMenu">
-            <img src="/images/icons/menu.png">
-            <p>Más {{#ifEq currentUser.phone undefined}}<span class="warning">!</span>{{/ifEq}}</p>
+        <div id="footerMenu">
+            <a class="block" href="/home">
+                <img src="/images/icons/search.png">
+                <p>Buscar</p>
+            </a>
+            <a class="block" href="/users/management">
+                <img src="/images/icons/house.png">
+                <p>Gestión</p>
+            </a>
+            <a class="block" href="/users/appointments">
+                <img src="/images/icons/calendar.png">
+                <p>Citas</p>
+            </a>
+            <a class="block" href="/chats">
+                <img src="/images/icons/chat.png">
+                <p>Chats</p>
+            </a>
+            <div class="block" id="moreMenu">
+                <img src="/images/icons/menu.png">
+                <p>Más {{#ifEq currentUser.phone undefined}}<span class="warning">!</span>{{/ifEq}}</p>
+            </div>
         </div>
-    </div>
-    <div id="backdrop"></div>
+        <div id="backdrop"></div>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/javascripts/main.js"></script>
 {{{block "scripts"}}}
+
 </body>
 </html>
